@@ -7,15 +7,15 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #1e1e2f; /* Cool dark background */
-    color: #eaeaea; /* Light text for contrast */
-    min-height: 100vh; /* Ensure footer stays at the bottom */
+    background-color: #1e1e2f; 
+    color: #eaeaea; 
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
 }
 
 header {
-    background-color: #333547; /* Neutral dark gray for header */
+    background-color: #333547; 
     color: #eaeaea;
     padding: 15px 0;
     position: sticky;
