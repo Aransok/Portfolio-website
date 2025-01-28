@@ -28,4 +28,4 @@ jobs:
 
       - name: Run Django tests
         run: |
-          nohup python manage.py runserver
+          python manage.py test
