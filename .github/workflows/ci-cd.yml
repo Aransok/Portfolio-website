@@ -40,4 +40,4 @@ jobs:
       - name: Deploy to Render
         if: github.ref == 'refs/heads/main'
         run: |
-          gunicorn portfolio_website.wsgi:application
+          gunicorn portfoliowebsite.asgi:application
