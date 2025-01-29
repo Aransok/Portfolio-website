@@ -1,8 +1,29 @@
 {% extends 'portfolio_website/base.html' %}
 
-{% block title %}About - My Portfolio{% endblock %}
+{% load static %}
 
+{% block title %}About - My Portfolio{% endblock %}
 {% block content %}
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is the about.</p>
+<section class="about-section">
+    <div class="about-text">
+        <h2>About Me</h2>
+            <p>👋 Hi! I’m Doan Idriz.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
+            <br>
+            <p> What I’ve been up to:</p>
+            <br>
+            <p>🐍 Earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/">SoftUni's</a> rigorous courses.</p>
+            <br>
+            <p>🤖 Currently geeking out over Machine Learning and Large Language Models—because code that learns feels like magic.</p>
+            <p>🌱 Always exploring the next tech rabbit hole.</p>
+            <br>
+            <p>Why I code:</p>
+            <p>Tech’s a never-ending playground. I’m here to build, break, and rebuild things that (hopefully) make someone go</p>
+            <p> “Wait, how’d you do that?”</p>
+            <br>
+            <p>Let’s connect and nerd out about the future of tech!</p>
+    </div>
+    <div class="about-image">
+        <img src="{% static '../../static/media/me.jpg' %}" alt="My Photo">
+    </div>
+</section>
 {% endblock %}

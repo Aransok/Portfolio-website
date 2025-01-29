@@ -94,7 +94,7 @@ a:hover {
     }
 
     header nav ul li {
-        margin: 10px 0;
+        margin: 5px 0;
     }
 
     header nav ul li a {
@@ -103,6 +103,49 @@ a:hover {
     }
 
     main {
-        padding: 10px;
+        padding: 2px;
     }
+}
+.about-section {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+}
+
+
+.about-text {
+    width: 50%;
+    text-align: center;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a202c;
+}
+
+.about-text p {
+    color: #7e8898;
+}
+
+.about-image {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.about-image img {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.about-text a{
+    text-decoration: none;
+    
 }
