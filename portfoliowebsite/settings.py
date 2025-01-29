@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&^)n-$+_w2)m$1_gfla57_t#-%1*svpm!qfm0(ik*zp^3&u)25
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['portfolio-website-fr7t.onrender.com']
+ALLOWED_HOSTS = ['portfolio-website-fr7t.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'portfoliowebsite.urls'
@@ -117,7 +118,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_FILES_DIRS = [BASE_DIR / 'portfolio_website/static']
+STATICFILES_DIRS = [BASE_DIR / 'portfolio_website/static']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
