@@ -173,14 +173,24 @@ a:hover {
     margin-bottom: 20px;
 }
 
-.success-message {
-    background-color: #e0ffe0;
-    color: #2d7e2d;
-    border: 1px solid #2d7e2d;
-    padding: 10px;
+.alert-success, .messages {
+    background-color: #2b2d52;
+    border: 1px solid #cbe7cb;
+    padding: 10px 15px;
     margin-bottom: 20px;
     text-align: center;
-    font-weight: bold;
+    border-radius: 1em;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 50px;
+}
+
+.messages > p {
+    color: #ccc;
+    margin: 0; 
+    padding: 0; 
+    font-size: 1em; 
 }
 
 .form-group {

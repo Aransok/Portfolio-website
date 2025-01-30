@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
+from django.contrib import messages
+
 
 load_dotenv()
 
@@ -24,7 +26,10 @@ def contact(request):
             message_email, 
             [recipient_email],
         )
-        return render(request, 'portfolio_website/contact.html', {'success': True, 'message_name': message_name, 'message_email': message_email, 'message': message})
+        messages.success(request, '✅ Your message has been sent successfully!')
+
+        # Redirect to the same page (GET request)
+        return redirect('contact')
 
     
     else:
