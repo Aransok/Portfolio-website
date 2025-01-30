@@ -7,11 +7,11 @@
 <section class="about-section">
     <div class="about-text">
         <h2>About Me</h2>
-            <p>👋 Hi! I’m Doan Idriz.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
+            <p>👋 Hi! I’m <a href="{% static '../../static/media/Doan_s_CV.pdf' %}" download="Doan_s_CV.pdf">Doan Idriz</a>.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
             <br>
             <p> What I’ve been up to:</p>
             <br>
-            <p>🐍 Earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/">SoftUni's</a> rigorous courses.</p>
+            <p>🐍 Earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/">SoftUni's</a> challenging and fun courses.</p>
             <br>
             <p>🤖 Currently geeking out over Machine Learning and Large Language Models—because code that learns feels like magic.</p>
             <p>🌱 Always exploring the next tech rabbit hole.</p>
@@ -20,7 +20,7 @@
             <p>Tech’s a never-ending playground. I’m here to build, break, and rebuild things that (hopefully) make someone go</p>
             <p> “Wait, how’d you do that?”</p>
             <br>
-            <p>Let’s connect and nerd out about the future of tech!</p>
+            <p>Let’s <a href="{% url 'contact' %}">connect</a> and nerd out about the future of tech!</p>
     </div>
     <div class="about-image">
         <img src="{% static '../../static/media/me.jpg' %}" alt="My Photo">

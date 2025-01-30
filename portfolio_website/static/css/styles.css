@@ -149,3 +149,99 @@ a:hover {
     text-decoration: none;
     
 }
+
+.contact-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #4e4f6e;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ccc;
+}
+
+.contact-section p {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    background-color: #e0ffe0;
+    color: #2d7e2d;
+    border: 1px solid #2d7e2d;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-top: 5px;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2c5c92;
+}
+
+/* Button Styling */
+.submit-button {
+    background-color: #4c70af;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #2c9283;
+}
+
+.submit-button:active {
+    background-color: #2c5c92;
+}
+
+@media (max-width: 600px) {
+    .contact-section {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .contact-section h2 {
+        font-size: 1.5em;
+    }
+
+    .contact-section p {
+        font-size: 0.9em;
+    }
+}
