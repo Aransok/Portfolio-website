@@ -38,5 +38,42 @@ def contact(request):
 def projects(request):
     return render(request, 'portfolio_website/projects.html')
 
-def certificates(request):
-    return render(request, 'portfolio_website/certificates.html')
+def certificates(request, cert_id=None):
+    certificates = [
+        {
+            'id': 1,
+            'name': 'Python Basics Certification',
+            'image': '/static/media/Programming Basics - January 2022 - Certificate.jpeg',
+            'description': 'Python Basics Certifications by SoftUni course. Course key points: Structures, If statements, For and While loops.',
+            'url':'https://softuni.bg/certificates/details/127200/734df61c'
+        },
+        {
+            'id': 2,
+            'name': 'Python Fundamentals Certification',
+            'image': '/static/media/Programming Fundamentals with Python - September 2022 - Certificate.jpeg',
+            'description': 'Python Fundamentals Certifications by SoftUni course. Course key points: Functions, Lists, Dictionaries, Tuples, Sets, Files.',
+            'url':'https://softuni.bg/certificates/details/151544/559cb886'
+        },
+       
+    ]
+    
+    if cert_id is None:
+        cert_id = 1
+    else:
+        cert_id = int(cert_id)
+    
+    current_certificate = next((cert for cert in certificates if cert['id'] == cert_id), certificates[0])
+    
+    cert_ids = [cert['id'] for cert in certificates]
+    current_index = cert_ids.index(cert_id)
+    prev_id = cert_ids[current_index - 1] if current_index > 0 else None
+    next_id = cert_ids[current_index + 1] if current_index < len(cert_ids) - 1 else None
+    
+    context = {
+        'certificates': certificates,
+        'current_certificate': current_certificate,
+        'prev_id': prev_id,
+        'next_id': next_id,
+    }
+    
+    return render(request, 'portfolio_website/certificates.html', context)

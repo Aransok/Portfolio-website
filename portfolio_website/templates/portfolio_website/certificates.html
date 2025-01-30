@@ -1,8 +1,39 @@
 {% extends 'portfolio_website/base.html' %}
 
-{% block title %}Certificates - My Portfolio{% endblock %}
+{% load static %}
 
+{% block title %}Certificates - My Portfolio{% endblock %}
 {% block content %}
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is the certificates.</p>
+<div class="certificates-container">
+    <div class="main-certificate">
+        <img src="{{ current_certificate.image }}" alt="{{ current_certificate.name }}">
+    </div>
+    
+    <div class="certificate-details">
+        <div class="certificate-info">
+            <h2>{{ current_certificate.name }}</h2>
+            <p>{{ current_certificate.description }}</p>
+            <a href="{{ current_certificate.url }}" target="_blank">View Certificate</a>
+        </div>
+        
+        <div class="certificate-thumbnails">
+            {% for cert in certificates %}
+            <div class="thumbnail {% if cert.id == current_certificate.id %}active{% endif %}">
+                <img src="{{ cert.image }}" alt="{{ cert.name }}" 
+                     onclick="location.href='{% url 'certificates' cert.id %}'">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="navigation-buttons">
+    {% if prev_id %}
+    <button class="nav-button" onclick="location.href='{% url 'certificates' prev_id %}'">◀</button>
+    {% endif %}
+    
+    {% if next_id %}
+    <button class="nav-button" onclick="location.href='{% url 'certificates' next_id %}'">▶</button>
+    {% endif %}
+</div>
 {% endblock %}
