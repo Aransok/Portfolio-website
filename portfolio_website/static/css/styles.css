@@ -661,8 +661,7 @@ div a{
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 3rem;
-    padding: 2rem;
+    margin-top: 1rem;
     color: #ccc;
 }
 
@@ -674,6 +673,7 @@ div a{
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     transition: transform 0.3s ease;
+    
 }
 
 .featured-card:hover {
