@@ -1,8 +1,32 @@
 {% extends 'portfolio_website/base.html' %}
-
+{%load static%}
 {% block title %}Home - My Portfolio{% endblock %}
 
 {% block content %}
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is the homepage.</p>
+<div class="hero-banner">
+    <div class="hero-content">
+        <h1>Welcome to My Website</h1>
+        <br><br><br>
+        <p>Thanks for visiting . My name is <a href={%url 'about'%} style='color:white'>Doan Idriz</a> nice to meet you!👋</p>
+        <a href="{% url 'contact'%}" class="btn-primary">Get in Touch</a>
+    </div>
+</div>
+
+<section class="featured-section">
+    <div class="featured-card">
+        <img src="{%static '../../static/media/coding-background.jpg'%}" alt="Project 1">
+        <h3><a href="https://github.com/Aransok/LLM-Article-Summarizer" style="text-decoration:none"> LLM Article Summarizer</a></h3>
+        <p>Python project for Article summarization using LLM</p>
+    </div>
+    <div class="featured-card">
+        <img src="{%static '../../static/media/coding-background.jpg'%}" alt="Project 2">
+        <h3><a href="https://github.com/Aransok/Angular-Project-Moviesite" style="text-decoration:none">Angular Movies web site</a></h3>
+        <p>A movie site using Angular and Node js</p>
+    </div>
+</section>
+
+<div style="text-align: center;">
+    <a href="/projects" class="see-more-btn">See More Projects</a>
+</div>
+
 {% endblock %}

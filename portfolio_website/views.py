@@ -77,3 +77,6 @@ def certificates(request, cert_id=None):
     }
     
     return render(request, 'portfolio_website/certificates.html', context)
+
+def demo_llm_summarizer(request):
+    return render(request, 'portfolio_website/demo-llm-summarizer.html')
