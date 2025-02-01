@@ -485,7 +485,7 @@ a:hover {
     position: relative;
     width: 100%;
     height: 80vh;  
-    background-image: url('../media/istockphoto-1448124439-612x612.jpg');
+    background-image: url("../media/istockphoto-1448124439-612x612.f5bc1d5da998.jpg");
     background-position: center ;
     background-size:cover;  
     display: flex;

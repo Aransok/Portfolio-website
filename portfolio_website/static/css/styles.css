@@ -727,3 +727,23 @@ a.see-more-btn {
         margin-bottom: 1rem;
     }
 }
+.error-page {
+    text-align: center;
+    padding: 50px;
+    margin: 50px auto;
+    max-width: 600px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-page h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.error-page p {
+    font-size: 1.2rem;
+}

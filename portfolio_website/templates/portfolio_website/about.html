@@ -7,7 +7,7 @@
 <section class="about-section">
     <div class="about-text">
         <h2>About Me</h2>
-            <p>👋 Hi! I’m <a href="{% static '../../static/media/Doan_s_CV.pdf' %}" download="Doan_s_CV.pdf">Doan Idriz</a>.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
+            <p>👋 Hi! I’m <a href="{% static 'media/Doan_s_CV.pdf' %}" download="Doan_s_CV.pdf">Doan Idriz</a>.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
             <br>
             <p> What I’ve been up to:</p>
             <br>
@@ -23,7 +23,7 @@
             <p>Let’s <a href="{% url 'contact' %}">connect</a> and nerd out about the future of tech!</p>
     </div>
     <div class="about-image">
-        <img src="{% static '../../static/media/me.jpg' %}" alt="My Photo">
+        <img src="{% static 'media/me.jpg' %}" alt="My Photo">
     </div>
 </section>
 {% endblock %}

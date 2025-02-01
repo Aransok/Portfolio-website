@@ -80,3 +80,18 @@ def certificates(request, cert_id=None):
 
 def demo_llm_summarizer(request):
     return render(request, 'portfolio_website/demo-llm-summarizer.html')
+
+def custom_400(request, exception):
+    response = render(request, "portfolio_website/400.html")
+    response.status_code = 400
+    return response
+
+def custom_404(request, exception):
+    response = render(request, "portfolio_website/404.html")
+    response.status_code = 404
+    return response
+
+def custom_500(request):
+    response = render(request, "portfolio_website/500.html")
+    response.status_code = 500
+    return response
