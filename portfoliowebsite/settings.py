@@ -85,7 +85,7 @@ DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASE_PORT = os.getenv("DATABASE_PORT")
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
