@@ -85,14 +85,7 @@ DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASE_PORT = os.getenv("DATABASE_PORT")
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DATABASE_NAME,
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST': DATABASE_URL,
-        'PORT': DATABASE_PORT,
-    } 
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
