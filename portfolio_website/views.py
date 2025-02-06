@@ -20,7 +20,6 @@ def contact(request):
         message_email = request.POST['message-email']
         message = request.POST['message']
         recipient_email = os.getenv("EMAIL_HOST_USER")
-        # Send an email
         send_mail(
             f'From: {message_name}' + f' Email: {message_email}', 
             f'Message: {message}',
@@ -29,7 +28,6 @@ def contact(request):
         )
         messages.success(request, '✅ Your message has been sent successfully!')
 
-        # Redirect to the same page (GET request)
         return redirect('contact')
 
     
@@ -38,18 +36,21 @@ def contact(request):
 
 def projects(request):
     return render(request, 'portfolio_website/projects.html')
+from django.shortcuts import render, redirect
+from .models import Certificate
+
 def certificates(request, cert_id=None):
-    certificates = Certificate.objects.all()  # Fetch from the database
+    certificates = Certificate.objects.all()
 
-    if cert_id is None:
-        cert_id = 1
-    else:
-        cert_id = int(cert_id)
+    # If cert_id is None or not in the certificates, select the first one
+    if cert_id is None or cert_id not in [cert.id for cert in certificates]:
+        cert_id = certificates.first().id if certificates.exists() else None
 
-    current_certificate = next((cert for cert in certificates if cert.id == cert_id), certificates[0])
+    current_certificate = next((cert for cert in certificates if cert.id == cert_id), None)
 
+    # Get all the IDs to generate previous/next navigation
     cert_ids = [cert.id for cert in certificates]
-    current_index = cert_ids.index(cert_id)
+    current_index = cert_ids.index(cert_id) if cert_id else 0
     prev_id = cert_ids[current_index - 1] if current_index > 0 else None
     next_id = cert_ids[current_index + 1] if current_index < len(cert_ids) - 1 else None
 
@@ -62,44 +63,7 @@ def certificates(request, cert_id=None):
 
     return render(request, 'portfolio_website/certificates.html', context)
 
-    certificates = [
-        {
-            'id': 1,
-            'name': 'Python Basics Certification',
-            'image': '/static/media/Programming Basics - January 2022 - Certificate.jpeg',
-            'description': 'Python Basics Certifications by SoftUni course. Course key points: Structures, If statements, For and While loops.',
-            'url':'https://softuni.bg/certificates/details/127200/734df61c'
-        },
-        {
-            'id': 2,
-            'name': 'Python Fundamentals Certification',
-            'image': '/static/media/Programming Fundamentals with Python - September 2022 - Certificate.jpeg',
-            'description': 'Python Fundamentals Certifications by SoftUni course. Course key points: Functions, Lists, Dictionaries, Tuples, Sets, Files.',
-            'url':'https://softuni.bg/certificates/details/151544/559cb886'
-        },
-       
-    ]
     
-    if cert_id is None:
-        cert_id = 1
-    else:
-        cert_id = int(cert_id)
-    
-    current_certificate = next((cert for cert in certificates if cert['id'] == cert_id), certificates[0])
-    
-    cert_ids = [cert['id'] for cert in certificates]
-    current_index = cert_ids.index(cert_id)
-    prev_id = cert_ids[current_index - 1] if current_index > 0 else None
-    next_id = cert_ids[current_index + 1] if current_index < len(cert_ids) - 1 else None
-    
-    context = {
-        'certificates': certificates,
-        'current_certificate': current_certificate,
-        'prev_id': prev_id,
-        'next_id': next_id,
-    }
-    
-    return render(request, 'portfolio_website/certificates.html', context)
 
 def demo_llm_summarizer(request):
     return render(request, 'portfolio_website/demo-llm-summarizer.html')

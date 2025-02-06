@@ -2,17 +2,17 @@ from django.contrib import admin
 from .models import Certificate, Diploma, AI_LLM
 
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'link_to_certificate') 
+    list_display = ('name', 'description', 'link') 
     search_fields = ['name']
     list_filter = ('name',)
 
 class DiplomaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'link_to_diploma')
+    list_display = ('name', 'description', 'link')
     search_fields = ['name']
     list_filter = ('name',)
 
 class AI_LLMAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'link_to_ai_llm')
+    list_display = ('name', 'description', 'link')
     search_fields = ['name']
     list_filter = ('name',)
 

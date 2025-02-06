@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block title %}Certificates - My Portfolio{% endblock %}
-
 {% block content %}
 <div class="certificates-container">
     <div class="main-certificate">
@@ -14,13 +13,15 @@
         <div class="certificate-info">
             <h2>{{ current_certificate.name }}</h2>
             <p>{{ current_certificate.description }}</p>
-            <a href="{{ current_certificate.url }}" target="_blank">View Certificate</a>
+            <br/>
+            <p>{{ current_certificate.what_i_learned }}</p>
+            <a href="{{ current_certificate.link }}" target="_blank">View Certificate</a>
         </div>
         
         <div class="certificate-thumbnails">
             {% for cert in certificates %}
             <div class="thumbnail {% if cert.id == current_certificate.id %}active{% endif %}">
-                <img src="{{ cert.image.url }}" alt="{{ cert.name }}" 
+                <img src="{{ current_certificate.image.url }}" alt="{{ current_certificate.name }}" 
                      onclick="location.href='{% url 'certificates' cert.id %}'">
             </div>
             {% endfor %}
