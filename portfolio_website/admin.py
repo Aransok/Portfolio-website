@@ -4,7 +4,7 @@ from .models import Certificate, Diploma, AI_LLM
 class CertificateAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'link_to_certificate') 
     search_fields = ['name']
-    list_filter = ('name',) 
+    list_filter = ('name',)
 
 class DiplomaAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'link_to_diploma')
@@ -16,7 +16,12 @@ class AI_LLMAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_filter = ('name',)
 
-# Register the models with custom admin
-admin.site.register(Certificate, CertificateAdmin)
-admin.site.register(Diploma, DiplomaAdmin)
-admin.site.register(AI_LLM, AI_LLMAdmin)
+# Check if the model is already registered
+if not admin.site.is_registered(Certificate):
+    admin.site.register(Certificate, CertificateAdmin)
+    
+if not admin.site.is_registered(Diploma):
+    admin.site.register(Diploma, DiplomaAdmin)
+
+if not admin.site.is_registered(AI_LLM):
+    admin.site.register(AI_LLM, AI_LLMAdmin)
