@@ -12,7 +12,7 @@
                 class="category-button {% if category == current_category %}active{% endif %}"
                 onclick="location.href='{% url 'certificates' category %}'">
                 {% if category == 'ai_llms' %}
-                    AI Certificates
+                    AI and ML Certificates
                 {% else %}
                     {{ category|title }}
                 {% endif %}
