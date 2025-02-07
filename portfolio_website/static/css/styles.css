@@ -254,233 +254,7 @@ a:hover {
         font-size: 0.9em;
     }
 }
-.certificates-container {
-    display: flex;
-    gap: 1rem;
-    min-height: 80vh;
-}
 
-.main-certificate {
-    flex: 2;
-    position: relative;
-}
-
-.main-certificate img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.certificate-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.certificate-info {
-    padding: 1rem;
-}
-.certificate-info a{
-    text-decoration: none;
-}
-
-.certificate-info h2 {
-    color: #ccc;
-    font-size: 1.5rem;
-}
-
-.certificate-info p {
-    color: #ccc;
-    line-height: 1.6;
-}
-
-.certificate-thumbnails {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.thumbnail {
-    width: 100px;
-    height: 70px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: transform 0.2s;
-}
-
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 2px solid transparent;
-}
-
-.thumbnail.active {
-    transform: scale(1.1);
-}
-
-.thumbnail.active img {
-    border-color: #007bff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.navigation-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.nav-button {
-    padding: 0.5rem 1rem;
-    background-color: #1c4979;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.nav-button:hover {
-    background-color: #173c64;
-}
-
-.nav-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-@media (max-width: 768px) {
-    .certificates-container {
-        flex-direction: column;
-        gap: 2rem;
-        padding: 10px;
-    }
-
-    .main-certificate {
-        flex: 1;
-        width: 100%;
-    }
-
-    .main-certificate img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .certificate-details {
-        flex: 1;
-        width: 100%;
-        display: block;
-    }
-
-    .certificate-info {
-        padding: 1rem;
-        text-align: center;
-    }
-
-    .certificate-info h2 {
-        font-size: 1.3rem;
-        color: #ccc;
-    }
-
-    .certificate-info p {
-        font-size: 1rem;
-        color: #ccc;
-    }
-
-    .certificate-info a {
-        font-size: 1rem;
-        text-decoration: none;
-        color: #4e4f6e;
-        margin-top: 1rem;
-    }
-
-    .certificate-thumbnails {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .thumbnail {
-        width: 80px;
-        height: 60px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: transform 0.2s;
-    }
-
-    .thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-        border: 2px solid transparent;
-    }
-
-    .thumbnail.active {
-        transform: scale(1.1);
-    }
-
-    .thumbnail.active img {
-        border-color: #007bff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .navigation-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    .nav-button {
-        padding: 0.5rem 1rem;
-        background-color: #1c4979;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-size: 1rem;
-    }
-
-    .nav-button:hover {
-        background-color: #173c64;
-    }
-
-    .nav-button:disabled {
-        background-color: #cccccc;
-        cursor: not-allowed;
-    }
-}
-
-@media (max-width: 600px) {
-    .certificate-info h2 {
-        font-size: 1.2rem;
-    }
-
-    .certificate-info p {
-        font-size: 0.9rem;
-    }
-
-    .thumbnail {
-        width: 70px;
-        height: 50px;
-    }
-
-    .main-certificate {
-        flex: 1;
-        width: 100%;
-    }
-}
 .hero-banner {
     position: relative;
     width: 100%;
@@ -747,3 +521,221 @@ a.see-more-btn {
 .error-page p {
     font-size: 1.2rem;
 }
+.certificates-container {
+    display: flex;
+    gap: 2rem;
+    min-height: 80vh;
+    flex-wrap: wrap; 
+}
+
+.category-selection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.category-button {
+    background-color: #4e4f6e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.category-button.active {
+    background-color: #2c5c92;
+}
+
+.main-certificate {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.main-certificate img {
+    width: 100%;
+    max-width: 600px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.nav-button {
+    padding: 0.5rem 1rem;
+    background-color: #1c4979;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: auto;
+    font-size: 1.5rem;
+    height: auto;
+}
+
+.nav-button:hover {
+    background-color: #173c64;
+}
+
+.nav-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.certificate-details {
+    flex: 2;
+    padding: 20px;
+    color: #ccc;
+    max-width: 500px;
+}
+
+.certificate-details h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.certificate-details p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.certificate-details a {
+    display: inline-block;
+    background-color: #4c70af;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.certificate-details a:hover {
+    background-color: #2c5c92;
+    transform: scale(1.05);
+}
+
+.certificate-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    
+}
+
+.thumbnail {
+    width: 60px; 
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
+}
+
+.thumbnail.active {
+    transform: scale(1.2); 
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); 
+}
+
+/* Desktop-only layout */
+@media (min-width: 769px) {
+    .certificates-container {
+        flex-direction: row; 
+    }
+
+    .main-certificate {
+        flex: 3; 
+    }
+
+    .certificate-thumbnails {
+        position: absolute;
+        
+        bottom: 10px;
+        right: 10px;
+        z-index: 10; 
+    }
+    .thumbnail.active {
+        transform: scale(1.1); 
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); 
+    }
+}
+
+@media (max-width: 768px) {
+    .certificates-container {
+        flex-direction: column; 
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .category-selection {
+        width: 100%;
+        padding: 0;
+    }
+
+    .category-button {
+        width: 100%; 
+        font-size: 1.2rem;
+    }
+
+    .main-certificate img {
+        width: 100%;
+        height: auto;
+    }
+
+    .certificate-details {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .navigation-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        width: auto;
+    }
+
+    .nav-button {
+        width: auto; 
+        font-size: 1.2rem; 
+        padding: 0.5rem 1rem;
+    }
+
+    .certificate-thumbnails {
+        justify-content: center; 
+        flex-direction: row;
+    }
+
+    .thumbnail {
+        width: 45%; 
+        height: 6rem;
+    }
+    .thumbnail.active {
+        transform: scale(1.1); 
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); 
+    }
+}
+

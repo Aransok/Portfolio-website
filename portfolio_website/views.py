@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
 from django.contrib import messages
-from .models import Certificate
+from .models import Certificate, Diploma, AI_LLM
 
 
 load_dotenv()
@@ -39,32 +39,36 @@ def projects(request):
 from django.shortcuts import render, redirect
 from .models import Certificate
 
-def certificates(request, cert_id=None):
-    certificates = Certificate.objects.all()
+def certificates(request, category="certificates", cert_id=None):
+    # Define the available categories
+    categories = {
+        "certificates": Certificate.objects.all(),
+        "diplomas": Diploma.objects.all(),
+        "ai_llms": AI_LLM.objects.all(),
+    }
 
-    # If cert_id is None or not in the certificates, select the first one
-    if cert_id is None or cert_id not in [cert.id for cert in certificates]:
-        cert_id = certificates.first().id if certificates.exists() else None
+    items = categories.get(category, Certificate.objects.all())  
+    selected_item = next((item for item in items if item.id == cert_id), None)
 
-    current_certificate = next((cert for cert in certificates if cert.id == cert_id), None)
+    if selected_item is None and items.exists():
+        selected_item = items.first()
+        cert_id = selected_item.id
 
-    # Get all the IDs to generate previous/next navigation
-    cert_ids = [cert.id for cert in certificates]
-    current_index = cert_ids.index(cert_id) if cert_id else 0
-    prev_id = cert_ids[current_index - 1] if current_index > 0 else None
-    next_id = cert_ids[current_index + 1] if current_index < len(cert_ids) - 1 else None
+    item_ids = [item.id for item in items]
+    current_index = item_ids.index(cert_id) if cert_id in item_ids else 0
+    prev_id = item_ids[current_index - 1] if current_index > 0 else None
+    next_id = item_ids[current_index + 1] if current_index < len(item_ids) - 1 else None
 
     context = {
-        'certificates': certificates,
-        'current_certificate': current_certificate,
-        'prev_id': prev_id,
-        'next_id': next_id,
+        "categories": categories.keys(),  # List of category names
+        "current_category": category,
+        "items": items,
+        "current_certificate": selected_item,
+        "prev_id": prev_id,
+        "next_id": next_id,
     }
 
     return render(request, 'portfolio_website/certificates.html', context)
-
-    
-
 def demo_llm_summarizer(request):
     return render(request, 'portfolio_website/demo-llm-summarizer.html')
 
