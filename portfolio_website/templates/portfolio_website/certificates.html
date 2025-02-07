@@ -6,25 +6,26 @@
 {% block content %}
 <div class="certificates-container">
 
-    <!-- Left: Category Selection -->
     <div class="category-selection">
         {% for category in categories %}
             <button 
                 class="category-button {% if category == current_category %}active{% endif %}"
                 onclick="location.href='{% url 'certificates' category %}'">
-                {{ category|title }}
+                {% if category == 'ai_llms' %}
+                    AI Certificates
+                {% else %}
+                    {{ category|title }}
+                {% endif %}
             </button>
         {% endfor %}
     </div>
-
-    <!-- Center: Main Certificate Image -->
+    
     <div class="main-certificate">
         {% if current_certificate %}
             <img src="{{ current_certificate.image.url }}" alt="{{ current_certificate.name }}">
         {% endif %}
     </div>
 
-    <!-- Right Top: Certificate Details -->
     <div class="certificate-details">
         {% if current_certificate %}
             <h2>{{ current_certificate.name }}</h2>
@@ -42,7 +43,6 @@
 
 </div>
 
-<!-- Right Bottom: Thumbnails -->
 <div class="certificate-thumbnails">
     {% for item in items %}
         <div class="thumbnail {% if item.id == current_certificate.id %}active{% endif %}">
@@ -52,7 +52,6 @@
     {% endfor %}
 </div>
 
-<!-- Navigation Buttons Below the Main Image -->
 <div class="navigation-buttons">
     {% if prev_id %}
         <button class="nav-button" onclick="location.href='{% url 'certificates' current_category prev_id %}'">◀</button>
