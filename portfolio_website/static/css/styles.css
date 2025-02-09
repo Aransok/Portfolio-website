@@ -375,27 +375,7 @@ a:hover {
     border-radius: 5px;
 }
 
-.demo-button {
-    display: inline-block;
-    background-color: #4c70af;
-    color: white;
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    text-decoration: none;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-}
 
-.demo-button:hover {
-    background-color: #2c5c92;
-    transform: scale(1.05);
-}
-a.demo-button{
-    text-decoration: none;
-}
 
 @media (max-width: 768px) {
     .projects-section {

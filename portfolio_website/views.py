@@ -4,11 +4,6 @@ import os
 from dotenv import load_dotenv
 from django.contrib import messages
 from .models import Certificate, Diploma, AI_LLM
-from django.http import JsonResponse
-from .forms import SummarizerForm
-from django.views.decorators.csrf import csrf_protect
-from portfolio_website.utils.LLM_Article_Summarizer import ArticleSummarizer
-from huggingface_hub import login
 from django.shortcuts import render, redirect
 from .models import Certificate
 
@@ -74,40 +69,6 @@ def certificates(request, category="certificates", cert_id=None):
     }
 
     return render(request, 'portfolio_website/certificates.html', context)
-@csrf_protect  
-def demo_llm_summarizer(request):
-    summary = None
-    title = None
-    error = None
-    language = "en" 
-
-    if request.method == "POST":
-        form = SummarizerForm(request.POST)
-        if form.is_valid():
-            url = form.cleaned_data["url"]
-            translate = form.cleaned_data["translate"]
-            language = form.cleaned_data["language"] if translate else "en"  
-
-            try:
-                model_id = "meta-llama/Llama-3.2-1B-Instruct"
-                hf_token = os.getenv("HUGGINGFACE_API_KEY")
-
-                summarizer = ArticleSummarizer(model_id=model_id, hf_token=hf_token)
-                title, summary = summarizer.process_article(url, translate, language)
-                
-                return JsonResponse({"title": title, "summary": summary})
-            except Exception as e:
-                error = str(e)
-                return JsonResponse({"error": error}, status=400)
-
-        else:
-            error = "Form is invalid."
-            return JsonResponse({"error": error}, status=400)
-
-    else:
-        form = SummarizerForm(initial={"language": "en"})
-
-    return render(request, "portfolio_website/demo-llm-summarizer.html", {"form": form, "title": title, "summary": summary, "error": error})
 def custom_400(request, exception):
     response = render(request, "portfolio_website/400.html")
     response.status_code = 400

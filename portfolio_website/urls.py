@@ -11,7 +11,6 @@ urlpatterns = [
     path('certificates', views.certificates, name='certificates'), 
     path('certificates/<str:category>/', views.certificates, name='certificates'),
     path('certificates/<str:category>/<int:cert_id>/', views.certificates, name='certificates'),
-    path('demo-llm-summarizer' , views.demo_llm_summarizer, name='demo_llm_summarizer'),
 
 ]
 if settings.DEBUG:
