@@ -79,14 +79,17 @@ WSGI_APPLICATION = 'portfoliowebsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASE_NAME = os.getenv("DATABASE_NAME")
-DATABASE_USER = os.getenv("DATABASE_USER")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
-DATABASE_URL = os.getenv("DATABASE_URL")
-DATABASE_PORT = os.getenv("DATABASE_PORT")
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL
+        'NAME': 'postgres',  # Default PostgreSQL database name
+        'USER': 'postgres',  # Default PostgreSQL user
+        'PASSWORD': '',  # Leave blank if no password is set
+        'HOST': 'localhost',  # Set to '127.0.0.1' if running locally
+        'PORT': '5432',  # Default PostgreSQL port
+    }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
