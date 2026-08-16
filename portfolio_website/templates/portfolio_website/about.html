@@ -7,23 +7,88 @@
 <section class="about-section">
     <div class="about-text">
         <h2>About Me</h2>
-            <p>👋 Hi! I’m <a href="{% static 'media/Doan_s_CV.pdf' %}" download="Doan_s_CV.pdf">Doan Idriz</a>.A developer who’s still that kid staring at a screen, wondering “How do I make this thing do stuff?”</p>
+            <p>👋 Hi! I’m <a href="{% static 'media/Doan_s_CV.pdf' %}" download="Doan_s_CV.pdf">Doan Idriz</a>, a Full-Stack Developer &amp; AI Automation Engineer based in Plovdiv, Bulgaria — still that kid staring at a screen, wondering "How do I make this thing do stuff?"</p>
             <br>
-            <p> What I’ve been up to:</p>
+            <p>🐍 Earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/" target="_blank">SoftUni's</a> challenging and fun courses.</p>
             <br>
-            <p>🐍 Earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/">SoftUni's</a> challenging and fun courses.</p>
-            <br>
-            <p>🤖 Currently geeking out over Machine Learning and Large Language Models—because code that learns feels like magic.</p>
+            <p>🤖 Most recently worked as an AI Researcher, building AI agents from scratch in pure Python, RAG pipelines, and workflow automations — because code that learns still feels a little like magic.</p>
             <p>🌱 Always exploring the next tech rabbit hole.</p>
-            <br>
-            <p>Why I code:</p>
-            <p>Tech’s a never-ending playground. I’m here to build, break, and rebuild things that (hopefully) make someone go</p>
-            <p> “Wait, how’d you do that?”</p>
             <br>
             <p>Let’s <a href="{% url 'contact' %}">connect</a> and nerd out about the future of tech!</p>
     </div>
     <div class="about-image">
         <img src="{% static 'media/me.jpg' %}" alt="My Photo">
+    </div>
+</section>
+
+<section class="resume-section">
+    <h2 class="section-heading">Experience</h2>
+    <div class="timeline-item">
+        <div class="timeline-header">
+            <h3>AI Researcher — Programming &amp; Automation</h3>
+            <span class="timeline-date">Mar 2025 – Jan 2026</span>
+        </div>
+        <p class="timeline-org">Edamame Digital · Sofia, Bulgaria</p>
+        <p>Designed and built AI agents from scratch in pure Python, with no external orchestration framework, integrated through OAuth 2.0-secured REST APIs. Implemented semantic search and RAG pipelines using the Pinecone vector database and text embeddings. Built internal websites and workflow automations using N8N.</p>
+        <div class="tag-row">
+            <span class="tag">AI Agents</span>
+            <span class="tag">Pure Python</span>
+            <span class="tag">Pinecone / RAG</span>
+            <span class="tag">OAuth 2.0</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">N8N</span>
+        </div>
+    </div>
+
+    <h2 class="section-heading">Education</h2>
+    <div class="timeline-item">
+        <div class="timeline-header">
+            <h3>Python Full-Stack Developer — Professional Diploma</h3>
+            <span class="timeline-date">Jan 2021 – May 2024</span>
+        </div>
+        <p class="timeline-org">Software University (SoftUni), Sofia, Bulgaria · <a href="https://softuni.bg/Certificates/Details/215978/eb3cab1b" target="_blank">Verify</a></p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-header">
+            <h3>Software Engineer with Python — Diploma</h3>
+            <span class="timeline-date">Mar 2024</span>
+        </div>
+        <p class="timeline-org">Software University (SoftUni), Sofia, Bulgaria · <a href="https://softuni.bg/Certificates/Details/208770/e20ed08e" target="_blank">Verify</a></p>
+    </div>
+
+    <h2 class="section-heading">Skills</h2>
+    <div class="tag-row skills-block">
+        <span class="tag">Python</span>
+        <span class="tag">Django</span>
+        <span class="tag">Flask</span>
+        <span class="tag">OOP</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Angular</span>
+        <span class="tag">AngularJS</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Express</span>
+        <span class="tag">Git</span>
+        <span class="tag">AI Agent Orchestration</span>
+        <span class="tag">Pinecone</span>
+        <span class="tag">RAG</span>
+        <span class="tag">OAuth 2.0</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">N8N Automation</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">Cursor</span>
+        <span class="tag">Prompt Engineering</span>
+    </div>
+
+    <h2 class="section-heading">Languages</h2>
+    <div class="tag-row skills-block">
+        <span class="tag">Bulgarian — Native</span>
+        <span class="tag">English — Fluent</span>
     </div>
 </section>
 {% endblock %}
