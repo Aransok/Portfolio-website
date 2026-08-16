@@ -2,7 +2,12 @@ name: Keep Render Instance Awake
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    # Every 10 min, but only 03:00-21:59 UTC = ~06:00-01:00 Bulgaria time (EEST,
+    # UTC+3). Outside that window the site is allowed to spin down on Render's
+    # free tier - no visitors expected then anyway. Note: this drifts by an hour
+    # once Bulgaria switches to EET (UTC+2) in winter, since cron doesn't know
+    # about DST; the ping window will run ~1 hour later local time until then.
+    - cron: '*/10 3-21 * * *'
   workflow_dispatch:
 
 jobs:
