@@ -146,17 +146,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-# Without this, a blocked/unreachable SMTP connection hangs indefinitely instead
-# of raising an exception, and Render's gateway kills the request with a 502
-# before the view's error handling ever gets a chance to run.
-EMAIL_TIMEOUT = 25
+
+# Contact form email, sent via the Resend API (HTTPS) rather than raw SMTP.
+# Render's network cannot reliably complete an SMTP handshake to Gmail (every
+# attempt burned the full configured timeout with zero variance, the signature
+# of a dropped/blocked connection, not a slow one) - HTTPS on port 443 doesn't
+# have that problem.
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+CONTACT_RECIPIENT_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 if not DEBUG:
     SESSION_COOKIE_SECURE = True

@@ -1,5 +1,5 @@
+import resend
 from django.shortcuts import render, redirect
-from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
 from .models import Certificate, Diploma, AI_LLM
@@ -16,17 +16,19 @@ def contact(request):
         message_name = request.POST['message-name']
         message_email = request.POST['message-email']
         message = request.POST['message']
-        recipient_email = settings.EMAIL_HOST_USER
 
         try:
-            email = EmailMessage(
-                subject=f'Portfolio contact from {message_name}',
-                body=f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
-                from_email=settings.EMAIL_HOST_USER,
-                to=[recipient_email],
-                reply_to=[message_email],
-            )
-            email.send(fail_silently=False)
+            resend.api_key = settings.RESEND_API_KEY
+            resend.Emails.send({
+                # Resend's shared onboarding domain can only send to the
+                # account's own verified address, which is exactly this form's
+                # recipient - no custom domain verification needed.
+                "from": "Portfolio Contact Form <onboarding@resend.dev>",
+                "to": [settings.CONTACT_RECIPIENT_EMAIL],
+                "reply_to": message_email,
+                "subject": f'Portfolio contact from {message_name}',
+                "text": f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
+            })
             messages.success(request, '✅ Your message has been sent successfully!')
         except Exception:
             messages.error(request, '⚠️ Sorry, your message could not be sent right now. Please try again later.')

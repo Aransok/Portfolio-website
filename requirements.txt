@@ -5,3 +5,4 @@ pillow==10.2.0
 whitenoise==6.8.2
 python-dotenv==1.0.0
 dj-database-url==2.3.0
+resend==2.5.1
