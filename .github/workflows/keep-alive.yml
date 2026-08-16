@@ -1,0 +1,17 @@
+name: Keep Render Instance Awake
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping site
+        run: |
+          echo "Pinging site to prevent Render free-tier spin-down..."
+          curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://portfolio-website-fr7t.onrender.com/ \
+            && echo " - OK" \
+            || echo " - request failed (site may have been asleep, this is non-fatal)"

@@ -1,17 +1,12 @@
-from django.shortcuts import render,redirect
-from django.core.mail import send_mail
-import os
-from dotenv import load_dotenv
+from django.shortcuts import render, redirect
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.contrib import messages
 from .models import Certificate, Diploma, AI_LLM
-from django.shortcuts import render, redirect
-from .models import Certificate
 
-
-load_dotenv()
 
 def home(request):
-    return render(request, 'portfolio_website/home.html')  
+    return render(request, 'portfolio_website/home.html')
 
 def about(request):
     return render(request, 'portfolio_website/about.html')
@@ -21,18 +16,23 @@ def contact(request):
         message_name = request.POST['message-name']
         message_email = request.POST['message-email']
         message = request.POST['message']
-        recipient_email = os.getenv("EMAIL_HOST_USER")
-        send_mail(
-            f'From: {message_name}' + f' Email: {message_email}', 
-            f'Message: {message}',
-            message_email, 
-            [recipient_email],
-        )
-        messages.success(request, '✅ Your message has been sent successfully!')
+        recipient_email = settings.EMAIL_HOST_USER
+
+        try:
+            email = EmailMessage(
+                subject=f'Portfolio contact from {message_name}',
+                body=f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
+                from_email=settings.EMAIL_HOST_USER,
+                to=[recipient_email],
+                reply_to=[message_email],
+            )
+            email.send(fail_silently=False)
+            messages.success(request, '✅ Your message has been sent successfully!')
+        except Exception:
+            messages.error(request, '⚠️ Sorry, your message could not be sent right now. Please try again later.')
 
         return redirect('contact')
 
-    
     else:
         return render(request, 'portfolio_website/contact.html', {})
 

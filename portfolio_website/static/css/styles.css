@@ -125,11 +125,12 @@ a:hover {
 .about-text h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: #1a202c;
+    color: #eaeaea;
+    margin-bottom: 1rem;
 }
 
 .about-text p {
-    color: #7e8898;
+    color: #c7cdda;
 }
 
 .about-image {
@@ -375,6 +376,13 @@ a:hover {
     border-radius: 5px;
 }
 
+/* Same placeholder image is reused across cards until real screenshots exist;
+   tint each one differently so cards read as distinct at a glance. */
+.project-card:nth-child(4n+1) img { filter: hue-rotate(0deg) saturate(1.3); }
+.project-card:nth-child(4n+2) img { filter: hue-rotate(80deg) saturate(1.3); }
+.project-card:nth-child(4n+3) img { filter: hue-rotate(180deg) saturate(1.3); }
+.project-card:nth-child(4n+4) img { filter: hue-rotate(260deg) saturate(1.3); }
+
 
 
 @media (max-width: 768px) {
@@ -452,6 +460,9 @@ a.see-more-btn {
     object-fit: cover;
     border-radius: 5px;
 }
+
+.featured-card:nth-child(1) img { filter: hue-rotate(0deg) saturate(1.3); }
+.featured-card:nth-child(2) img { filter: hue-rotate(150deg) saturate(1.3); }
 
 .see-more-btn {
     display: inline-block;

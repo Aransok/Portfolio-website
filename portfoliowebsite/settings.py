@@ -24,12 +24,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&^)n-$+_w2)m$1_gfla57_t#-%1*svpm!qfm0(ik*zp^3&u)25'
+# Set a SECRET_KEY env var on Render for real production security; this is only a dev fallback.
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-&^)n-$+_w2)m$1_gfla57_t#-%1*svpm!qfm0(ik*zp^3&u)25',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['portfolio-website-fr7t.onrender.com', 'localhost', '127.0.0.1']
+
+# Render terminates TLS at its proxy and forwards this header; without it Django
+# thinks every request is plain HTTP, which breaks CSRF/session cookie checks.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_TRUSTED_ORIGINS = ['https://portfolio-website-fr7t.onrender.com']
 
 
 # Application definition
@@ -78,16 +87,16 @@ WSGI_APPLICATION = 'portfoliowebsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# Uses DATABASE_URL (Render sets this automatically when a Postgres instance is
+# attached) and falls back to the committed sqlite db otherwise. The old hardcoded
+# config pointed at a Postgres server on localhost, which doesn't exist on Render
+# and made every DB-backed page (certificates) return a 500.
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL
-        'NAME': 'postgres',  # Default PostgreSQL database name
-        'USER': 'postgres',  # Default PostgreSQL user
-        'PASSWORD': '',  # Leave blank if no password is set
-        'HOST': 'localhost',  # Set to '127.0.0.1' if running locally
-        'PORT': '5432',  # Default PostgreSQL port
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
 # Password validation
@@ -144,3 +153,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
