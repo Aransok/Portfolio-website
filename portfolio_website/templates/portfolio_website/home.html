@@ -5,29 +5,42 @@
 {% block content %}
 <div class="hero-banner">
     <div class="hero-content">
-        <h1>Welcome to My Website</h1>
-        <br><br><br>
-        <p>Thanks for visiting! My name is <a href={%url 'about'%} style='color:white'>Doan Idriz</a>, nice to meet you!👋</p>
+        <span class="hero-eyebrow">Full-Stack Developer &amp; AI Automation Engineer</span>
+        <h1>Hi, I'm Doan Idriz</h1>
+        <p>I build production web applications end to end — from Django/React platforms serving real customers to AI-assisted tooling that automates the boring parts.</p>
         <a href="{% url 'contact'%}" class="btn-primary">Get in Touch</a>
     </div>
 </div>
 
+<h2 class="section-heading">Featured Work</h2>
 <section class="featured-section">
-    <div class="featured-card">
-        <img src="{%static 'media/coding-background.jpg'%}" alt="Project 1">
-        <h3><a href="https://github.com/Aransok/LLM-Article-Summarizer" style="text-decoration:none"> LLM Article Summarizer</a></h3>
-        <p>Python project for Article summarization using LLM</p>
-
-    </div>
-    <div class="featured-card">
-        <img src="{%static 'media/coding-background.jpg'%}" alt="Project 2">
-        <h3><a href="https://github.com/Aransok/Angular-Project-Moviesite" style="text-decoration:none">Angular Movies web site</a></h3>
-        <p>A movie site using Angular and Node js</p>
+    <div class="project-card flagship">
+        <div class="project-media">
+            <img class="logo-media" src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+        </div>
+        <div class="project-body">
+            <div class="project-title-row">
+                <h3>Broffice</h3>
+                <span class="badge-live">Live</span>
+            </div>
+            <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer — full storefront, dual pricing engine, and an admin back office with a conversational assistant. In production, serving real customers.</p>
+            <div class="tag-row">
+                <span class="tag">Django</span>
+                <span class="tag">React</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Celery</span>
+                <span class="tag">Docker</span>
+            </div>
+            <div class="project-links">
+                <a href="https://www.broffice.bg" target="_blank" class="link-primary">Visit Site</a>
+                <a href="https://github.com/Aransok/broffice-app" target="_blank" class="link-secondary">View Code</a>
+            </div>
+        </div>
     </div>
 </section>
 
 <div style="text-align: center;">
-    <a href="/projects" class="see-more-btn">See More Projects</a>
+    <a href="{% url 'projects' %}" class="see-more-btn">See More Projects</a>
 </div>
 
 {% endblock %}
