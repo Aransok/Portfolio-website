@@ -2,6 +2,7 @@ import resend
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
+from django.template.loader import render_to_string
 from .models import Certificate, Diploma, AI_LLM
 
 
@@ -18,6 +19,11 @@ def contact(request):
         message = request.POST['message']
 
         try:
+            html_body = render_to_string('portfolio_website/emails/contact_notification.html', {
+                'sender_name': message_name,
+                'sender_email': message_email,
+                'message_body': message,
+            })
             resend.api_key = settings.RESEND_API_KEY
             resend.Emails.send({
                 # Resend's shared onboarding domain can only send to the
@@ -27,6 +33,7 @@ def contact(request):
                 "to": [settings.CONTACT_RECIPIENT_EMAIL],
                 "reply_to": message_email,
                 "subject": f'Portfolio contact from {message_name}',
+                "html": html_body,
                 "text": f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
             })
             messages.success(request, '✅ Your message has been sent successfully!')
