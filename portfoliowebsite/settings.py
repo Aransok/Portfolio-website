@@ -153,6 +153,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+# Without this, a blocked/unreachable SMTP connection hangs indefinitely instead
+# of raising an exception, and Render's gateway kills the request with a 502
+# before the view's error handling ever gets a chance to run.
+EMAIL_TIMEOUT = 10
 
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
