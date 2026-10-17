@@ -1,45 +1,43 @@
 {% extends 'portfolio_website/base.html' %}
 
-{% block title %}Contacts - My Portfolio{% endblock %}
+{% block title %}Contact | Doan Idriz{% endblock %}
 
 {% block content %}
-<section class="contact-section">
-    <h2>Contact Me</h2>
-    <p>Have a question or want to get in touch? Send me a message!</p>
-
-    <div class="contact-info">
-        <a href="mailto:doanchetoidriz@gmail.com">✉ doanchetoidriz@gmail.com</a>
-        <span>📍 Plovdiv, Bulgaria</span>
-        <a href="https://www.linkedin.com/in/doan-idriz-70b472165/" target="_blank">in LinkedIn</a>
-        <a href="https://github.com/Aransok" target="_blank">⌥ GitHub</a>
-    </div>
-
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <p class="alert {{ message.tags }}">{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    <form method="POST" action="{% url 'contact' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="message-name">Name:</label>
-            <input type="text" id="message-name" name="message-name" required>
+<div class="wrap">
+    <section class="contact-grid">
+        <div class="contact-intro">
+            <span class="label">Contact</span>
+            <h1>Let's build something.</h1>
+            <p>Have a question, a project, or an automation you want gone? Send me a message and I'll get back to you.</p>
+            <ul class="contact-list">
+                <li><span>Email</span><a href="mailto:doanchetoidriz@gmail.com">doanchetoidriz@gmail.com</a></li>
+                <li><span>Based in</span><b>Plovdiv, Bulgaria</b></li>
+                <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/doan-idriz-70b472165/" target="_blank" rel="noopener">Doan Idriz</a></li>
+                <li><span>GitHub</span><a href="https://github.com/Aransok" target="_blank" rel="noopener">Aransok</a></li>
+            </ul>
         </div>
 
-        <div class="form-group">
-            <label for="message-email">Email:</label>
-            <input type="email" id="message-email" name="message-email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-
-        <button type="submit" class="submit-button">Send Message</button>
-    </form>
-</section>
+        <form method="POST" action="{% url 'contact' %}" class="contact-form">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="alert {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label for="message-name">Name</label>
+                <input type="text" id="message-name" name="message-name" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+                <label for="message-email">Email</label>
+                <input type="email" id="message-email" name="message-email" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+    </section>
+</div>
 {% endblock %}

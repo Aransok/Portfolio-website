@@ -1,13 +1,28 @@
 import resend
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_control
 from django.conf import settings
 from django.contrib import messages
 from django.template.loader import render_to_string
 from .models import Certificate, Diploma, AI_LLM
+from . import github_activity
 
 
 def home(request):
     return render(request, 'portfolio_website/home.html')
+
+@cache_control(public=True, max_age=1800)
+def activity(request):
+    """Contribution calendar as JSON, loaded by the home page after render."""
+    if settings.ACTIVITY_SAMPLE:
+        days = github_activity.sample_days()
+        data = {"days": days, "summary": github_activity.summarize(days), "sample": True}
+    else:
+        data = github_activity.get_activity(settings.GITHUB_USERNAME)
+    if not data:
+        return JsonResponse({"ok": False}, status=503)
+    return JsonResponse({"ok": True, "username": settings.GITHUB_USERNAME, **data})
 
 def about(request):
     return render(request, 'portfolio_website/about.html')

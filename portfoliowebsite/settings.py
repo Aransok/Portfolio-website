@@ -155,6 +155,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
 CONTACT_RECIPIENT_EMAIL = os.getenv("EMAIL_HOST_USER")
 
+# Activity graph on the home page. GITHUB_TOKEN is optional: with it the
+# graph uses the GraphQL API, without it the public calendar page.
+GITHUB_USERNAME = os.getenv("GITHUB_USERNAME", "Aransok")
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+# Local previews only: serve example activity instead of asking GitHub.
+ACTIVITY_SAMPLE = os.getenv("ACTIVITY_SAMPLE", "False") == "True"
+
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
