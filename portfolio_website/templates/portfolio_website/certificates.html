@@ -1,65 +1,65 @@
 {% extends 'portfolio_website/base.html' %}
 {% load static %}
 
-{% block title %}Certificates - My Portfolio{% endblock %}
+{% block title %}Certificates | Doan Idriz{% endblock %}
 
 {% block content %}
-<div class="certificates-container">
+<div class="wrap">
+    <header class="page-head">
+        <span class="label">Certificates</span>
+        <h1>Paper trail</h1>
+        <p>Diplomas and course certificates from SoftUni, plus AI and ML recognitions.</p>
+    </header>
 
-    <div class="category-selection">
+    <nav class="cert-tabs" aria-label="Certificate categories">
         {% for category in categories %}
-            <button 
-                class="category-button {% if category == current_category %}active{% endif %}"
-                onclick="location.href='{% url 'certificates' category %}'">
-                {% if category == 'ai_llms' %}
-                    AI and ML Certificates
-                {% else %}
-                    {{ category|title }}
-                {% endif %}
-            </button>
+            <a href="{% url 'certificates' category %}" {% if category == current_category %}aria-current="page"{% endif %}>
+                {% if category == 'ai_llms' %}AI and ML{% else %}{{ category|title }}{% endif %}
+            </a>
         {% endfor %}
-    </div>
-    
-    <div class="main-certificate">
-        {% if current_certificate %}
-            <img src="{{ current_certificate.image.url }}" alt="{{ current_certificate.name }}">
-        {% endif %}
-    </div>
+    </nav>
 
-    <div class="certificate-details">
-        {% if current_certificate %}
+    {% if current_certificate %}
+    <section class="cert-viewer">
+        <div class="cert-image">
+            <img src="{{ current_certificate.image.url }}" alt="{{ current_certificate.name }}">
+        </div>
+        <div class="cert-details">
+            <span class="label">{% if 'diploma' in current_category %}Diploma{% elif current_category == 'ai_llms' %}AI and ML{% else %}Certificate{% endif %}</span>
             <h2>{{ current_certificate.name }}</h2>
             <p>{{ current_certificate.description }}</p>
             <p>{{ current_certificate.what_i_learned }}</p>
-            <a href="{{ current_certificate.link }}" target="_blank">
-                {% if 'diploma' in current_category %}
-                    View Diploma
+            <div>
+                <a class="btn" href="{{ current_certificate.link }}" target="_blank" rel="noopener">
+                    {% if 'diploma' in current_category %}View diploma{% else %}View certificate{% endif %}
+                </a>
+            </div>
+            <div class="cert-pager">
+                {% if prev_id %}
+                    <a href="{% url 'certificates' current_category prev_id %}" aria-label="Previous">&#8592;</a>
                 {% else %}
-                    View Certificate
+                    <span class="off" aria-hidden="true">&#8592;</span>
                 {% endif %}
-            </a>
-        {% endif %}
-    </div>
-
-</div>
-
-<div class="certificate-thumbnails">
-    {% for item in items %}
-        <div class="thumbnail {% if item.id == current_certificate.id %}active{% endif %}">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" 
-                 onclick="location.href='{% url 'certificates' current_category item.id %}'">
+                {% if next_id %}
+                    <a href="{% url 'certificates' current_category next_id %}" aria-label="Next">&#8594;</a>
+                {% else %}
+                    <span class="off" aria-hidden="true">&#8594;</span>
+                {% endif %}
+                <span>{{ items|length }} in this collection</span>
+            </div>
         </div>
-    {% endfor %}
-</div>
+    </section>
 
-<div class="navigation-buttons">
-    {% if prev_id %}
-        <button class="nav-button" onclick="location.href='{% url 'certificates' current_category prev_id %}'">◀</button>
-    {% endif %}
-    
-    {% if next_id %}
-        <button class="nav-button" onclick="location.href='{% url 'certificates' current_category next_id %}'">▶</button>
+    <div class="cert-strip">
+        {% for item in items %}
+            <a href="{% url 'certificates' current_category item.id %}" {% if item.id == current_certificate.id %}aria-current="true"{% endif %} title="{{ item.name }}">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" loading="lazy">
+            </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="activity-empty">Nothing here yet.</p>
     {% endif %}
 </div>
-
+<div class="section"></div>
 {% endblock %}

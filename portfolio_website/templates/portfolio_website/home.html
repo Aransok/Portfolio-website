@@ -1,46 +1,123 @@
 {% extends 'portfolio_website/base.html' %}
-{%load static%}
-{% block title %}Home - My Portfolio{% endblock %}
+{% load static %}
+{% block title %}Doan Idriz | Full-Stack & AI Automation Engineer{% endblock %}
 
 {% block content %}
-<div class="hero-banner">
-    <div class="hero-content">
-        <span class="hero-eyebrow">Full-Stack Developer &amp; AI Automation Engineer</span>
-        <h1>Hi, I'm Doan Idriz</h1>
-        <p>I build production web applications end to end — from Django/React platforms serving real customers to AI-assisted tooling that automates the boring parts.</p>
-        <a href="{% url 'contact'%}" class="btn-primary">Get in Touch</a>
-    </div>
-</div>
-
-<h2 class="section-heading">Featured Work</h2>
-<section class="featured-section">
-    <div class="project-card flagship">
-        <div class="project-media">
-            <img class="logo-media" src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+<section class="hero">
+    <canvas id="woven" aria-hidden="true"></canvas>
+    <div class="wrap">
+        <div class="hero-copy">
+            <span class="hero-eyebrow">Full-stack &amp; AI automation engineer &middot; Plovdiv</span>
+            <h1>Hi, I'm Doan. I build agents from <em>plain Python</em>.</h1>
+            <p>Production web apps end to end, from Django and React platforms serving real customers to AI agents and RAG pipelines written from scratch. <b>No LangChain, no CrewAI</b>, just code you can read and own.</p>
+            <div class="hero-actions">
+                <a href="{% url 'projects' %}" class="btn btn-primary">See the work</a>
+                <a href="{% url 'contact' %}" class="btn">Get in touch</a>
+            </div>
         </div>
-        <div class="project-body">
-            <div class="project-title-row">
-                <h3>Broffice</h3>
-                <span class="badge-live">Live</span>
+    </div>
+    <span class="hero-hint">move through the knot &middot; drag to spin</span>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <span class="label">Featured work</span>
+                <h2>Live in production</h2>
             </div>
-            <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer — full storefront, dual pricing engine, and an admin back office with a conversational assistant. In production, serving real customers.</p>
-            <div class="tag-row">
-                <span class="tag">Django</span>
-                <span class="tag">React</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Celery</span>
-                <span class="tag">Docker</span>
+            <p>A real retailer, real customers, and the whole stack from database to deploy pipeline.</p>
+        </div>
+
+        <div class="projects-grid">
+            <article class="project-card flagship">
+                <div class="project-art">
+                    <img src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+                </div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>Broffice</h3>
+                        <span class="badge-live">Live</span>
+                    </div>
+                    <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront, dual pricing engine, and an admin back office with a conversational assistant. In production, serving real customers.</p>
+                    <div class="tag-row">
+                        <span class="tag">Django</span>
+                        <span class="tag">React</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Celery</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">Visit site</a>
+                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="center-row">
+            <a href="{% url 'projects' %}" class="btn">All projects</a>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="activity">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <span class="label">On GitHub</span>
+                <h2>A year of commits</h2>
             </div>
-            <div class="project-links">
-                <a href="https://www.broffice.bg" target="_blank" class="link-primary">Visit Site</a>
-                <a href="https://github.com/Aransok/broffice-app" target="_blank" class="link-secondary">View Code</a>
+            <p>Every square is a day. Teal is a working day, ember marks the busiest ones. Pulled live from GitHub.</p>
+        </div>
+
+        <div class="activity" data-src="{% url 'activity' %}">
+            <div class="activity-stats">
+                <div class="stat"><b data-stat="total">&ndash;</b><span>Contributions</span></div>
+                <div class="stat hot"><b data-stat="current_streak">&ndash;</b><span>Current streak</span></div>
+                <div class="stat"><b data-stat="longest_streak">&ndash;</b><span>Longest streak</span></div>
+                <div class="stat"><b data-stat="active_days">&ndash;</b><span>Active days</span></div>
+            </div>
+
+            <div class="activity-bar">
+                <div class="view-switch" role="group" aria-label="Graph view">
+                    <button type="button" data-view="flat" aria-pressed="true">Grid</button>
+                    <button type="button" data-view="3d" aria-pressed="false">3D city</button>
+                </div>
+                <div class="legend" aria-hidden="true">
+                    <span>Less</span>
+                    <i style="background: var(--lvl-0)"></i><i style="background: var(--lvl-1)"></i><i style="background: var(--lvl-2)"></i><i style="background: var(--lvl-3)"></i><i style="background: var(--lvl-4)"></i>
+                    <span>More</span>
+                </div>
+            </div>
+
+            <div class="cal-scroll" data-pane="flat">
+                <div class="cal" id="cal" role="grid" aria-label="Contribution calendar"></div>
+            </div>
+            <canvas class="cal-3d" id="cal3d" data-pane="3d" hidden aria-label="Contribution calendar as a 3D city"></canvas>
+
+            <p class="cal-tip" id="cal-tip" aria-live="polite">Loading activity&hellip;</p>
+
+            <div class="activity-foot">
+                <span id="best-day"></span>
+                <a href="https://github.com/Aransok" target="_blank" rel="noopener">github.com/Aransok &#8599;</a>
             </div>
         </div>
     </div>
 </section>
 
-<div style="text-align: center;">
-    <a href="{% url 'projects' %}" class="see-more-btn">See More Projects</a>
-</div>
+<section class="section">
+    <div class="wrap">
+        <div class="cta-strip">
+            <h2>Need an agent, an automation, or a whole platform?</h2>
+            <a href="{% url 'contact' %}" class="btn btn-primary">Start a conversation</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
 
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="{% static 'js/woven.js' %}" defer></script>
+<script src="{% static 'js/activity.js' %}" defer></script>
 {% endblock %}

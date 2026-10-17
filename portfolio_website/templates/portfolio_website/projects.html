@@ -1,122 +1,135 @@
 {% extends 'portfolio_website/base.html' %}
 {% load static %}
-{% block title %}Projects - My Portfolio{% endblock %}
+{% block title %}Projects | Doan Idriz{% endblock %}
 
 {% block content %}
-<section class="projects-section">
+<div class="wrap">
+    <header class="page-head">
+        <span class="label">Projects</span>
+        <h1>Things I've built</h1>
+        <p>From a live e-commerce platform to small AI tools and the projects I learned on.</p>
+    </header>
+</div>
 
-    <div class="project-card flagship">
-        <div class="project-media">
-            <img class="logo-media" src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
-        </div>
-        <div class="project-body">
-            <div class="project-title-row">
-                <h3>Broffice</h3>
-                <span class="badge-live">Live</span>
-            </div>
-            <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront with dual-currency pricing and promotions, plus an admin back office with a dual pricing/profit-margin engine, B2B orders, automated backups, and a conversational help assistant. In production, serving real customers.</p>
-            <div class="tag-row">
-                <span class="tag">Django</span>
-                <span class="tag">React</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Redis / Celery</span>
-                <span class="tag">Docker</span>
-                <span class="tag">CI/CD</span>
-            </div>
-            <div class="project-links">
-                <a href="https://www.broffice.bg" target="_blank" class="link-primary">Visit Site</a>
-                <a href="https://github.com/Aransok/broffice-app" target="_blank" class="link-secondary">View Code</a>
-            </div>
+<section class="section">
+    <div class="wrap">
+        <div class="projects-grid">
+
+            <article class="project-card flagship">
+                <div class="project-art">
+                    <img src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+                </div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>Broffice</h3>
+                        <span class="badge-live">Live</span>
+                    </div>
+                    <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront with dual-currency pricing and promotions, plus an admin back office with a dual pricing/profit-margin engine, B2B orders, automated backups, and a conversational help assistant. In production, serving real customers.</p>
+                    <div class="tag-row">
+                        <span class="tag">Django</span>
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis / Celery</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">CI/CD</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">Visit site</a>
+                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">PL</span></div>
+                <div class="project-body">
+                    <h3>Property Listings Generator</h3>
+                    <p>Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface.</p>
+                    <div class="tag-row">
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">Translation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/JsonBulgarianDataToAINumericData" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">PDF</span></div>
+                <div class="project-body">
+                    <h3>Simple PDF Chat</h3>
+                    <p>A Flask app that lets you upload PDFs and chat with them using AI, with Bulgarian OCR support (Tesseract) for scanned documents.</p>
+                    <div class="tag-row">
+                        <span class="tag">Flask</span>
+                        <span class="tag">AI Chat</span>
+                        <span class="tag">OCR</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">LLM</span></div>
+                <div class="project-body">
+                    <h3>LLM Article Summarizer</h3>
+                    <p>Python project for article summarization using an LLM.</p>
+                    <div class="tag-row">
+                        <span class="tag">Python</span>
+                        <span class="tag">LLM</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">NG</span></div>
+                <div class="project-body">
+                    <h3>Angular Movies Web Site</h3>
+                    <p>A movie site built with Angular and Node.js.</p>
+                    <div class="tag-row">
+                        <span class="tag">Angular</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">DJ</span></div>
+                <div class="project-body">
+                    <h3>Python Movie Website</h3>
+                    <p>An earlier Django movie website project.</p>
+                    <div class="tag-row">
+                        <span class="tag">Django</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/ProjectProtect" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-art"><span class="mono">d.</span></div>
+                <div class="project-body">
+                    <h3>This Portfolio</h3>
+                    <p>This site itself: a Django portfolio with an admin-managed certificates gallery and a live GitHub activity graph.</p>
+                    <div class="tag-row">
+                        <span class="tag">Django</span>
+                        <span class="tag">Three.js</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/Portfolio-website" target="_blank" rel="noopener">View code</a>
+                    </div>
+                </div>
+            </article>
+
         </div>
     </div>
-
-    <div class="project-card">
-        <div class="project-media"><span class="icon-media">🏠</span></div>
-        <div class="project-body">
-            <h3>Property Listings Generator</h3>
-            <p>Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface.</p>
-            <div class="tag-row">
-                <span class="tag">Python</span>
-                <span class="tag">Flask</span>
-                <span class="tag">Translation</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/Aransok/JsonBulgarianDataToAINumericData" target="_blank" class="link-secondary">View Code</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-card">
-        <div class="project-media"><span class="icon-media">📄</span></div>
-        <div class="project-body">
-            <h3>Simple PDF Chat</h3>
-            <p>A Flask app that lets you upload PDFs and chat with them using AI, with Bulgarian OCR support (Tesseract) for scanned documents.</p>
-            <div class="tag-row">
-                <span class="tag">Flask</span>
-                <span class="tag">AI Chat</span>
-                <span class="tag">OCR</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-card">
-        <img src="{% static 'media/coding-background.jpg' %}" alt="LLM Article Summarizer">
-        <div class="project-body">
-            <h3>LLM Article Summarizer</h3>
-            <p>Python project for article summarization using an LLM.</p>
-            <div class="tag-row">
-                <span class="tag">Python</span>
-                <span class="tag">LLM</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" class="link-secondary">View Code</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-card">
-        <img src="{% static 'media/coding-background.jpg' %}" alt="Angular Movies Web Site">
-        <div class="project-body">
-            <h3>Angular Movies Web Site</h3>
-            <p>A movie site built with Angular and Node.js.</p>
-            <div class="tag-row">
-                <span class="tag">Angular</span>
-                <span class="tag">Node.js</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" class="link-secondary">View Code</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-card">
-        <img src="{% static 'media/coding-background.jpg' %}" alt="Python Movie Website">
-        <div class="project-body">
-            <h3>Python Movie Website</h3>
-            <p>An earlier Django movie website project.</p>
-            <div class="tag-row">
-                <span class="tag">Django</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/Aransok/ProjectProtect" target="_blank" class="link-secondary">View Code</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-card">
-        <img src="{% static 'media/coding-background.jpg' %}" alt="This Portfolio Website">
-        <div class="project-body">
-            <h3>This Portfolio</h3>
-            <p>This site itself: a Django portfolio with an admin-managed certificates gallery.</p>
-            <div class="tag-row">
-                <span class="tag">Django</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/Aransok/Portfolio-website" target="_blank" class="link-secondary">View Code</a>
-            </div>
-        </div>
-    </div>
-
 </section>
 {% endblock %}
