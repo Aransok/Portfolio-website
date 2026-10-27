@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <span class="hero-hint">{% translate "move through the code &middot; click to morph" %}</span>
+    <span class="hero-hint">{% translate "hover an agent &middot; click for the next task" %}</span>
 </section>
 
 <div class="marquee" aria-label="{% translate 'Tech stack' %}">
@@ -201,7 +201,7 @@ def agent(goal, max_steps=8):
 
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="{% static 'js/woven.js' %}" defer></script>
+<script src="{% static 'js/agents.js' %}" defer></script>
 <script src="{% static 'js/activity.js' %}" defer></script>
 <script src="{% static 'js/terminal.js' %}" defer></script>
 {% endblock %}
