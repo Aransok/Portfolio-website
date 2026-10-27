@@ -11,9 +11,64 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script>
+        // first visit in a session boots the agents, later pages skip it
+        try {
+            if (sessionStorage.getItem('booted') || matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('no-boot');
+        } catch (e) { document.documentElement.classList.add('no-boot'); }
+    </script>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <div id="boot" aria-hidden="true">
+        <div class="boot-core">
+            <svg class="boot-ring" viewBox="-70 -70 140 140">
+                <defs><linearGradient id="boot-g" x1="0" x2="1"><stop offset="0" stop-color="#7fe3d4"/><stop offset="1" stop-color="#ffb35c"/></linearGradient></defs>
+                <circle class="boot-orbit" r="62"/>
+                <path class="boot-hex" d="M0-48L41.6-24V24L0 48L-41.6 24V-24Z"/>
+                <g class="boot-spokes"><path d="M0 0L0-48"/><path d="M0 0L41.6-24"/><path d="M0 0L41.6 24"/><path d="M0 0L0 48"/><path d="M0 0L-41.6 24"/><path d="M0 0L-41.6-24"/></g>
+                <g class="boot-nodes"><circle cx="0" cy="-48" r="4.5"/><circle cx="41.6" cy="-24" r="4.5"/><circle cx="41.6" cy="24" r="4.5"/><circle cx="0" cy="48" r="4.5"/><circle cx="-41.6" cy="24" r="4.5"/><circle cx="-41.6" cy="-24" r="4.5"/></g>
+                <circle class="boot-core-dot" r="9"/>
+            </svg>
+            <div class="boot-word">doan<span>.</span>idriz</div>
+        </div>
+        <ol class="boot-log">
+            <li data-at="8">manager.wake() <b>ok</b></li>
+            <li data-at="30">researcher, architect, engineer <b>ok</b></li>
+            <li data-at="55">designer, writer, sales <b>ok</b></li>
+            <li data-at="80">{% translate "hanging the paintings" %} <b>ok</b></li>
+        </ol>
+        <div class="boot-pct"><b>0</b>%</div>
+        <i class="boot-bar"><s></s></i>
+    </div>
+    <script>
+        (function () {
+            var boot = document.getElementById('boot');
+            if (!boot) return;
+            if (document.documentElement.classList.contains('no-boot')) { boot.remove(); return; }
+            var pct = boot.querySelector('.boot-pct b'), bar = boot.querySelector('.boot-bar s');
+            var logs = boot.querySelectorAll('.boot-log li');
+            var t0 = performance.now(), loaded = false, shown = 0, MIN = 1500, MAX = 4000;
+            window.addEventListener('load', function () { loaded = true; });
+            function tick(now) {
+                var e = now - t0;
+                // runs to 90% on its own, the last stretch waits for the page
+                var goal = loaded && e > MIN ? 100 : Math.min(90, e / MIN * 90);
+                if (e > MAX) goal = 100;
+                shown += (goal - shown) * 0.12;
+                if (goal === 100 && shown > 99.4) shown = 100;
+                var v = Math.round(shown);
+                pct.textContent = v;
+                bar.style.transform = 'scaleX(' + (shown / 100) + ')';
+                for (var i = 0; i < logs.length; i++) if (v >= +logs[i].dataset.at) logs[i].classList.add('on');
+                if (v < 100) return requestAnimationFrame(tick);
+                boot.classList.add('done');
+                try { sessionStorage.setItem('booted', '1'); } catch (err) {}
+                setTimeout(function () { boot.remove(); }, 900);
+            }
+            requestAnimationFrame(tick);
+        })();
+    </script>
     {% with current=request.resolver_match.url_name %}
     <header class="site-header">
         <div class="wrap">

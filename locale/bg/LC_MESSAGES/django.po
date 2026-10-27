@@ -580,3 +580,264 @@ msgstr "Английски"
 
 msgid "Bulgarian"
 msgstr "Български"
+
+msgid ""
+"Right now I'm a Software Engineer at Adi Kars in Plovdiv, building the "
+"internal tools and infrastructure that connect its three offices. Before "
+"that I worked as an AI Researcher, building AI agents from scratch in pure "
+"Python, RAG pipelines, and workflow automations, because code that learns "
+"still feels a little like magic. Always exploring the next tech rabbit hole."
+msgstr ""
+"В момента съм софтуерен инженер в Ади Карс в Пловдив и създавам вътрешните "
+"инструменти и инфраструктура, които свързват трите ѝ офиса. Преди това "
+"работех като AI изследовател: създавах AI агенти от нулата на чист Python, "
+"RAG конвейери и автоматизации на работни процеси, защото код, който се учи, "
+"още ми прилича на малко магия. Винаги разучавам поредната технологична "
+"заешка дупка."
+
+msgid "Oct 2026 &ndash; now"
+msgstr "окт 2026 &ndash; сега"
+
+msgid "Software Engineer"
+msgstr "Софтуерен инженер"
+
+msgid "Adi Kars Ltd (Ади Карс ЕООД) &middot; Plovdiv, Bulgaria"
+msgstr "Ади Карс ЕООД &middot; Пловдив, България"
+
+msgid ""
+"Building internal software and infrastructure for a three-office business: a"
+" self-hosted office server with VPN access between the locations, a staff "
+"portal for shared files and business apps, and an internal team platform for"
+" messaging, a company feed and listings."
+msgstr ""
+"Създавам вътрешен софтуер и инфраструктура за фирма с три офиса: собствен "
+"офис сървър с VPN връзка между обектите, портал за служителите със споделени"
+" файлове и бизнес програми и вътрешна платформа за екипа със съобщения, "
+"фирмена стена и обяви."
+
+msgid "Internal tools"
+msgstr "Вътрешни инструменти"
+
+msgid "Private beta"
+msgstr "Затворена бета"
+
+msgid "Recorded demo"
+msgstr "Записано демо"
+
+msgid "Crewbase control room for a dispatcher"
+msgstr "Контролният панел на диспечера в Crewbase"
+
+msgid ""
+"A home base for teams that run their day on chat groups and Excel files: "
+"feed, chat, internal listings, people, and Workspaces built from a company's"
+" own spreadsheets. The first module is Routes: dispatchers import and plan "
+"the day, drivers get their stops in order with one-tap navigation, and a "
+"live board shows every delivery as it happens. Multi-company and bilingual "
+"from day one."
+msgstr ""
+"База за екипи, които карат деня си на чат групи и Excel файлове: стена, чат,"
+" вътрешни обяви, хора и работни пространства, създадени от собствените "
+"таблици на фирмата. Първият модул е Маршрути: диспечерите внасят и планират "
+"деня, шофьорите получават спирките си подредени с навигация с едно "
+"докосване, а табло на живо показва всяка доставка, докато се случва. "
+"Многофирмена и двуезична от първия ден."
+
+msgid "Realtime"
+msgstr "В реално време"
+
+msgid "Ask for a demo"
+msgstr "Поискай демо"
+
+msgid "crew badge"
+msgstr "служебна карта"
+
+msgid "In development"
+msgstr "В разработка"
+
+msgid "VEKTOR car taken apart into parts"
+msgstr "Колата на VEKTOR, разглобена на части"
+
+msgid ""
+"A concept store for an auto parts shop in Plovdiv. A 3D car comes apart as "
+"you scroll so you pick the part straight off it, with live prices, a paint "
+"switcher, a plate lookup that recognises the car, a part finder and a "
+"delivery map of the city."
+msgstr ""
+"Концептуален магазин за авточасти в Пловдив. 3D кола се разглобява, докато "
+"скролваш, и избираш частта направо от нея, с цени, смяна на цвета, търсене "
+"по номер, което разпознава колата, търсачка на части и карта за доставка из "
+"града."
+
+msgid "Vanilla JS"
+msgstr "Чист JS"
+
+msgid "5 shorts a day, 0 clicks"
+msgstr "5 шортса на ден, 0 клика"
+
+msgid ""
+"A faceless YouTube channel that runs itself. A free Python pipeline on "
+"GitHub Actions writes, voices, renders and uploads daily Shorts (programming"
+" tips, facts, recipes) and long-form quiz videos, then tracks the stats "
+"every week."
+msgstr ""
+"YouTube канал без лице, който се управлява сам. Безплатен Python конвейер в "
+"GitHub Actions пише, озвучава, рендерира и качва ежедневни шортсове (съвети "
+"за програмиране, факти, рецепти) и дълги видеа с куизове, после всяка "
+"седмица следи статистиката."
+
+msgid "Video automation"
+msgstr "Автоматизация на видео"
+
+msgid "Watch the channel"
+msgstr "Към канала"
+
+msgid "A company made of agents"
+msgstr "Фирма от агенти"
+
+msgid ""
+"A virtual company of AI agents in pure Python: a manager, an architect, "
+"researchers, engineers, a designer and a writer, each with its own persona "
+"file that grows with experience. Hand it a spec and it works in the "
+"background with task locks, budget limits and approval gates, then reports "
+"back."
+msgstr ""
+"Виртуална фирма от AI агенти на чист Python: мениджър, архитект, "
+"изследователи, инженери, дизайнер и писател, всеки със свой файл на "
+"личността, който расте с опита. Даваш му задание и той работи на заден план "
+"със заключване на задачи, лимити на бюджета и одобрения, после докладва."
+
+msgid "Multi-agent"
+msgstr "Много агенти"
+
+msgid "Your phone is a PC now"
+msgstr "Телефонът ти вече е компютър"
+
+msgid ""
+"An Android app that turns a phone into a computer: a full Linux desktop with"
+" a Mint look, no root needed. Ships its own display server and is tested in "
+"CI on emulators and Firebase Test Lab."
+msgstr ""
+"Android приложение, което превръща телефона в компютър: пълен Linux десктоп "
+"с вид на Mint, без root. Има собствен дисплей сървър и се тества в CI на "
+"емулатори и Firebase Test Lab."
+
+msgid "Display server code"
+msgstr "Код на дисплей сървъра"
+
+msgid "Early work"
+msgstr "Ранни проекти"
+
+msgid ""
+"The projects I learned on: a movie site in Angular and Node.js, an earlier "
+"movie site in Django, and an LLM article summarizer in Python."
+msgstr ""
+"Проектите, на които се учих: сайт за филми с Angular и Node.js, по-ранен "
+"сайт за филми с Django и резюмиране на статии с LLM на Python."
+
+msgid "Summarizer"
+msgstr "Резюмиране"
+
+msgid ""
+"This site itself: a Django portfolio with a three.js agent HQ, a walk-"
+"through museum whose paintings play project trailers, a working terminal, "
+"and a live GitHub activity graph."
+msgstr ""
+"Самият този сайт: Django портфолио с 3D щаб на агентите, музей, през който "
+"се разхождаш и картините пускат трейлъри на проектите, работещ терминал и "
+"графика на активността в GitHub на живо."
+
+msgid "Private beta &middot; crew access"
+msgstr "Затворена бета &middot; достъп за екипа"
+
+msgid ""
+"You found the back room. Crewbase is the platform I am building for teams "
+"that run their day on chat groups and Excel files. Dispatchers plan routes "
+"on a laptop, drivers work from their phone, and everyone shares one feed, "
+"one chat and one board."
+msgstr ""
+"Намери задната стая. Crewbase е платформата, която строя за екипи, които "
+"карат деня си на чат групи и Excel файлове. Диспечерите планират маршрути на"
+" лаптопа, шофьорите работят от телефона, а всички делят една стена, един чат"
+" и едно табло."
+
+msgid "Dispatcher &middot; laptop"
+msgstr "Диспечер &middot; лаптоп"
+
+msgid "Driver &middot; phone"
+msgstr "Шофьор &middot; телефон"
+
+msgid ""
+"Import a messy sheet, plan and optimise the day, drivers navigate stop by "
+"stop, a live board shows every delivery."
+msgstr ""
+"Внеси разхвърляна таблица, планирай и оптимизирай деня, шофьорите навигират "
+"спирка по спирка, табло на живо показва всяка доставка."
+
+msgid ""
+"Announcements with read receipts, polls, kudos and auto posts when a route "
+"is done."
+msgstr ""
+"Обявления с потвърждение за прочитане, анкети, благодарности и автоматични "
+"публикации при завършен маршрут."
+
+msgid "Direct messages, groups and auto channels per role, office and van."
+msgstr "Лични съобщения, групи и автоматични канали по роля, офис и бус."
+
+msgid "Internal listings: sell, give away, request, lost and found."
+msgstr "Вътрешни обяви: продавам, подарявам, търся, изгубено и намерено."
+
+msgid "Directory, roles, departments, who is on shift and in which van today."
+msgstr "Указател, роли, отдели, кой е на смяна и в кой бус днес."
+
+msgid ""
+"Turn any spreadsheet into a small app with table, map, kanban and dashboard "
+"views."
+msgstr ""
+"Превърни всяка таблица в малко приложение с изгледи таблица, карта, канбан и"
+" табло."
+
+msgid ""
+"8:roles out of the box|2:languages, EN and BG|101:automated tests|€0:to "
+"start running it"
+msgstr "8:готови роли|2:езика, EN и BG|101:автоматични теста|€0:за да тръгне"
+
+msgid "Get early access"
+msgstr "Ранен достъп"
+
+msgid "Badge NW-0042 belongs to Mira. Keep it between us."
+msgstr "Картата NW-0042 е на Мира. Да си остане между нас."
+
+msgid "hanging the paintings"
+msgstr "окачване на картините"
+
+msgid "5 databases, 1 PDF"
+msgstr "5 бази, 1 PDF"
+
+msgid "Where it started"
+msgstr "Оттук започна"
+
+msgid "You are here"
+msgstr "Ти си тук"
+
+msgid "Chat with any PDF"
+msgstr "Говори с всеки PDF"
+
+msgid "Closed beta soon"
+msgstr "Затворена бета скоро"
+
+msgid "One hand. No mercy."
+msgstr "Една ръка. Без милост."
+
+msgid "Project Ember promo art with its damage meter"
+msgstr "Промо на Project Ember с таблицата за щети"
+
+msgid ""
+"A hardcore dark-fantasy action RPG for Android, played in portrait with one "
+"hand: an open world, bosses and loot, and classless builds grown through "
+"skills, talents and a permanent Ember tree. Built in Unity with Claude Code "
+"driving the editor through Unity MCP."
+msgstr ""
+"Хардкор екшън RPG в мрачен фентъзи свят за Android, играе се вертикално с "
+"една ръка: отворен свят, босове и плячка, билдове без класове, развивани "
+"чрез умения, таланти и постоянно Ember дърво. Направена с Unity, като Claude"
+" Code управлява редактора през Unity MCP."

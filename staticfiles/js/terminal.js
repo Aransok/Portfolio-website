@@ -11,12 +11,15 @@
   var GH = 'https://github.com/Aransok';
 
   var projects = [
-    ['broffice', 'Broffice: office booking platform, live at broffice.bg', 'https://broffice.bg'],
-    ['listings', 'Property Listings Generator: Bulgarian listing data to AI-ready numeric data', GH + '/JsonBulgarianDataToAINumericData'],
-    ['pdf-chat', 'Simple PDF Chat: ask questions about any PDF (RAG)', null],
-    ['summarizer', 'LLM Article Summarizer: paste a link, get the gist', GH + '/LLM-Article-Summarizer'],
-    ['moviesite', 'Angular Movies Web Site', GH + '/Angular-Project-Moviesite'],
-    ['projectprotect', 'Python Movie Website (Django)', GH + '/ProjectProtect'],
+    ['broffice', 'Broffice: office-supplies e-commerce, live at broffice.bg', 'https://broffice.bg'],
+    ['crewbase', 'Crewbase: team platform with routes for drivers (private beta)', null],
+    ['vektor', 'VEKTOR Auto Parts: 3D car you take apart to pick a part (in development)', null],
+    ['ember', 'Project Ember: hardcore one-hand RPG for Android (closed beta soon)', null],
+    ['bytebits', 'ByteBits: a YouTube channel that runs itself', 'https://www.youtube.com/@ByteBits-y3b'],
+    ['agents-office', 'AI Agents Office: a company made of agents, pure Python (in development)', null],
+    ['pocket-linux', 'Pocket Linux: a Linux desktop on your phone, no root (in development)', GH + '/pocketlinux-x11'],
+    ['listings', 'Property Listings Generator: 5 databases in, translated PDF out', GH + '/JsonBulgarianDataToAINumericData'],
+    ['pdf-chat', 'Simple PDF Chat: ask questions about any PDF, Bulgarian OCR', null],
     ['portfolio', 'This portfolio: Django, three.js, no frameworks on the front', GH + '/Portfolio-website']
   ];
 
@@ -66,9 +69,49 @@
     clear: function () { out.innerHTML = ''; return null; },
     sudo: function () { return 'nice try. you are not in the sudoers file. this incident will be reported to Doan.'; },
     rm: function (arg) { return arg.indexOf('-rf') === 0 ? 'permission denied: this portfolio is load-bearing' : 'rm: refusing'; },
-    exit: function () { return 'there is no exit. only <b>hire</b>.'; }
+    exit: function () { return 'there is no exit. only <b>hire</b>.'; },
+    cat: function (arg) {
+      if (arg === '.crewbase') {
+        return '<span class="t-warn">ACCESS RESTRICTED</span>  crewbase is in private beta.\n' +
+          'members only. present your crew badge:  <b>badge &lt;id&gt;</b>\n' +
+          '<span class="t-dim">every crew member wears one. walk the museum, look closer at the second room.</span>';
+      }
+      if (arg === 'readme' || arg === 'README.md') return 'there is more here than <b>ls</b> shows.';
+      return arg ? 'cat: ' + esc(arg) + ': no such file' : 'cat: give me a file';
+    },
+    badge: function (arg) {
+      var id = (arg || '').toUpperCase().replace(/\s+/g, '');
+      if (!id) return 'badge: which one? <b>badge &lt;id&gt;</b>';
+      if (id !== 'NW-0042' && id !== 'NW0042') {
+        return '<span class="t-warn">denied.</span> ' + esc(id) + ' is not on the crew list.';
+      }
+      unlock();
+      return null;
+    }
   };
-  cmds.ls = cmds.projects;
+  function unlock() {
+    var lines = [
+      ['<span class="t-dim">verifying badge NW-0042 ...</span>', 0],
+      ['crew member: Mira Petrova · driver · van 1', 500],
+      ['clearance: <span class="t-ok">granted</span>', 900],
+      ['mounting /vault/crewbase ...', 1300],
+      ['<span class="t-ok">welcome to the crew.</span>', 1900]
+    ];
+    form.hidden = true;
+    lines.forEach(function (l) { setTimeout(function () { print(l[0]); }, reduce ? 0 : l[1]); });
+    setTimeout(function () {
+      form.hidden = false;
+      try { localStorage.setItem('crew-badge', 'NW-0042'); } catch (e) {}
+      if (window.openVault) window.openVault();
+      else print('vault is offline. try again in a minute.');
+    }, reduce ? 0 : 2500);
+  }
+  cmds.ls = function (arg) {
+    if (/(^|\s)-\w*a/.test(arg || '')) {
+      return '<b>.</b>  <b>..</b>  <span class="t-k">.crewbase</span>  README.md\n' + cmds.projects();
+    }
+    return cmds.projects();
+  };
   cmds.contact = cmds.hire;
   var names = Object.keys(cmds);
 

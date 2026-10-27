@@ -63,7 +63,48 @@
 
   // Generative "code art": circuit traces seeded by the project title, with
   // the card's glyph (or logo) in the middle and its tags along the bottom.
+  function cover(g, src, sw, sh, w, h) {
+    var sc = Math.max(w / sw, h / sh), dw = sw * sc, dh = sh * sc;
+    g.drawImage(src, (w - dw) / 2, (h - dh) / 2, dw, dh);
+  }
+  // projects with a recorded demo hang a frame of the real product
+  function paintShot(g, w, h, card, shot) {
+    var title = card.querySelector('h3').textContent.trim();
+    var tags = Array.prototype.map.call(card.querySelectorAll('.tag'), function (t) { return t.textContent.trim(); });
+    g.fillStyle = '#0a0d12';
+    g.fillRect(0, 0, w, h);
+    cover(g, shot, shot.naturalWidth, shot.naturalHeight, w, h);
+    var fade = g.createLinearGradient(0, h * 0.45, 0, h);
+    fade.addColorStop(0, 'rgba(9,11,15,0)');
+    fade.addColorStop(1, 'rgba(9,11,15,0.92)');
+    g.fillStyle = fade;
+    g.fillRect(0, 0, w, h);
+    var badge = (card.dataset.badge || '').toUpperCase();
+    if (badge) {
+      g.font = '600 20px "IBM Plex Mono", monospace';
+      var bw = g.measureText(badge).width + 34;
+      g.fillStyle = 'rgba(9,11,15,0.8)';
+      g.beginPath();
+      if (g.roundRect) g.roundRect(w - bw - 28, 26, bw, 40, 20); else g.rect(w - bw - 28, 26, bw, 40);
+      g.fill();
+      g.strokeStyle = EMBER;
+      g.lineWidth = 2;
+      g.stroke();
+      g.fillStyle = EMBER;
+      g.textBaseline = 'middle';
+      g.fillText(badge, w - bw - 11, 47);
+    }
+    g.textBaseline = 'alphabetic';
+    g.textAlign = 'left';
+    g.font = '800 54px Syne, "Arial Black", sans-serif';
+    g.fillStyle = '#e9edf2';
+    g.fillText(title, 48, h - 86);
+    g.font = '22px "IBM Plex Mono", monospace';
+    g.fillStyle = THREAD;
+    g.fillText(tags.join('  /  '), 48, h - 44);
+  }
   function paint(g, w, h, card) {
+    if (card.__shot) { paintShot(g, w, h, card, card.__shot); return; }
     var title = card.querySelector('h3').textContent.trim();
     var mark = card.querySelector('.project-art .mono');
     var img = card.querySelector('.project-art img');
@@ -183,7 +224,33 @@
     g.font = weight + ' ' + px + 'px ' + family;
     return px;
   }
+  function videoTrailer(p) {
+    var c = p.tex.image, g = c.getContext('2d'), w = c.width, h = c.height, v = p.video;
+    if (v.readyState < 2) return;
+    g.fillStyle = '#0a0d12';
+    g.fillRect(0, 0, w, h);
+    cover(g, v, v.videoWidth, v.videoHeight, w, h);
+    var k = v.duration ? v.currentTime / v.duration : 0;
+    g.fillStyle = 'rgba(8,11,15,0.72)';
+    if (g.roundRect) { g.beginPath(); g.roundRect(24, 22, 196, 40, 20); g.fill(); } else g.fillRect(24, 22, 196, 40);
+    g.fillStyle = Math.floor(performance.now() / 500) % 2 ? '#ff5d5d' : '#7a2a2a';
+    g.beginPath();
+    g.arc(48, 42, 8, 0, Math.PI * 2);
+    g.fill();
+    g.font = '600 20px "IBM Plex Mono", monospace';
+    g.textAlign = 'left';
+    g.textBaseline = 'middle';
+    g.fillStyle = '#e9edf2';
+    g.fillText('LIVE DEMO', 66, 43);
+    g.textBaseline = 'alphabetic';
+    g.fillStyle = 'rgba(255,255,255,0.1)';
+    g.fillRect(0, h - 6, w, 6);
+    g.fillStyle = THREAD;
+    g.fillRect(0, h - 6, w * k, 6);
+    p.tex.needsUpdate = true;
+  }
   function trailer(p, s) {
+    if (p.video) { videoTrailer(p); return; }
     var c = p.tex.image, g = c.getContext('2d'), w = c.width, h = c.height, sc = p.script;
     var t = s % TR;
     var SYNE = 'Syne, "Arial Black", sans-serif', MONO = '"IBM Plex Mono", monospace';
@@ -346,6 +413,7 @@
   }
   function stopTrailer(p) {
     if (!p || !p.still) return;
+    if (p.video) p.video.pause();
     var g = p.tex.image.getContext('2d');
     g.drawImage(p.still, 0, 0);
     p.tex.needsUpdate = true;
@@ -574,6 +642,24 @@
       return;
     }
     var p = paintings[k];
+    var poster = p.card.dataset.poster;
+    if (poster && !p.card.__shot && !p.card.__shotTried) {
+      p.card.__shotTried = true;
+      var im = new Image();
+      im.onload = function () { p.card.__shot = im; hang(k); };
+      im.onerror = function () { hang(k); };
+      im.src = poster;
+      return;
+    }
+    if (p.card.dataset.video && !p.video) {
+      var v = document.createElement('video');
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.preload = 'none';
+      v.src = p.card.dataset.video;
+      p.video = v;
+    }
     paint(p.tex.image.getContext('2d'), p.tex.image.width, p.tex.image.height, p.card);
     p.still = document.createElement('canvas');
     p.still.width = p.tex.image.width;
@@ -669,7 +755,10 @@
       // the trailer takes over the canvas, so the scan line stays off while it plays
       paintings.forEach(function (p) { p.scan.visible = false; });
       if (shown >= 0) stopTrailer(paintings[shown]);
-      if (idx >= 0) paintings[idx].start = performance.now();
+      if (idx >= 0) {
+        paintings[idx].start = performance.now();
+        if (paintings[idx].video) { paintings[idx].video.currentTime = 0; paintings[idx].video.play().catch(function () {}); }
+      }
       shown = idx;
       if (idx >= 0) plaque.innerHTML = plaques[idx];
       plaque.classList.toggle('on', idx >= 0);
