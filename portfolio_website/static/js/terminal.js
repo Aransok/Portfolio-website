@@ -76,6 +76,10 @@
           'members only. present your crew badge:  <b>badge &lt;id&gt;</b>\n' +
           '<span class="t-dim">every crew member wears one. walk the museum, look closer at the second room.</span>';
       }
+      if (arg === '.shelf') {
+        return 'shelf is empty here. the books were moved behind a painting.\n' +
+          '<span class="t-dim">one painting in the museum is not hanging straight. paintings like that never stay up for long.</span>';
+      }
       if (arg === 'readme' || arg === 'README.md') return 'there is more here than <b>ls</b> shows.';
       return arg ? 'cat: ' + esc(arg) + ': no such file' : 'cat: give me a file';
     },
@@ -108,7 +112,7 @@
   }
   cmds.ls = function (arg) {
     if (/(^|\s)-\w*a/.test(arg || '')) {
-      return '<b>.</b>  <b>..</b>  <span class="t-k">.crewbase</span>  README.md\n' + cmds.projects();
+      return '<b>.</b>  <b>..</b>  <span class="t-k">.crewbase</span>  <span class="t-k">.shelf</span>  README.md\n' + cmds.projects();
     }
     return cmds.projects();
   };

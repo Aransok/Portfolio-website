@@ -1,6 +1,12 @@
 // Catalogue cards with a recorded demo play it on hover (or when scrolled
 // into the middle of the screen on touch devices). Video loads on first use.
 (function () {
+  // the demo link on Crewbase is a reward for finding the vault
+  try {
+    if (localStorage.getItem('crew-badge') === 'NW-0042') {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-crew-only]'), function (el) { el.hidden = false; });
+    }
+  } catch (e) {}
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;

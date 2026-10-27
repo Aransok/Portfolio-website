@@ -36,9 +36,10 @@
         </div>
         <div class="projects-grid">
 
-            <article class="project-card flagship" data-cmd="$ docker compose up -d|django ✓  react ✓  postgres ✓  celery ✓|$ curl -I https://www.broffice.bg|HTTP/2 200 · serving real customers" data-hook="{% translate 'Live in production' %}">
-                <div class="project-art">
-                    <img src="{% static 'media/broffice-logo.png' %}" alt="{% translate 'Broffice logo' %}">
+            <article class="project-card flagship" data-cmd="$ docker compose up -d|django ✓  react ✓  postgres ✓  celery ✓|$ curl -I https://www.broffice.bg|HTTP/2 200 · serving real customers" data-hook="{% translate 'Live in production' %}" data-video="{% static 'media/trailers/broffice.mp4' %}" data-kind="render" data-logo="{% static 'media/broffice-logo.png' %}">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/broffice-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
@@ -62,7 +63,7 @@
                 </div>
             </article>
 
-            <article class="project-card flagship" id="crewbase" data-badge="{% translate 'Private beta' %}" data-video="{% static 'media/trailers/crewbase.mp4' %}" data-poster="{% static 'media/trailers/crewbase.jpg' %}">
+            <article class="project-card flagship" id="crewbase" data-badge="{% translate 'Private beta' %}" data-video="{% static 'media/trailers/crewbase.mp4' %}" data-poster="{% static 'media/trailers/crewbase.jpg' %}" data-kind="demo">
                 <div class="project-art has-shot">
                     <img class="project-shot" src="{% static 'media/trailers/crewbase.jpg' %}" alt="{% translate 'Crewbase control room for a dispatcher' %}" loading="lazy">
                     <span class="shot-tag">{% translate "Recorded demo" %}</span>
@@ -82,13 +83,13 @@
                         <span class="tag">Leaflet</span>
                     </div>
                     <div class="project-links">
-                        <a href="{% url 'contact' %}">{% translate "Ask for a demo" %}</a>
+                        <a href="{% url 'contact' %}?demo=crewbase" data-crew-only hidden>{% translate "Ask for a demo" %}</a>
                         <span class="crew-id" title="{% translate 'crew badge' %}">crew badge · NW-0042</span>
                     </div>
                 </div>
             </article>
 
-            <article class="project-card" data-badge="{% translate 'In development' %}" data-video="{% static 'media/trailers/vektor.mp4' %}" data-poster="{% static 'media/trailers/vektor.jpg' %}">
+            <article class="project-card" data-badge="{% translate 'In development' %}" data-video="{% static 'media/trailers/vektor.mp4' %}" data-poster="{% static 'media/trailers/vektor.jpg' %}" data-kind="demo">
                 <div class="project-art has-shot">
                     <img class="project-shot" src="{% static 'media/trailers/vektor.jpg' %}" alt="{% translate 'VEKTOR car taken apart into parts' %}" loading="lazy">
                     <span class="shot-tag">{% translate "Recorded demo" %}</span>
@@ -108,9 +109,10 @@
                 </div>
             </article>
 
-            <article class="project-card" data-badge="{% translate 'Closed beta soon' %}" data-poster="{% static 'media/trailers/ember.jpg' %}" data-cmd="$ unity -batchmode -buildTarget Android|loading open world  ·  bosses  ·  loot ✓|ember tree: 48 nodes  ·  hardcore mode on|$ adb install ProjectEmber.apk" data-hook="{% translate 'One hand. No mercy.' %}">
+            <article class="project-card" data-badge="{% translate 'Closed beta soon' %}" data-poster="{% static 'media/trailers/ember.jpg' %}" data-cmd="$ unity -batchmode -buildTarget Android|loading open world  ·  bosses  ·  loot ✓|ember tree: 48 nodes  ·  hardcore mode on|$ adb install ProjectEmber.apk" data-hook="{% translate 'One hand. No mercy.' %}" data-video="{% static 'media/trailers/ember.mp4' %}" data-kind="render">
                 <div class="project-art has-shot">
                     <img class="project-shot" src="{% static 'media/trailers/ember.jpg' %}" alt="{% translate 'Project Ember promo art with its damage meter' %}" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
@@ -127,8 +129,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ gh workflow run daily-shorts|script ✓  voice ✓  captions ✓  render ✓|uploading 5 shorts to @ByteBits ✓|$ gh workflow run quiz-longform" data-hook="{% translate '5 shorts a day, 0 clicks' %}">
-                <div class="project-art"><span class="mono">BB</span></div>
+            <article class="project-card" data-cmd="$ gh workflow run daily-shorts|script ✓  voice ✓  captions ✓  render ✓|uploading 5 shorts to @ByteBits ✓|$ gh workflow run quiz-longform" data-hook="{% translate '5 shorts a day, 0 clicks' %}" data-video="{% static 'media/trailers/bytebits.mp4' %}" data-kind="render" data-mark="BB">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/bytebits-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <div class="project-title-row">
                         <h3>ByteBits</h3>
@@ -147,8 +152,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ office new --spec pricing.md --mode build|architect → plan.md ✓|engineer → 12 files  ·  tests ✓|budget used €0.38 of €2.00|$ office report" data-hook="{% translate 'A company made of agents' %}">
-                <div class="project-art"><span class="mono">AO</span></div>
+            <article class="project-card" data-cmd="$ office new --spec pricing.md --mode build|architect → plan.md ✓|engineer → 12 files  ·  tests ✓|budget used €0.38 of €2.00|$ office report" data-hook="{% translate 'A company made of agents' %}" data-video="{% static 'media/trailers/agents-office.mp4' %}" data-kind="render" data-mark="AO">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/agents-office-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <div class="project-title-row">
                         <h3>AI Agents Office</h3>
@@ -163,8 +171,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ adb install pocketlinux.apk|unpacking debian rootfs ✓|starting display server ✓|$ startxfce4  # mint theme" data-hook="{% translate 'Your phone is a PC now' %}">
-                <div class="project-art"><span class="mono">PL</span></div>
+            <article class="project-card" data-cmd="$ adb install pocketlinux.apk|unpacking debian rootfs ✓|starting display server ✓|$ startxfce4  # mint theme" data-hook="{% translate 'Your phone is a PC now' %}" data-video="{% static 'media/trailers/pocket-linux.mp4' %}" data-kind="render" data-mark="PL">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/pocket-linux-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <div class="project-title-row">
                         <h3>Pocket Linux</h3>
@@ -183,8 +194,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ python generate.py --source mysql --lang bg:en|reading listings from 5 db engines|translating BG → EN ✓|$ open report.pdf" data-hook="{% translate '5 databases, 1 PDF' %}">
-                <div class="project-art"><span class="mono">PLG</span></div>
+            <article class="project-card" data-cmd="$ python generate.py --source mysql --lang bg:en|reading listings from 5 db engines|translating BG → EN ✓|$ open report.pdf" data-hook="{% translate '5 databases, 1 PDF' %}" data-video="{% static 'media/trailers/listings.mp4' %}" data-kind="render" data-mark="PLG">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/listings-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <h3>Property Listings Generator</h3>
                     <p>{% translate "Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface." %}</p>
@@ -199,8 +213,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ flask run|upload  scanned_contract.pdf|tesseract OCR (bul) ✓|$ ask 'when does the contract end?'" data-hook="{% translate 'Chat with any PDF' %}">
-                <div class="project-art"><span class="mono">PDF</span></div>
+            <article class="project-card" data-cmd="$ flask run|upload  scanned_contract.pdf|tesseract OCR (bul) ✓|$ ask 'when does the contract end?'" data-hook="{% translate 'Chat with any PDF' %}" data-video="{% static 'media/trailers/pdf-chat.mp4' %}" data-kind="render" data-mark="PDF">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/pdf-chat-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <h3>Simple PDF Chat</h3>
                     <p>{% translate "A Flask app that lets you upload PDFs and chat with them using AI, with Bulgarian OCR support (Tesseract) for scanned documents." %}</p>
@@ -212,8 +229,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ ng serve|compiled ✓  localhost:4200|$ python manage.py runserver|$ python summarize.py article.html" data-hook="{% translate 'Where it started' %}">
-                <div class="project-art"><span class="mono">01</span></div>
+            <article class="project-card" data-cmd="$ ng serve|compiled ✓  localhost:4200|$ python manage.py runserver|$ python summarize.py article.html" data-hook="{% translate 'Where it started' %}" data-video="{% static 'media/trailers/early-work.mp4' %}" data-kind="render" data-mark="01">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/early-work-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
+                </div>
                 <div class="project-body">
                     <h3>{% translate "Early work" %}</h3>
                     <p>{% translate "The projects I learned on: a movie site in Angular and Node.js, an earlier movie site in Django, and an LLM article summarizer in Python." %}</p>
@@ -231,8 +251,11 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 11 rooms lit ✓" data-hook="{% translate 'You are here' %}">
-                <div class="project-art"><span class="mono">d.</span></div>
+            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 11 rooms lit ✓" data-hook="{% translate 'You are here' %}" data-video="{% static 'media/trailers/portfolio.mp4' %}" data-kind="demo">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/portfolio.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                </div>
                 <div class="project-body">
                     <h3>This Portfolio</h3>
                     <p>{% translate "This site itself: a Django portfolio with a three.js agent HQ, a walk-through museum whose paintings play project trailers, a working terminal, and a live GitHub activity graph." %}</p>
@@ -249,10 +272,16 @@
         </div>
     </div>
 </section>
+<div hidden data-shelf data-src="{% static 'media/shelf/builds.json' %}"
+    data-title="{% translate 'The Build Shelf' %}" data-kicker="{% translate 'Found behind the crooked painting' %}"
+    data-lede="{% translate 'Everything I build on the side, one experiment at a time: tools for my own day, weird ideas and things that just had to exist. Take your time, nothing here is for sale.' %}"
+    data-contents="{% translate 'Contents' %}" data-empty="{% translate 'The shelf is being stocked. Come back soon.' %}"
+    data-open="{% translate 'Open it' %}" data-prev="{% translate 'Previous page' %}" data-next="{% translate 'Next page' %}" data-close="{% translate 'Close' %}"></div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <script src="{% static 'js/gallery.js' %}" defer></script>
 <script src="{% static 'js/cards.js' %}" defer></script>
+<script src="{% static 'js/shelf.js' %}" defer></script>
 {% endblock %}

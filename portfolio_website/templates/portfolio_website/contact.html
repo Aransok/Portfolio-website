@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="message">{% translate "Message" %}</label>
-                <textarea id="message" name="message" rows="6" required></textarea>
+                <textarea id="message" name="message" rows="6" required data-demo="{% translate 'Hi Doan, I found crew badge NW-0042 and I would like a Crewbase demo.' %}"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">{% translate "Send message" %}</button>
             <div class="tx" aria-live="polite" hidden>
@@ -55,4 +55,17 @@
         </form>
     </section>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // crew members who found the vault arrive with their demo request ready
+    (function () {
+        var box = document.getElementById('message');
+        if (!box || location.search.indexOf('demo=crewbase') < 0 || box.value) return;
+        var member = false;
+        try { member = localStorage.getItem('crew-badge') === 'NW-0042'; } catch (e) {}
+        if (member) box.value = box.dataset.demo;
+    })();
+</script>
 {% endblock %}
