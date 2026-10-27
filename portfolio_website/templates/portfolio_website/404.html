@@ -1,14 +1,15 @@
 {% extends "portfolio_website/base.html" %}
+{% load i18n %}
 
 {% block title %}404 | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <section class="error-page">
-        <span class="error-code">404</span>
-        <h1>Page not found</h1>
-        <p>This page doesn't exist, or it moved. Taking you back home.</p>
-        <p>Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.</p>
+        <span class="error-code" data-text="404">404</span>
+        <h1>{% translate "Page not found" %}</h1>
+        <p>{% translate "This page doesn't exist, or it moved. Taking you back home." %}</p>
+        <p>{% blocktranslate %}Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.{% endblocktranslate %}</p>
     </section>
 </div>
 

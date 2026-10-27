@@ -1,45 +1,55 @@
 {% extends 'portfolio_website/base.html' %}
-{% load static %}
-{% block title %}Doan Idriz | Full-Stack & AI Automation Engineer{% endblock %}
+{% load static i18n %}
+{% block title %}{% translate "Doan Idriz | Full-Stack & AI Automation Engineer" %}{% endblock %}
 
 {% block content %}
 <section class="hero">
     <canvas id="woven" aria-hidden="true"></canvas>
     <div class="wrap">
         <div class="hero-copy">
-            <span class="hero-eyebrow">Full-stack &amp; AI automation engineer &middot; Plovdiv</span>
-            <h1>Hi, I'm Doan. I build agents from <em>plain Python</em>.</h1>
-            <p>Production web apps end to end, from Django and React platforms serving real customers to AI agents and RAG pipelines written from scratch. <b>No LangChain, no CrewAI</b>, just code you can read and own.</p>
+            <span class="hero-eyebrow">{% translate "Full-stack &amp; AI automation engineer &middot; Plovdiv" %}</span>
+            <h1>{% blocktranslate %}Hi, I'm Doan. I build agents from <em>plain Python</em>.{% endblocktranslate %}</h1>
+            <p>{% blocktranslate %}Production web apps end to end, from Django and React platforms serving real customers to AI agents and RAG pipelines written from scratch. <b>No LangChain, no CrewAI</b>, just code you can read and own.{% endblocktranslate %}</p>
             <div class="hero-actions">
-                <a href="{% url 'projects' %}" class="btn btn-primary">See the work</a>
-                <a href="{% url 'contact' %}" class="btn">Get in touch</a>
+                <a href="{% url 'projects' %}" class="btn btn-primary">{% translate "See the work" %}</a>
+                <a href="{% url 'contact' %}" class="btn">{% translate "Get in touch" %}</a>
             </div>
         </div>
     </div>
-    <span class="hero-hint">move through the knot &middot; drag to spin</span>
+    <span class="hero-hint">{% translate "move through the code &middot; click to morph" %}</span>
 </section>
+
+<div class="marquee" aria-label="{% translate 'Tech stack' %}">
+    <div class="marquee-track">
+        {% for pass in "ab" %}
+        <ul {% if pass == "b" %}aria-hidden="true"{% endif %}>
+            <li>Python</li><li>Django</li><li>React</li><li>TypeScript</li><li>PostgreSQL</li><li>Redis</li><li>Celery</li><li>Docker</li><li>Terraform</li><li>RAG</li><li>Pinecone</li><li>AI Agents</li><li>REST APIs</li><li>OAuth 2.0</li><li>N8N</li><li>CI/CD</li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 
 <section class="section">
     <div class="wrap">
         <div class="section-head">
             <div>
-                <span class="label">Featured work</span>
-                <h2>Live in production</h2>
+                <span class="label">{% translate "Featured work" %}</span>
+                <h2>{% translate "Live in production" %}</h2>
             </div>
-            <p>A real retailer, real customers, and the whole stack from database to deploy pipeline.</p>
+            <p>{% translate "A real retailer, real customers, and the whole stack from database to deploy pipeline." %}</p>
         </div>
 
         <div class="projects-grid">
             <article class="project-card flagship">
                 <div class="project-art">
-                    <img src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+                    <img src="{% static 'media/broffice-logo.png' %}" alt="{% translate 'Broffice logo' %}">
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
                         <h3>Broffice</h3>
-                        <span class="badge-live">Live</span>
+                        <span class="badge-live">{% translate "Live" %}</span>
                     </div>
-                    <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront, dual pricing engine, and an admin back office with a conversational assistant. In production, serving real customers.</p>
+                    <p>{% translate "A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront, dual pricing engine, and an admin back office with a conversational assistant. In production, serving real customers." %}</p>
                     <div class="tag-row">
                         <span class="tag">Django</span>
                         <span class="tag">React</span>
@@ -48,15 +58,68 @@
                         <span class="tag">Docker</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">Visit site</a>
-                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">View code</a>
+                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">{% translate "Visit site" %}</a>
+                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
         </div>
 
         <div class="center-row">
-            <a href="{% url 'projects' %}" class="btn">All projects</a>
+            <a href="{% url 'projects' %}" class="btn">{% translate "All projects" %}</a>
+        </div>
+    </div>
+</section>
+
+<section class="ship" aria-labelledby="ship-title">
+    <div class="ship-stick">
+        <div class="wrap">
+            <div class="section-head">
+                <div>
+                    <span class="label">{% translate "How I ship" %}</span>
+                    <h2 id="ship-title">{% translate "From blank file to production." %}</h2>
+                </div>
+                <p>{% translate "Scroll to write an agent in plain Python and push it through the pipeline. No framework, no magic, just code that passes its tests." %}</p>
+            </div>
+            <div class="ship-grid">
+                <div class="editor">
+                    <div class="editor-bar"><i></i><i></i><i></i><span>agent.py</span><span class="editor-pct" data-pct>0%</span></div>
+<script type="text/plain" id="ship-src">
+from llm import chat
+import tools
+
+def agent(goal, max_steps=8):
+    # plain loop: think, call a tool, repeat
+    memory = [{"role": "user", "content": goal}]
+    for step in range(max_steps):
+        reply = chat(memory, tools=tools.schema)
+        if not reply.tool_call:
+            return reply.text
+        result = tools.run(reply.tool_call)
+        memory.append({"role": "tool", "content": result})
+    raise TimeoutError("no answer after max_steps")
+</script>
+                    <pre aria-hidden="true"><code></code></pre>
+                </div>
+                <div class="pipeline">
+                    <div class="pipe-track"><div class="pipe-fill"></div></div>
+                    <ol class="stages">
+                        <li class="stage" data-state="wait"><b></b>lint</li>
+                        <li class="stage" data-state="wait"><b></b>test</li>
+                        <li class="stage" data-state="wait"><b></b>build</li>
+                        <li class="stage" data-state="wait"><b></b>deploy</li>
+                        <li class="stage" data-state="wait"><b></b>live</li>
+                    </ol>
+                    <ul class="log">
+                        <li><span>$ ruff check .</span> All checks passed</li>
+                        <li><span>$ pytest -q</span> 24 passed in 0.91s</li>
+                        <li><span>$ docker build -t agent .</span> image 84 MB</li>
+                        <li><span>$ git push origin main</span> deploy hook fired</li>
+                        <li><span>200 OK</span> serving real users</li>
+                    </ul>
+                    <div class="ship-done">{% translate "Shipped. Next ticket?" %}</div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -65,38 +128,38 @@
     <div class="wrap">
         <div class="section-head">
             <div>
-                <span class="label">On GitHub</span>
-                <h2>A year of commits</h2>
+                <span class="label">{% translate "On GitHub" %}</span>
+                <h2>{% translate "A year of commits" %}</h2>
             </div>
-            <p>Every square is a day. Teal is a working day, ember marks the busiest ones. Pulled live from GitHub.</p>
+            <p>{% translate "Every square is a day. Teal is a working day, ember marks the busiest ones. Pulled live from GitHub." %}</p>
         </div>
 
         <div class="activity" data-src="{% url 'activity' %}">
             <div class="activity-stats">
-                <div class="stat"><b data-stat="total">&ndash;</b><span>Contributions</span></div>
-                <div class="stat hot"><b data-stat="current_streak">&ndash;</b><span>Current streak</span></div>
-                <div class="stat"><b data-stat="longest_streak">&ndash;</b><span>Longest streak</span></div>
-                <div class="stat"><b data-stat="active_days">&ndash;</b><span>Active days</span></div>
+                <div class="stat"><b data-stat="total">&ndash;</b><span>{% translate "Contributions" %}</span></div>
+                <div class="stat hot"><b data-stat="current_streak">&ndash;</b><span>{% translate "Current streak" %}</span></div>
+                <div class="stat"><b data-stat="longest_streak">&ndash;</b><span>{% translate "Longest streak" %}</span></div>
+                <div class="stat"><b data-stat="active_days">&ndash;</b><span>{% translate "Active days" %}</span></div>
             </div>
 
             <div class="activity-bar">
-                <div class="view-switch" role="group" aria-label="Graph view">
-                    <button type="button" data-view="flat" aria-pressed="true">Grid</button>
-                    <button type="button" data-view="3d" aria-pressed="false">3D city</button>
+                <div class="view-switch" role="group" aria-label="{% translate 'Graph view' %}">
+                    <button type="button" data-view="flat" aria-pressed="true">{% translate "Grid" %}</button>
+                    <button type="button" data-view="3d" aria-pressed="false">{% translate "3D city" %}</button>
                 </div>
                 <div class="legend" aria-hidden="true">
-                    <span>Less</span>
+                    <span>{% translate "Less" %}</span>
                     <i style="background: var(--lvl-0)"></i><i style="background: var(--lvl-1)"></i><i style="background: var(--lvl-2)"></i><i style="background: var(--lvl-3)"></i><i style="background: var(--lvl-4)"></i>
-                    <span>More</span>
+                    <span>{% translate "More" %}</span>
                 </div>
             </div>
 
             <div class="cal-scroll" data-pane="flat">
-                <div class="cal" id="cal" role="grid" aria-label="Contribution calendar"></div>
+                <div class="cal" id="cal" role="grid" aria-label="{% translate 'Contribution calendar' %}"></div>
             </div>
-            <canvas class="cal-3d" id="cal3d" data-pane="3d" hidden aria-label="Contribution calendar as a 3D city"></canvas>
+            <canvas class="cal-3d" id="cal3d" data-pane="3d" hidden aria-label="{% translate 'Contribution calendar as a 3D city' %}" title="{% translate 'Drag to orbit, double-click to reset' %}"></canvas>
 
-            <p class="cal-tip" id="cal-tip" aria-live="polite">Loading activity&hellip;</p>
+            <p class="cal-tip" id="cal-tip" aria-live="polite">{% translate "Loading activity&hellip;" %}</p>
 
             <div class="activity-foot">
                 <span id="best-day"></span>
@@ -106,11 +169,31 @@
     </div>
 </section>
 
+<section class="section" id="shell">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <span class="label">{% translate "Interview me" %}</span>
+                <h2>{% translate "Ask the terminal" %}</h2>
+            </div>
+            <p>{% blocktranslate %}A tiny shell about me. Type <code>help</code>, use Tab to complete and the arrow keys for history.{% endblocktranslate %}</p>
+        </div>
+        <div class="term" data-cv="{% static 'media/Doan_Idriz_CV_ATS.pdf' %}" data-contact="{% url 'contact' %}">
+            <div class="editor-bar"><i></i><i></i><i></i><span>doan@plovdiv: ~</span><span class="editor-pct">zsh</span></div>
+            <div class="term-out" role="log" aria-live="polite"></div>
+            <form class="term-line" autocomplete="off">
+                <label for="term-in"><span class="term-ps">doan@plovdiv:~$</span></label>
+                <input id="term-in" name="cmd" spellcheck="false" autocapitalize="off" aria-label="{% translate 'Terminal command' %}">
+            </form>
+        </div>
+    </div>
+</section>
+
 <section class="section">
     <div class="wrap">
         <div class="cta-strip">
-            <h2>Need an agent, an automation, or a whole platform?</h2>
-            <a href="{% url 'contact' %}" class="btn btn-primary">Start a conversation</a>
+            <h2>{% translate "Need an agent, an automation, or a whole platform?" %}</h2>
+            <a href="{% url 'contact' %}" class="btn btn-primary">{% translate "Start a conversation" %}</a>
         </div>
     </div>
 </section>
@@ -120,4 +203,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <script src="{% static 'js/woven.js' %}" defer></script>
 <script src="{% static 'js/activity.js' %}" defer></script>
+<script src="{% static 'js/terminal.js' %}" defer></script>
 {% endblock %}

@@ -1,14 +1,15 @@
 {% extends "portfolio_website/base.html" %}
+{% load i18n %}
 
 {% block title %}400 | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <section class="error-page">
-        <span class="error-code">400</span>
-        <h1>Bad request</h1>
-        <p>Something about that request didn't add up. Taking you back home.</p>
-        <p>Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.</p>
+        <span class="error-code" data-text="400">400</span>
+        <h1>{% translate "Bad request" %}</h1>
+        <p>{% translate "Something about that request didn't add up. Taking you back home." %}</p>
+        <p>{% blocktranslate %}Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.{% endblocktranslate %}</p>
     </section>
 </div>
 

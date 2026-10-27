@@ -1,17 +1,18 @@
 {% extends 'portfolio_website/base.html' %}
 
-{% block title %}Contact | Doan Idriz{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Contact" %} | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <section class="contact-grid">
         <div class="contact-intro">
-            <span class="label">Contact</span>
-            <h1>Let's build something.</h1>
-            <p>Have a question, a project, or an automation you want gone? Send me a message and I'll get back to you.</p>
+            <span class="label">{% translate "Contact" %}</span>
+            <h1>{% translate "Let's build something." %}</h1>
+            <p>{% translate "Have a question, a project, or an automation you want gone? Send me a message and I'll get back to you." %}</p>
             <ul class="contact-list">
-                <li><span>Email</span><a href="mailto:doanchetoidriz@gmail.com">doanchetoidriz@gmail.com</a></li>
-                <li><span>Based in</span><b>Plovdiv, Bulgaria</b></li>
+                <li><span>{% translate "Email" %}</span><a href="mailto:doanchetoidriz@gmail.com">doanchetoidriz@gmail.com</a></li>
+                <li><span>{% translate "Based in" %}</span><b>{% translate "Plovdiv, Bulgaria" %}</b></li>
                 <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/doan-idriz-70b472165/" target="_blank" rel="noopener">Doan Idriz</a></li>
                 <li><span>GitHub</span><a href="https://github.com/Aransok" target="_blank" rel="noopener">Aransok</a></li>
             </ul>
@@ -25,18 +26,32 @@
                 {% endfor %}
             {% endif %}
             <div class="form-group">
-                <label for="message-name">Name</label>
+                <label for="message-name">{% translate "Name" %}</label>
                 <input type="text" id="message-name" name="message-name" autocomplete="name" required>
             </div>
             <div class="form-group">
-                <label for="message-email">Email</label>
+                <label for="message-email">{% translate "Email" %}</label>
                 <input type="email" id="message-email" name="message-email" autocomplete="email" required>
             </div>
             <div class="form-group">
-                <label for="message">Message</label>
+                <label for="message">{% translate "Message" %}</label>
                 <textarea id="message" name="message" rows="6" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send message</button>
+            <button type="submit" class="btn btn-primary">{% translate "Send message" %}</button>
+            <div class="tx" aria-live="polite" hidden>
+                <ol class="tx-log">
+                    <li>{% translate "Packing your message" %}</li>
+                    <li>{% translate "Encrypting over TLS" %}</li>
+                    <li>{% translate "Routing to Plovdiv, BG" %}</li>
+                    <li>{% translate "Delivering" %}</li>
+                </ol>
+                <div class="tx-done" hidden>
+                    <b class="tx-ok">{% translate "Delivered." %}</b>
+                    <p>{% translate "Thanks, I'll get back to you soon." %}</p>
+                    <button type="button" class="btn" data-again>{% translate "Send another" %}</button>
+                </div>
+                <p class="tx-err" data-fallback="{% translate 'Could not reach the server. Please try again.' %}" hidden></p>
+            </div>
         </form>
     </section>
 </div>

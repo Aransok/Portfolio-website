@@ -15,12 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, re_path, include
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.views.static import serve
+from portfolio_website import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('portfolio_website.urls'))
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('activity.json', views.activity, name='activity'),
+    # Served unconditionally (not gated by DEBUG): no cloud storage is configured, so
+    # uploaded media is committed to the repo and must be served by Django in production too.
+    # django.conf.urls.static.static() no-ops when DEBUG=False, so serve is wired directly.
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
+
+urlpatterns += i18n_patterns(
+    path('', include('portfolio_website.urls')),
+    prefix_default_language=False,
+)
 handler400 = 'portfolio_website.views.custom_400'
 handler404 = 'portfolio_website.views.custom_404'
 handler500 = 'portfolio_website.views.custom_500'

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
 from django.conf import settings
+from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.template.loader import render_to_string
 from .models import Certificate, Diploma, AI_LLM
@@ -29,32 +30,50 @@ def about(request):
 
 def contact(request):
     if request.method == "POST":
-        message_name = request.POST['message-name']
-        message_email = request.POST['message-email']
-        message = request.POST['message']
+        # the form's own JS posts with fetch and wants JSON back, plain posts get a redirect
+        wants_json = request.headers.get('X-Requested-With') == 'fetch'
+        message_name = request.POST.get('message-name', '').strip()
+        message_email = request.POST.get('message-email', '').strip()
+        message = request.POST.get('message', '').strip()
 
-        try:
-            html_body = render_to_string('portfolio_website/emails/contact_notification.html', {
-                'sender_name': message_name,
-                'sender_email': message_email,
-                'message_body': message,
-            })
-            resend.api_key = settings.RESEND_API_KEY
-            resend.Emails.send({
-                # Resend's shared onboarding domain can only send to the
-                # account's own verified address, which is exactly this form's
-                # recipient - no custom domain verification needed.
-                "from": "Portfolio Contact Form <onboarding@resend.dev>",
-                "to": [settings.CONTACT_RECIPIENT_EMAIL],
-                "reply_to": message_email,
-                "subject": f'Portfolio contact from {message_name}',
-                "html": html_body,
-                "text": f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
-            })
-            messages.success(request, '✅ Your message has been sent successfully!')
-        except Exception:
-            messages.error(request, '⚠️ Sorry, your message could not be sent right now. Please try again later.')
+        if not (message_name and message and '@' in message_email):
+            text = _('Please fill in your name, a valid email and a message.')
+            if wants_json:
+                return JsonResponse({"ok": False, "message": text}, status=400)
+            messages.error(request, text)
+            return redirect('contact')
 
+        sent = True
+        if not settings.RESEND_API_KEY and settings.DEBUG:
+            # local runs have no Resend key: show the email in the server log instead
+            print(f'[contact, dev, not emailed] {message_name} <{message_email}>: {message}')
+        else:
+            try:
+                html_body = render_to_string('portfolio_website/emails/contact_notification.html', {
+                    'sender_name': message_name,
+                    'sender_email': message_email,
+                    'message_body': message,
+                })
+                resend.api_key = settings.RESEND_API_KEY
+                resend.Emails.send({
+                    # Resend's shared onboarding domain can only send to the
+                    # account's own verified address, which is exactly this form's
+                    # recipient - no custom domain verification needed.
+                    "from": "Portfolio Contact Form <onboarding@resend.dev>",
+                    "to": [settings.CONTACT_RECIPIENT_EMAIL],
+                    "reply_to": message_email,
+                    "subject": f'Portfolio contact from {message_name}',
+                    "html": html_body,
+                    "text": f'From: {message_name} <{message_email}>\n\nMessage:\n{message}',
+                })
+            except Exception:
+                sent = False
+
+        text = (_('Your message has been sent successfully!') if sent
+                else _('Sorry, your message could not be sent right now. Please try again later.'))
+        if wants_json:
+            return JsonResponse({"ok": sent, "message": text}, status=200 if sent else 502)
+        (messages.success if sent else messages.error)(request, text)
         return redirect('contact')
 
     else:
