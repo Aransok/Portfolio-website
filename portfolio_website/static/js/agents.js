@@ -279,7 +279,7 @@
   }
 
   // ---------- sizing: on wide screens the stage sits right of the copy ----------
-  var W = 1, H = 1, wide = true;
+  var W = 1, H = 1, wide = true, distK = 1;
   function resize() {
     W = hero.clientWidth; H = hero.clientHeight;
     if (!W || !H) return;
@@ -287,7 +287,12 @@
     wide = W > 900;
     camera.aspect = W / H;
     camera.fov = wide ? 36 : 50;
-    if (wide) camera.setViewOffset(W, H, -W * 0.25, H * 0.13, W, H);
+    // centre the scene in the space right of the copy, pulling back when it is tight
+    var copy = hero.querySelector('.hero-copy'), right = W * 0.5;
+    if (copy) right = copy.getBoundingClientRect().right - hero.getBoundingClientRect().left;
+    var room = Math.max(360, W - right);
+    distK = wide ? Math.min(1.7, Math.max(0.92, 760 / room)) : 1;
+    if (wide) camera.setViewOffset(W, H, -((right + W) / 2 - W / 2), H * 0.13, W, H);
     else camera.setViewOffset(W, H, 0, H * 0.3, W, H);
     camera.updateProjectionMatrix();
     ui.classList.toggle('narrow', !wide);
@@ -322,7 +327,7 @@
     var ty = mouse.in ? mouse.y * 0.25 : 0;
     orbit += (tx - orbit) * 0.04;
     tilt += (ty - tilt) * 0.04;
-    var ang = orbit + 0.35, dist = wide ? 11.6 : 14, hgt = 4.6 + tilt * 2;
+    var ang = orbit + 0.35, dist = (wide ? 11.6 : 14) * distK, hgt = 4.6 + tilt * 2;
     camera.position.set(Math.sin(ang) * dist, hgt, Math.cos(ang) * dist);
     camera.lookAt(lookAt);
 
