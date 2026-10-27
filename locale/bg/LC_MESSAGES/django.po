@@ -878,3 +878,36 @@ msgstr "Предишна страница"
 
 msgid "Next page"
 msgstr "Следваща страница"
+
+msgid "Python tip"
+msgstr "Python съвет"
+
+msgid "Fact"
+msgstr "Факт"
+
+msgid "Sauce of the day"
+msgstr "Сос на деня"
+
+msgid ""
+"A faceless channel run by a Python pipeline on GitHub Actions. It writes the"
+" script, records the voice, animates the short and uploads it, five times a "
+"day, while I sleep."
+msgstr ""
+"Канал без лице, който се управлява от Python конвейер в GitHub Actions. Пише"
+" сценария, записва гласа, анимира шорта и го качва, пет пъти на ден, докато "
+"спя."
+
+msgid "5:shorts a day|3:series|0:clicks from me"
+msgstr "5:шорта на ден|3:поредици|0:клика от мен"
+
+msgid "Subscribe"
+msgstr "Абонирай се"
+
+msgid "Open the channel"
+msgstr "Отвори канала"
+
+msgid "Plan. Drive. Deliver."
+msgstr "Планирай. Карай. Достави."
+
+msgid "Take the car apart"
+msgstr "Разглоби колата"

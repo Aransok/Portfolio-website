@@ -63,10 +63,10 @@
                 </div>
             </article>
 
-            <article class="project-card flagship" id="crewbase" data-badge="{% translate 'Private beta' %}" data-video="{% static 'media/trailers/crewbase.mp4' %}" data-poster="{% static 'media/trailers/crewbase.jpg' %}" data-kind="demo">
+            <article class="project-card flagship" id="crewbase" data-badge="{% translate 'Private beta' %}" data-poster="{% static 'media/trailers/crewbase.jpg' %}" data-cmd="$ pnpm seed|Northwind Logistics · 12 people ✓|$ import routes.xlsx|42 stops mapped · 1 skipped, no address|$ optimize --drivers 4|distance -18% · published to drivers ✓" data-hook="{% translate 'Plan. Drive. Deliver.' %}" data-video="{% static 'media/trailers/crewbase-trailer.mp4' %}" data-kind="render">
                 <div class="project-art has-shot">
-                    <img class="project-shot" src="{% static 'media/trailers/crewbase.jpg' %}" alt="{% translate 'Crewbase control room for a dispatcher' %}" loading="lazy">
-                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                    <img class="project-shot" src="{% static 'media/trailers/crewbase-still.jpg' %}" alt="{% translate 'Crewbase control room for a dispatcher' %}" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
@@ -89,10 +89,10 @@
                 </div>
             </article>
 
-            <article class="project-card" data-badge="{% translate 'In development' %}" data-video="{% static 'media/trailers/vektor.mp4' %}" data-poster="{% static 'media/trailers/vektor.jpg' %}" data-kind="demo">
+            <article class="project-card" data-badge="{% translate 'In development' %}" data-poster="{% static 'media/trailers/vektor.jpg' %}" data-cmd="$ npm run dev|3D car ready · 38 parts|$ scroll|car taken apart into 8 systems ✓|$ plate PB 2026 KX|Toyota RAV4 2017 · 6 parts in stock ✓" data-hook="{% translate 'Take the car apart' %}" data-video="{% static 'media/trailers/vektor-trailer.mp4' %}" data-kind="render">
                 <div class="project-art has-shot">
-                    <img class="project-shot" src="{% static 'media/trailers/vektor.jpg' %}" alt="{% translate 'VEKTOR car taken apart into parts' %}" loading="lazy">
-                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                    <img class="project-shot" src="{% static 'media/trailers/vektor-still.jpg' %}" alt="{% translate 'VEKTOR car taken apart into parts' %}" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
@@ -146,7 +146,7 @@
                         <span class="tag">YouTube API</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://www.youtube.com/@ByteBits-y3b" target="_blank" rel="noopener">{% translate "Watch the channel" %}</a>
+                        <a href="https://www.youtube.com/@ByteBits-y3b" target="_blank" rel="noopener" data-channel>{% translate "Watch the channel" %}</a>
                         <a href="https://github.com/Aransok/faceless-shorts" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
@@ -251,10 +251,10 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 11 rooms lit ✓" data-hook="{% translate 'You are here' %}" data-video="{% static 'media/trailers/portfolio.mp4' %}" data-kind="demo">
+            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 11 rooms lit ✓" data-hook="{% translate 'You are here' %}" data-video="{% static 'media/trailers/portfolio-trailer.mp4' %}" data-kind="render" data-mark="d.">
                 <div class="project-art has-shot">
-                    <img class="project-shot" src="{% static 'media/trailers/portfolio.jpg' %}" alt="" loading="lazy">
-                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                    <img class="project-shot" src="{% static 'media/trailers/portfolio-still.jpg' %}" alt="" loading="lazy">
+                    <span class="shot-tag">{% translate "Trailer" %}</span>
                 </div>
                 <div class="project-body">
                     <h3>This Portfolio</h3>
@@ -272,6 +272,12 @@
         </div>
     </div>
 </section>
+<div hidden data-channel-card data-url="https://www.youtube.com/@ByteBits-y3b" data-sub="https://www.youtube.com/@ByteBits-y3b?sub_confirmation=1"
+    data-shorts="{% static 'media/trailers/bytebits-code.mp4' %}|{% static 'media/trailers/bytebits-facts.mp4' %}|{% static 'media/trailers/bytebits-chef.mp4' %}"
+    data-labels="{% translate 'Python tip' %}|{% translate 'Fact' %}|{% translate 'Sauce of the day' %}"
+    data-lede="{% translate 'A faceless channel run by a Python pipeline on GitHub Actions. It writes the script, records the voice, animates the short and uploads it, five times a day, while I sleep.' %}"
+    data-stats="{% translate '5:shorts a day|3:series|0:clicks from me' %}"
+    data-subscribe="{% translate 'Subscribe' %}" data-open="{% translate 'Open the channel' %}" data-close="{% translate 'Close' %}"></div>
 <div hidden data-shelf data-src="{% static 'media/shelf/builds.json' %}"
     data-title="{% translate 'The Build Shelf' %}" data-kicker="{% translate 'Found behind the crooked painting' %}"
     data-lede="{% translate 'Everything I build on the side, one experiment at a time: tools for my own day, weird ideas and things that just had to exist. Take your time, nothing here is for sale.' %}"
@@ -284,4 +290,5 @@
 <script src="{% static 'js/gallery.js' %}" defer></script>
 <script src="{% static 'js/cards.js' %}" defer></script>
 <script src="{% static 'js/shelf.js' %}" defer></script>
+<script src="{% static 'js/channel.js' %}" defer></script>
 {% endblock %}
