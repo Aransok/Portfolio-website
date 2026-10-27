@@ -10,7 +10,7 @@
             <h1>{% translate "Still the kid asking how to make it do stuff." %}</h1>
             <p>{% blocktranslate %}I'm <strong>Doan Idriz</strong>, a full-stack developer and AI automation engineer based in Plovdiv, Bulgaria. Still that kid staring at a screen, wondering "How do I make this thing do stuff?"{% endblocktranslate %}</p>
             <p>{% blocktranslate %}I earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/" target="_blank" rel="noopener">SoftUni's</a> challenging and fun courses.{% endblocktranslate %}</p>
-            <p>{% translate "Most recently I worked as an AI Researcher, building AI agents from scratch in pure Python, RAG pipelines, and workflow automations, because code that learns still feels a little like magic. Always exploring the next tech rabbit hole." %}</p>
+            <p>{% translate "Right now I'm a Software Engineer at Adi Kars in Plovdiv, building the internal tools and infrastructure that connect its three offices. Before that I worked as an AI Researcher, building AI agents from scratch in pure Python, RAG pipelines, and workflow automations, because code that learns still feels a little like magic. Always exploring the next tech rabbit hole." %}</p>
             <div class="hero-actions">
                 <a href="{% url 'contact' %}" class="btn btn-primary">{% translate "Let's connect" %}</a>
                 <a href="{% static 'media/Doan_s_CV.pdf' %}" class="btn" target="_blank" rel="noopener">{% translate "Download CV" %}</a>
@@ -33,6 +33,19 @@
 
         <div class="timeline">
             <div class="timeline-item current">
+                <span class="timeline-date">{% translate "Oct 2026 &ndash; now" %}</span>
+                <h3>{% translate "Software Engineer" %}</h3>
+                <p class="timeline-org">{% translate "Adi Kars Ltd (Ади Карс ЕООД) &middot; Plovdiv, Bulgaria" %}</p>
+                <p>{% translate "Building internal software and infrastructure for a three-office business: a self-hosted office server with VPN access between the locations, a staff portal for shared files and business apps, and an internal team platform for messaging, a company feed and listings." %}</p>
+                <div class="tag-row">
+                    <span class="tag">Docker</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">VPN</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">{% translate "Internal tools" %}</span>
+                </div>
+            </div>
+            <div class="timeline-item">
                 <span class="timeline-date">{% blocktranslate %}Mar 2025 &ndash; Jan 2026{% endblocktranslate %}</span>
                 <h3>{% translate "AI Researcher &middot; Programming &amp; Automation" %}</h3>
                 <p class="timeline-org">{% blocktranslate %}Edamame Digital &middot; Sofia, Bulgaria{% endblocktranslate %}</p>
