@@ -62,8 +62,129 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ python generate.py --source mysql --lang bg:en|reading listings from 5 db engines|translating BG → EN ✓|$ open report.pdf" data-hook="{% translate '5 databases, 1 PDF' %}">
+            <article class="project-card flagship" id="crewbase" data-badge="{% translate 'Private beta' %}" data-video="{% static 'media/trailers/crewbase.mp4' %}" data-poster="{% static 'media/trailers/crewbase.jpg' %}">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/crewbase.jpg' %}" alt="{% translate 'Crewbase control room for a dispatcher' %}" loading="lazy">
+                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                </div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>Crewbase</h3>
+                        <span class="badge-beta">{% translate "Private beta" %}</span>
+                    </div>
+                    <p>{% translate "A home base for teams that run their day on chat groups and Excel files: feed, chat, internal listings, people, and Workspaces built from a company's own spreadsheets. The first module is Routes: dispatchers import and plan the day, drivers get their stops in order with one-tap navigation, and a live board shows every delivery as it happens. Multi-company and bilingual from day one." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Drizzle</span>
+                        <span class="tag">{% translate "Realtime" %}</span>
+                        <span class="tag">Leaflet</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="{% url 'contact' %}">{% translate "Ask for a demo" %}</a>
+                        <span class="crew-id" title="{% translate 'crew badge' %}">crew badge · NW-0042</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-badge="{% translate 'In development' %}" data-video="{% static 'media/trailers/vektor.mp4' %}" data-poster="{% static 'media/trailers/vektor.jpg' %}">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/vektor.jpg' %}" alt="{% translate 'VEKTOR car taken apart into parts' %}" loading="lazy">
+                    <span class="shot-tag">{% translate "Recorded demo" %}</span>
+                </div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>VEKTOR Auto Parts</h3>
+                        <span class="badge-beta">{% translate "In development" %}</span>
+                    </div>
+                    <p>{% translate "A concept store for an auto parts shop in Plovdiv. A 3D car comes apart as you scroll so you pick the part straight off it, with live prices, a paint switcher, a plate lookup that recognises the car, a part finder and a delivery map of the city." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">three.js</span>
+                        <span class="tag">GSAP</span>
+                        <span class="tag">Vite</span>
+                        <span class="tag">{% translate "Vanilla JS" %}</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-badge="{% translate 'Closed beta soon' %}" data-poster="{% static 'media/trailers/ember.jpg' %}" data-cmd="$ unity -batchmode -buildTarget Android|loading open world  ·  bosses  ·  loot ✓|ember tree: 48 nodes  ·  hardcore mode on|$ adb install ProjectEmber.apk" data-hook="{% translate 'One hand. No mercy.' %}">
+                <div class="project-art has-shot">
+                    <img class="project-shot" src="{% static 'media/trailers/ember.jpg' %}" alt="{% translate 'Project Ember promo art with its damage meter' %}" loading="lazy">
+                </div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>Project Ember</h3>
+                        <span class="badge-beta">{% translate "Closed beta soon" %}</span>
+                    </div>
+                    <p>{% translate "A hardcore dark-fantasy action RPG for Android, played in portrait with one hand: an open world, bosses and loot, and classless builds grown through skills, talents and a permanent Ember tree. Built in Unity with Claude Code driving the editor through Unity MCP." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">Unity</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">Unity MCP</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-cmd="$ gh workflow run daily-shorts|script ✓  voice ✓  captions ✓  render ✓|uploading 5 shorts to @ByteBits ✓|$ gh workflow run quiz-longform" data-hook="{% translate '5 shorts a day, 0 clicks' %}">
+                <div class="project-art"><span class="mono">BB</span></div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>ByteBits</h3>
+                    </div>
+                    <p>{% translate "A faceless YouTube channel that runs itself. A free Python pipeline on GitHub Actions writes, voices, renders and uploads daily Shorts (programming tips, facts, recipes) and long-form quiz videos, then tracks the stats every week." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">Python</span>
+                        <span class="tag">GitHub Actions</span>
+                        <span class="tag">{% translate "Video automation" %}</span>
+                        <span class="tag">YouTube API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.youtube.com/@ByteBits-y3b" target="_blank" rel="noopener">{% translate "Watch the channel" %}</a>
+                        <a href="https://github.com/Aransok/faceless-shorts" target="_blank" rel="noopener">{% translate "View code" %}</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-cmd="$ office new --spec pricing.md --mode build|architect → plan.md ✓|engineer → 12 files  ·  tests ✓|budget used €0.38 of €2.00|$ office report" data-hook="{% translate 'A company made of agents' %}">
+                <div class="project-art"><span class="mono">AO</span></div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>AI Agents Office</h3>
+                        <span class="badge-beta">{% translate "In development" %}</span>
+                    </div>
+                    <p>{% translate "A virtual company of AI agents in pure Python: a manager, an architect, researchers, engineers, a designer and a writer, each with its own persona file that grows with experience. Hand it a spec and it works in the background with task locks, budget limits and approval gates, then reports back." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">{% translate "Pure Python" %}</span>
+                        <span class="tag">{% translate "Multi-agent" %}</span>
+                        <span class="tag">LLM</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-cmd="$ adb install pocketlinux.apk|unpacking debian rootfs ✓|starting display server ✓|$ startxfce4  # mint theme" data-hook="{% translate 'Your phone is a PC now' %}">
                 <div class="project-art"><span class="mono">PL</span></div>
+                <div class="project-body">
+                    <div class="project-title-row">
+                        <h3>Pocket Linux</h3>
+                        <span class="badge-beta">{% translate "In development" %}</span>
+                    </div>
+                    <p>{% translate "An Android app that turns a phone into a computer: a full Linux desktop with a Mint look, no root needed. Ships its own display server and is tested in CI on emulators and Firebase Test Lab." %}</p>
+                    <div class="tag-row">
+                        <span class="tag">Android</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">X11</span>
+                        <span class="tag">CI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aransok/pocketlinux-x11" target="_blank" rel="noopener">{% translate "Display server code" %}</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card" data-cmd="$ python generate.py --source mysql --lang bg:en|reading listings from 5 db engines|translating BG → EN ✓|$ open report.pdf" data-hook="{% translate '5 databases, 1 PDF' %}">
+                <div class="project-art"><span class="mono">PLG</span></div>
                 <div class="project-body">
                     <h3>Property Listings Generator</h3>
                     <p>{% translate "Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface." %}</p>
@@ -91,55 +212,30 @@
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ python summarize.py article.html|fetching article ✓|$ cat summary.md" data-hook="{% translate 'Long read, short answer' %}">
-                <div class="project-art"><span class="mono">LLM</span></div>
+            <article class="project-card" data-cmd="$ ng serve|compiled ✓  localhost:4200|$ python manage.py runserver|$ python summarize.py article.html" data-hook="{% translate 'Where it started' %}">
+                <div class="project-art"><span class="mono">01</span></div>
                 <div class="project-body">
-                    <h3>LLM Article Summarizer</h3>
-                    <p>{% translate "Python project for article summarization using an LLM." %}</p>
-                    <div class="tag-row">
-                        <span class="tag">Python</span>
-                        <span class="tag">LLM</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" rel="noopener">{% translate "View code" %}</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card" data-cmd="$ ng serve|compiled ✓  localhost:4200|$ node server.js|GET /api/movies 200" data-hook="{% translate 'Angular + Node' %}">
-                <div class="project-art"><span class="mono">NG</span></div>
-                <div class="project-body">
-                    <h3>Angular Movies Web Site</h3>
-                    <p>{% translate "A movie site built with Angular and Node.js." %}</p>
+                    <h3>{% translate "Early work" %}</h3>
+                    <p>{% translate "The projects I learned on: a movie site in Angular and Node.js, an earlier movie site in Django, and an LLM article summarizer in Python." %}</p>
                     <div class="tag-row">
                         <span class="tag">Angular</span>
                         <span class="tag">Node.js</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" rel="noopener">{% translate "View code" %}</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card" data-cmd="$ python manage.py runserver|GET /movies/ 200|where the Django story started" data-hook="{% translate 'Where it started' %}">
-                <div class="project-art"><span class="mono">DJ</span></div>
-                <div class="project-body">
-                    <h3>Python Movie Website</h3>
-                    <p>{% translate "An earlier Django movie website project." %}</p>
-                    <div class="tag-row">
                         <span class="tag">Django</span>
+                        <span class="tag">LLM</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/ProjectProtect" target="_blank" rel="noopener">{% translate "View code" %}</a>
+                        <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" rel="noopener">Angular</a>
+                        <a href="https://github.com/Aransok/ProjectProtect" target="_blank" rel="noopener">Django</a>
+                        <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" rel="noopener">{% translate "Summarizer" %}</a>
                     </div>
                 </div>
             </article>
 
-            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 7 rooms lit ✓" data-hook="{% translate 'You are here' %}">
+            <article class="project-card" data-cmd="$ git push origin main|CI ✓  deploy → render.com|$ python manage.py runserver|museum: 11 rooms lit ✓" data-hook="{% translate 'You are here' %}">
                 <div class="project-art"><span class="mono">d.</span></div>
                 <div class="project-body">
                     <h3>This Portfolio</h3>
-                    <p>{% translate "This site itself: a Django portfolio with an admin-managed certificates gallery and a live GitHub activity graph." %}</p>
+                    <p>{% translate "This site itself: a Django portfolio with a three.js agent HQ, a walk-through museum whose paintings play project trailers, a working terminal, and a live GitHub activity graph." %}</p>
                     <div class="tag-row">
                         <span class="tag">Django</span>
                         <span class="tag">Three.js</span>
@@ -158,4 +254,5 @@
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <script src="{% static 'js/gallery.js' %}" defer></script>
+<script src="{% static 'js/cards.js' %}" defer></script>
 {% endblock %}

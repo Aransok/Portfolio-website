@@ -189,6 +189,23 @@ def agent(goal, max_steps=8):
     </div>
 </section>
 
+<div hidden data-vault
+    data-tag="{% translate 'Private beta &middot; crew access' %}"
+    data-lede="{% translate 'You found the back room. Crewbase is the platform I am building for teams that run their day on chat groups and Excel files. Dispatchers plan routes on a laptop, drivers work from their phone, and everyone shares one feed, one chat and one board.' %}"
+    data-desk="{% static 'media/trailers/crewbase.mp4' %}" data-desk-poster="{% static 'media/trailers/crewbase.jpg' %}"
+    data-phone="{% static 'media/trailers/crewbase-phone.mp4' %}" data-phone-poster="{% static 'media/trailers/crewbase-phone.jpg' %}"
+    data-cap-desk="{% translate 'Dispatcher &middot; laptop' %}" data-cap-phone="{% translate 'Driver &middot; phone' %}"
+    data-f-routes="{% translate 'Import a messy sheet, plan and optimise the day, drivers navigate stop by stop, a live board shows every delivery.' %}"
+    data-f-feed="{% translate 'Announcements with read receipts, polls, kudos and auto posts when a route is done.' %}"
+    data-f-chat="{% translate 'Direct messages, groups and auto channels per role, office and van.' %}"
+    data-f-board="{% translate 'Internal listings: sell, give away, request, lost and found.' %}"
+    data-f-people="{% translate 'Directory, roles, departments, who is on shift and in which van today.' %}"
+    data-f-work="{% translate 'Turn any spreadsheet into a small app with table, map, kanban and dashboard views.' %}"
+    data-stats="{% translate '8:roles out of the box|2:languages, EN and BG|101:automated tests|€0:to start running it' %}"
+    data-cta="{% translate 'Get early access' %}" data-contact="{% url 'contact' %}"
+    data-foot="{% translate 'Badge NW-0042 belongs to Mira. Keep it between us.' %}"
+    data-close="{% translate 'Close' %}"></div>
+
 <section class="section">
     <div class="wrap">
         <div class="cta-strip">
@@ -204,4 +221,5 @@ def agent(goal, max_steps=8):
 <script src="{% static 'js/agents.js' %}" defer></script>
 <script src="{% static 'js/activity.js' %}" defer></script>
 <script src="{% static 'js/terminal.js' %}" defer></script>
+<script src="{% static 'js/vault.js' %}" defer></script>
 {% endblock %}
