@@ -141,6 +141,216 @@
     g.fillText(tags.join('  /  '), 48, h - 40);
   }
 
+  // ---------- trailers ----------
+  // When the camera faces a painting it plays a short looping trailer drawn
+  // straight into the painting's canvas: glitch-in, a terminal running the
+  // project, its stack, then a one-line hook. Scripts come from the card's
+  // data-cmd ("|" separated lines, "$ " = typed command) and data-hook.
+  var TR = 9.5;
+  function rrect(g, x, y, w, h, r) {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  }
+  function trailerScript(card) {
+    var title = card.querySelector('h3').textContent.trim();
+    var cmd = card.dataset.cmd ? card.dataset.cmd.split('|') : ['$ git clone ' + title.toLowerCase().replace(/\s+/g, '-'), 'ready ✓'];
+    var lines = [], at = 0.3;
+    cmd.forEach(function (l) {
+      l = l.trim();
+      var typed = l.indexOf('$ ') === 0;
+      var dur = typed ? Math.max(0.5, l.length / 34) : 0.12;
+      lines.push({ text: l, typed: typed, at: at, dur: dur });
+      at += dur + (typed ? 0.35 : 0.22);
+    });
+    return {
+      title: title,
+      slug: title.toLowerCase().replace(/\s+/g, '_'),
+      tags: Array.prototype.map.call(card.querySelectorAll('.tag'), function (t) { return t.textContent.trim(); }),
+      lines: lines,
+      hook: (card.dataset.hook || title).toUpperCase()
+    };
+  }
+  function fitFont(g, text, weight, family, maxW, maxPx) {
+    var px = maxPx;
+    g.font = weight + ' ' + px + 'px ' + family;
+    var m = g.measureText(text).width;
+    if (m > maxW) px = Math.floor(px * maxW / m);
+    g.font = weight + ' ' + px + 'px ' + family;
+    return px;
+  }
+  function trailer(p, s) {
+    var c = p.tex.image, g = c.getContext('2d'), w = c.width, h = c.height, sc = p.script;
+    var t = s % TR;
+    var SYNE = 'Syne, "Arial Black", sans-serif', MONO = '"IBM Plex Mono", monospace';
+    g.save();
+    g.fillStyle = '#0a0d12';
+    g.fillRect(0, 0, w, h);
+
+    if (t < 1.4) {
+      // glitch-in: the still painting arrives in torn horizontal slices
+      var k = ease(t / 1.1), slices = 14, sh = h / slices, rnd = seeded(sc.title + Math.floor(t * 24));
+      for (var i = 0; i < slices; i++) {
+        var off = (rnd() - 0.5) * 220 * (1 - k);
+        g.globalAlpha = 0.35 + 0.65 * k;
+        g.drawImage(p.still, 0, i * sh, w, sh, off, i * sh, w, sh);
+        if (rnd() < 0.3 * (1 - k)) {
+          g.globalAlpha = 0.5 * (1 - k);
+          g.fillStyle = rnd() < 0.5 ? THREAD : EMBER;
+          g.fillRect(0, i * sh + rnd() * sh, w, 3);
+        }
+      }
+      g.globalAlpha = 1;
+    } else if (t < 5.4) {
+      // terminal running the project
+      var lt = t - 1.4;
+      g.globalAlpha = 0.18;
+      g.drawImage(p.still, 0, 0);
+      g.globalAlpha = 1;
+      var px = 70, py = 64, pw = w - 140, ph = h - 150;
+      var pop = ease(lt / 0.35);
+      g.translate(w / 2, h / 2);
+      g.scale(0.94 + 0.06 * pop, 0.94 + 0.06 * pop);
+      g.translate(-w / 2, -h / 2);
+      g.globalAlpha = pop;
+      rrect(g, px, py, pw, ph, 18);
+      g.fillStyle = 'rgba(8,11,15,0.94)';
+      g.fill();
+      g.strokeStyle = 'rgba(127,227,212,0.45)';
+      g.lineWidth = 2;
+      g.stroke();
+      ['#ff6b6b', EMBER, THREAD].forEach(function (col, j) {
+        g.fillStyle = col;
+        g.beginPath();
+        g.arc(px + 30 + j * 26, py + 28, 7, 0, Math.PI * 2);
+        g.fill();
+      });
+      g.font = '500 22px ' + MONO;
+      g.fillStyle = '#8b95a3';
+      g.textAlign = 'center';
+      g.fillText('~/' + sc.slug, w / 2, py + 35);
+      g.textAlign = 'left';
+      g.font = '500 30px ' + MONO;
+      var y = py + 104, cx = px + 36, cy = y;
+      for (var n = 0; n < sc.lines.length; n++) {
+        var L = sc.lines[n];
+        if (lt < L.at) break;
+        var txt = L.typed ? L.text.slice(0, Math.ceil(L.text.length * clamp((lt - L.at) / L.dur))) : L.text;
+        g.fillStyle = L.typed ? THREAD : (L.text.indexOf('✓') >= 0 ? EMBER : '#d6dde6');
+        g.fillText(txt, px + 36, y);
+        cx = px + 36 + g.measureText(txt).width + 6;
+        cy = y;
+        y += 50;
+      }
+      if (Math.floor(lt * 2.4) % 2 === 0) {
+        g.fillStyle = THREAD;
+        g.fillRect(cx, cy - 24, 16, 30);
+      }
+    } else if (t < 7.4) {
+      // the stack: title rises, tag chips drop in one by one
+      var st = t - 5.4;
+      g.globalAlpha = 0.28;
+      g.drawImage(p.still, 0, 0);
+      g.globalAlpha = 1;
+      var vg = g.createRadialGradient(w / 2, h / 2, 50, w / 2, h / 2, w * 0.6);
+      vg.addColorStop(0, 'rgba(10,13,18,0.55)');
+      vg.addColorStop(1, 'rgba(10,13,18,0.95)');
+      g.fillStyle = vg;
+      g.fillRect(0, 0, w, h);
+      var rise = ease(st / 0.5);
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      fitFont(g, sc.title, 800, SYNE, w * 0.86, 88);
+      g.globalAlpha = rise;
+      g.fillStyle = '#e9edf2';
+      g.fillText(sc.title, w / 2, h * 0.36 + 40 * (1 - rise));
+      g.font = '500 30px ' + MONO;
+      var gap = 18, ws = sc.tags.map(function (tg) { return g.measureText(tg).width + 44; });
+      var rows = [[]], rw = [0], maxRow = w * 0.84;
+      ws.forEach(function (cw, j) {
+        var r = rows.length - 1;
+        if (rw[r] + cw > maxRow && rows[r].length) { rows.push([]); rw.push(0); r++; }
+        rows[r].push(j);
+        rw[r] += cw + gap;
+      });
+      rows.forEach(function (row, r) {
+        var x = (w - (rw[r] - gap)) / 2, yy = h * 0.58 + r * 74;
+        row.forEach(function (j) {
+          var a = ease((st - 0.35 - j * 0.14) / 0.3);
+          g.globalAlpha = a;
+          var dy = -30 * (1 - a);
+          rrect(g, x, yy - 28 + dy, ws[j], 56, 28);
+          g.fillStyle = 'rgba(127,227,212,0.08)';
+          g.fill();
+          g.strokeStyle = j % 3 === 2 ? EMBER : THREAD;
+          g.lineWidth = 2;
+          g.stroke();
+          g.fillStyle = '#e9edf2';
+          g.fillText(sc.tags[j], x + ws[j] / 2, yy + 2 + dy);
+          x += ws[j] + gap;
+        });
+      });
+    } else {
+      // the hook: one big line, then fade back to the still painting
+      var ht = t - 7.4;
+      var zoom = 1.18 - 0.18 * ease(ht / 0.6);
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.translate(w / 2, h * 0.46);
+      g.scale(zoom, zoom);
+      fitFont(g, sc.hook, 800, SYNE, w * 0.82, 120);
+      var gr = g.createLinearGradient(-w * 0.4, 0, w * 0.4, 0);
+      gr.addColorStop(0, THREAD);
+      gr.addColorStop(1, EMBER);
+      g.shadowColor = THREAD;
+      g.shadowBlur = 40 * ease(ht / 0.6);
+      g.globalAlpha = ease(ht / 0.35);
+      g.fillStyle = gr;
+      g.fillText(sc.hook, 0, 0);
+      g.setTransform(1, 0, 0, 1, 0, 0);
+      g.shadowBlur = 0;
+      g.font = '500 24px ' + MONO;
+      g.fillStyle = '#8b95a3';
+      g.fillText('doan.idriz  /  ' + sc.slug, w / 2, h * 0.7);
+      var back = ease((ht - 1.5) / 0.6);
+      if (back > 0) {
+        g.globalAlpha = back;
+        g.drawImage(p.still, 0, 0);
+      }
+    }
+    g.restore();
+
+    // REC badge and progress line ride on top of every scene
+    g.fillStyle = 'rgba(8,11,15,0.7)';
+    rrect(g, 24, 22, 150, 40, 20);
+    g.fill();
+    g.fillStyle = Math.floor(s * 2) % 2 ? '#ff5d5d' : '#7a2a2a';
+    g.beginPath();
+    g.arc(48, 42, 8, 0, Math.PI * 2);
+    g.fill();
+    g.font = '600 20px "IBM Plex Mono", monospace';
+    g.textAlign = 'left';
+    g.textBaseline = 'middle';
+    g.fillStyle = '#e9edf2';
+    g.fillText('TRAILER', 66, 43);
+    g.textBaseline = 'alphabetic';
+    g.fillStyle = 'rgba(255,255,255,0.08)';
+    g.fillRect(0, h - 6, w, 6);
+    g.fillStyle = THREAD;
+    g.fillRect(0, h - 6, w * (t / TR), 6);
+    p.tex.needsUpdate = true;
+  }
+  function stopTrailer(p) {
+    if (!p || !p.still) return;
+    var g = p.tex.image.getContext('2d');
+    g.drawImage(p.still, 0, 0);
+    p.tex.needsUpdate = true;
+  }
+
   // ---------- hall ----------
   var midZ = 2 - L / 2 + 4;
   var floorTex = canvasTex(256, 256, function (g, w, h) {
@@ -253,7 +463,7 @@
     num.renderOrder = 2;
     scene.add(num);
 
-    paintings.push({ card: card, side: side, z: z, art: art, tex: tex, scan: scan, beam: bm, pool: pool.material, halo: halo.material });
+    paintings.push({ card: card, side: side, z: z, art: art, tex: tex, scan: scan, beam: bm, pool: pool.material, halo: halo.material, script: trailerScript(card), still: null, start: 0 });
   });
 
   // ---------- entrance: building front, neon sign, sliding doors ----------
@@ -365,6 +575,10 @@
     }
     var p = paintings[k];
     paint(p.tex.image.getContext('2d'), p.tex.image.width, p.tex.image.height, p.card);
+    p.still = document.createElement('canvas');
+    p.still.width = p.tex.image.width;
+    p.still.height = p.tex.image.height;
+    p.still.getContext('2d').drawImage(p.tex.image, 0, 0);
     p.tex.needsUpdate = true;
     if (loader) {
       pct.textContent = Math.round((k + 1) / N * 100) + '%';
@@ -452,7 +666,10 @@
 
     var idx = lw > 0.55 ? i : -1;
     if (idx !== shown) {
-      paintings.forEach(function (p, j) { p.scan.visible = j === idx; });
+      // the trailer takes over the canvas, so the scan line stays off while it plays
+      paintings.forEach(function (p) { p.scan.visible = false; });
+      if (shown >= 0) stopTrailer(paintings[shown]);
+      if (idx >= 0) paintings[idx].start = performance.now();
       shown = idx;
       if (idx >= 0) plaque.innerHTML = plaques[idx];
       plaque.classList.toggle('on', idx >= 0);
@@ -521,6 +738,7 @@
     dustGeo.attributes.position.needsUpdate = true;
     lightsUp(performance.now());
     place();
+    if (shown >= 0 && paintings[shown].still) trailer(paintings[shown], (performance.now() - paintings[shown].start) / 1000);
     if (shown >= 0) paintings[shown].scan.position.y = 0.98 - (clock.elapsedTime * 0.45 % 1) * 1.96;
     renderer.render(scene, camera);
   }
