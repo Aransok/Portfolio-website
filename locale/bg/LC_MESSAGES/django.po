@@ -315,8 +315,8 @@ msgstr "Виж проектите"
 msgid "Get in touch"
 msgstr "Свържи се с мен"
 
-msgid "move through the code &middot; click to morph"
-msgstr "движи се през кода &middot; кликни за промяна"
+msgid "hover an agent &middot; click for the next task"
+msgstr "посочи агент &middot; кликни за следваща задача"
 
 msgid "Tech stack"
 msgstr "Технологии"
