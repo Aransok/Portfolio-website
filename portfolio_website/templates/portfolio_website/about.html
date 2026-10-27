@@ -1,23 +1,23 @@
 {% extends 'portfolio_website/base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}About | Doan Idriz{% endblock %}
+{% block title %}{% translate "About" %} | Doan Idriz{% endblock %}
 {% block content %}
 <div class="wrap">
     <section class="about-grid">
         <div class="about-text">
-            <span class="label">About</span>
-            <h1>Still the kid asking how to make it do stuff.</h1>
-            <p>I'm <strong>Doan Idriz</strong>, a full-stack developer and AI automation engineer based in Plovdiv, Bulgaria. Still that kid staring at a screen, wondering "How do I make this thing do stuff?"</p>
-            <p>I earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/" target="_blank" rel="noopener">SoftUni's</a> challenging and fun courses.</p>
-            <p>Most recently I worked as an AI Researcher, building AI agents from scratch in pure Python, RAG pipelines, and workflow automations, because code that learns still feels a little like magic. Always exploring the next tech rabbit hole.</p>
+            <span class="label">{% translate "About" %}</span>
+            <h1>{% translate "Still the kid asking how to make it do stuff." %}</h1>
+            <p>{% blocktranslate %}I'm <strong>Doan Idriz</strong>, a full-stack developer and AI automation engineer based in Plovdiv, Bulgaria. Still that kid staring at a screen, wondering "How do I make this thing do stuff?"{% endblocktranslate %}</p>
+            <p>{% blocktranslate %}I earned diplomas in Full-Stack Python and Python Web Development after completing <a href="https://softuni.bg/" target="_blank" rel="noopener">SoftUni's</a> challenging and fun courses.{% endblocktranslate %}</p>
+            <p>{% translate "Most recently I worked as an AI Researcher, building AI agents from scratch in pure Python, RAG pipelines, and workflow automations, because code that learns still feels a little like magic. Always exploring the next tech rabbit hole." %}</p>
             <div class="hero-actions">
-                <a href="{% url 'contact' %}" class="btn btn-primary">Let's connect</a>
-                <a href="{% static 'media/Doan_s_CV.pdf' %}" class="btn" target="_blank" rel="noopener">Download CV</a>
+                <a href="{% url 'contact' %}" class="btn btn-primary">{% translate "Let's connect" %}</a>
+                <a href="{% static 'media/Doan_s_CV.pdf' %}" class="btn" target="_blank" rel="noopener">{% translate "Download CV" %}</a>
             </div>
         </div>
         <div class="about-photo">
-            <img src="{% static 'media/me.jpg' %}" alt="Doan Idriz">
+            <img src="{% static 'media/me.jpg' %}" alt="{% translate 'Doan Idriz' %}">
         </div>
     </section>
 </div>
@@ -26,20 +26,20 @@
     <div class="wrap">
         <div class="section-head">
             <div>
-                <span class="label">Path</span>
-                <h2>Experience &amp; education</h2>
+                <span class="label">{% translate "Path" %}</span>
+                <h2>{% translate "Experience &amp; education" %}</h2>
             </div>
         </div>
 
         <div class="timeline">
             <div class="timeline-item current">
-                <span class="timeline-date">Mar 2025 &ndash; Jan 2026</span>
-                <h3>AI Researcher &middot; Programming &amp; Automation</h3>
-                <p class="timeline-org">Edamame Digital &middot; Sofia, Bulgaria</p>
-                <p>Designed and built AI agents from scratch in pure Python, with no external orchestration framework, integrated through OAuth 2.0-secured REST APIs. Implemented semantic search and RAG pipelines using the Pinecone vector database and text embeddings. Built internal websites and workflow automations using N8N.</p>
+                <span class="timeline-date">{% blocktranslate %}Mar 2025 &ndash; Jan 2026{% endblocktranslate %}</span>
+                <h3>{% translate "AI Researcher &middot; Programming &amp; Automation" %}</h3>
+                <p class="timeline-org">{% blocktranslate %}Edamame Digital &middot; Sofia, Bulgaria{% endblocktranslate %}</p>
+                <p>{% translate "Designed and built AI agents from scratch in pure Python, with no external orchestration framework, integrated through OAuth 2.0-secured REST APIs. Implemented semantic search and RAG pipelines using the Pinecone vector database and text embeddings. Built internal websites and workflow automations using N8N." %}</p>
                 <div class="tag-row">
                     <span class="tag">AI Agents</span>
-                    <span class="tag">Pure Python</span>
+                    <span class="tag">{% translate "Pure Python" %}</span>
                     <span class="tag">Pinecone / RAG</span>
                     <span class="tag">OAuth 2.0</span>
                     <span class="tag">REST APIs</span>
@@ -47,14 +47,14 @@
                 </div>
             </div>
             <div class="timeline-item">
-                <span class="timeline-date">Jan 2021 &ndash; May 2024</span>
-                <h3>Python Full-Stack Developer &middot; Professional Diploma</h3>
-                <p class="timeline-org">Software University (SoftUni), Sofia &middot; <a href="https://softuni.bg/Certificates/Details/215978/eb3cab1b" target="_blank" rel="noopener">Verify</a></p>
+                <span class="timeline-date">{% blocktranslate %}Jan 2021 &ndash; May 2024{% endblocktranslate %}</span>
+                <h3>{% translate "Python Full-Stack Developer &middot; Professional Diploma" %}</h3>
+                <p class="timeline-org">{% blocktranslate %}Software University (SoftUni), Sofia &middot; <a href="https://softuni.bg/Certificates/Details/215978/eb3cab1b" target="_blank" rel="noopener">Verify</a>{% endblocktranslate %}</p>
             </div>
             <div class="timeline-item">
-                <span class="timeline-date">Mar 2024</span>
-                <h3>Software Engineer with Python &middot; Diploma</h3>
-                <p class="timeline-org">Software University (SoftUni), Sofia &middot; <a href="https://softuni.bg/Certificates/Details/208770/e20ed08e" target="_blank" rel="noopener">Verify</a></p>
+                <span class="timeline-date">{% translate "Mar 2024" %}</span>
+                <h3>{% translate "Software Engineer with Python &middot; Diploma" %}</h3>
+                <p class="timeline-org">{% blocktranslate %}Software University (SoftUni), Sofia &middot; <a href="https://softuni.bg/Certificates/Details/208770/e20ed08e" target="_blank" rel="noopener">Verify</a>{% endblocktranslate %}</p>
             </div>
         </div>
     </div>
@@ -64,19 +64,19 @@
     <div class="wrap two-col">
         <div>
             <div class="skill-group">
-                <p class="col-title">AI &amp; automation</p>
+                <p class="col-title">{% translate "AI &amp; automation" %}</p>
                 <div class="tag-row">
-                    <span class="tag">AI Agent Orchestration</span>
+                    <span class="tag">{% translate "AI Agent Orchestration" %}</span>
                     <span class="tag">Pinecone</span>
                     <span class="tag">RAG</span>
-                    <span class="tag">N8N Automation</span>
-                    <span class="tag">Prompt Engineering</span>
+                    <span class="tag">{% translate "N8N Automation" %}</span>
+                    <span class="tag">{% translate "Prompt Engineering" %}</span>
                     <span class="tag">Claude Code</span>
                     <span class="tag">Cursor</span>
                 </div>
             </div>
             <div class="skill-group">
-                <p class="col-title">Backend &amp; data</p>
+                <p class="col-title">{% translate "Backend &amp; data" %}</p>
                 <div class="tag-row">
                     <span class="tag">Python</span>
                     <span class="tag">Django</span>
@@ -93,7 +93,7 @@
         </div>
         <div>
             <div class="skill-group">
-                <p class="col-title">Frontend</p>
+                <p class="col-title">{% translate "Frontend" %}</p>
                 <div class="tag-row">
                     <span class="tag">JavaScript</span>
                     <span class="tag">HTML5</span>
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="skill-group">
-                <p class="col-title">Infrastructure</p>
+                <p class="col-title">{% translate "Infrastructure" %}</p>
                 <div class="tag-row">
                     <span class="tag">Docker</span>
                     <span class="tag">Terraform</span>
@@ -111,10 +111,10 @@
                 </div>
             </div>
             <div class="skill-group">
-                <p class="col-title">Languages</p>
+                <p class="col-title">{% translate "Languages" %}</p>
                 <div class="tag-row">
-                    <span class="tag">Bulgarian &middot; Native</span>
-                    <span class="tag">English &middot; Fluent</span>
+                    <span class="tag">{% translate "Bulgarian &middot; Native" %}</span>
+                    <span class="tag">{% translate "English &middot; Fluent" %}</span>
                 </div>
             </div>
         </div>

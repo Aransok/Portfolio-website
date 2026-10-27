@@ -1,51 +1,51 @@
 {% extends 'portfolio_website/base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Certificates | Doan Idriz{% endblock %}
+{% block title %}{% translate "Certificates" %} | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <header class="page-head">
-        <span class="label">Certificates</span>
-        <h1>Paper trail</h1>
-        <p>Diplomas and course certificates from SoftUni, plus AI and ML recognitions.</p>
+        <span class="label">{% translate "Certificates" %}</span>
+        <h1>{% translate "Paper trail" %}</h1>
+        <p>{% translate "Diplomas and course certificates from SoftUni, plus AI and ML recognitions." %}</p>
     </header>
 
-    <nav class="cert-tabs" aria-label="Certificate categories">
+    <nav class="cert-tabs" aria-label="{% translate 'Certificate categories' %}">
         {% for category in categories %}
             <a href="{% url 'certificates' category %}" {% if category == current_category %}aria-current="page"{% endif %}>
-                {% if category == 'ai_llms' %}AI and ML{% else %}{{ category|title }}{% endif %}
+                {% if category == 'ai_llms' %}{% translate "AI and ML" %}{% elif category == 'diplomas' %}{% translate "Diplomas" %}{% else %}{% translate "Certificates" %}{% endif %}
             </a>
         {% endfor %}
     </nav>
 
     {% if current_certificate %}
     <section class="cert-viewer">
-        <div class="cert-image">
+        <div class="cert-image" data-stamp="{% translate 'Verified' %}" data-scan="{% translate 'Scanning' %}">
             <img src="{{ current_certificate.image.url }}" alt="{{ current_certificate.name }}">
         </div>
         <div class="cert-details">
-            <span class="label">{% if 'diploma' in current_category %}Diploma{% elif current_category == 'ai_llms' %}AI and ML{% else %}Certificate{% endif %}</span>
+            <span class="label">{% if 'diploma' in current_category %}{% translate "Diploma" %}{% elif current_category == 'ai_llms' %}{% translate "AI and ML" %}{% else %}{% translate "Certificate" %}{% endif %}</span>
             <h2>{{ current_certificate.name }}</h2>
             <p>{{ current_certificate.description }}</p>
             <p>{{ current_certificate.what_i_learned }}</p>
             <div>
                 <a class="btn" href="{{ current_certificate.link }}" target="_blank" rel="noopener">
-                    {% if 'diploma' in current_category %}View diploma{% else %}View certificate{% endif %}
+                    {% if 'diploma' in current_category %}{% translate "View diploma" %}{% else %}{% translate "View certificate" %}{% endif %}
                 </a>
             </div>
             <div class="cert-pager">
                 {% if prev_id %}
-                    <a href="{% url 'certificates' current_category prev_id %}" aria-label="Previous">&#8592;</a>
+                    <a href="{% url 'certificates' current_category prev_id %}" aria-label="{% translate 'Previous' %}">&#8592;</a>
                 {% else %}
                     <span class="off" aria-hidden="true">&#8592;</span>
                 {% endif %}
                 {% if next_id %}
-                    <a href="{% url 'certificates' current_category next_id %}" aria-label="Next">&#8594;</a>
+                    <a href="{% url 'certificates' current_category next_id %}" aria-label="{% translate 'Next' %}">&#8594;</a>
                 {% else %}
                     <span class="off" aria-hidden="true">&#8594;</span>
                 {% endif %}
-                <span>{{ items|length }} in this collection</span>
+                <span>{% blocktranslate with count=items|length %}{{ count }} in this collection{% endblocktranslate %}</span>
             </div>
         </div>
     </section>
@@ -58,7 +58,7 @@
         {% endfor %}
     </div>
     {% else %}
-    <p class="activity-empty">Nothing here yet.</p>
+    <p class="activity-empty">{% translate "Nothing here yet." %}</p>
     {% endif %}
 </div>
 <div class="section"></div>

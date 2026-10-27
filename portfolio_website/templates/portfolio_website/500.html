@@ -1,14 +1,15 @@
 {% extends "portfolio_website/base.html" %}
+{% load i18n %}
 
 {% block title %}500 | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <section class="error-page">
-        <span class="error-code">500</span>
-        <h1>Server error</h1>
-        <p>Something broke on my side. It's logged; taking you back home.</p>
-        <p>Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.</p>
+        <span class="error-code" data-text="500">500</span>
+        <h1>{% translate "Server error" %}</h1>
+        <p>{% translate "Something broke on my side. It's logged; taking you back home." %}</p>
+        <p>{% blocktranslate %}Redirecting in <span id="countdown">5</span> seconds, or <a href="/">go home now</a>.{% endblocktranslate %}</p>
     </section>
 </div>
 

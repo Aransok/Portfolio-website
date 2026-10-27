@@ -101,11 +101,19 @@
   }
 
   // ---------- 3D city ----------
+  // Camera math adapted from kedhareswer's "contribution-skyline" on 21st.dev:
+  // world x = week, y = weekday, z = height; drag orbits within a safe range
+  // and the bars rise in a wave from the oldest week to the newest.
 
   var levelColors = [];
   var hover = -1;
-  var grow = 0;
+  var rise = 0;
   var layout = null;
+  var drawn = [];
+  var RAD = Math.PI / 180;
+  var cam = { yaw: 45 * RAD, elev: 34 * RAD };
+  var YAW = [8 * RAD, 82 * RAD], ELEV = [18 * RAD, 62 * RAD];
+  var TOP = 7.72; // tallest possible bar, used to keep the fit steady while rising
 
   function readColors() {
     var cs = getComputedStyle(document.documentElement);
@@ -119,95 +127,124 @@
     r = Math.round(Math.min(255, r * f)); g = Math.round(Math.min(255, g * f)); b = Math.round(Math.min(255, b * f));
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
 
   function computeLayout() {
     var cssW = canvas.clientWidth || canvas.parentElement.clientWidth;
-    var cw = (cssW - 24) / (weeks + 7);
-    var ch = cw * 0.5;
-    var hMax = cw * 9;
-    var cssH = Math.ceil((weeks + 7) * ch + hMax + 24);
+    var cssH = Math.round(clamp(cssW * 0.55, 280, 560));
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.style.height = cssH + 'px';
     canvas.width = Math.round(cssW * dpr);
     canvas.height = Math.round(cssH * dpr);
-    layout = { cw: cw, ch: ch, hMax: hMax, dpr: dpr, ox: 12 + 7 * cw, oy: hMax + 12 };
+    layout = { w: cssW, h: cssH, dpr: dpr };
   }
 
-  function barHeight(day) {
-    if (!day.count) return layout.cw * 0.18;
-    return layout.cw * 0.5 + Math.sqrt(day.count / maxCount) * layout.hMax * grow;
+  function camera() {
+    return { cs: Math.cos(cam.yaw), sn: Math.sin(cam.yaw), se: Math.sin(cam.elev), ce: Math.cos(cam.elev) };
   }
-  function project(day) {
-    var x = layout.ox + (day.week - day.wd) * layout.cw;
-    var y = layout.oy + (day.week + day.wd) * layout.ch;
-    return { x: x, y: y };
+  function proj(c, x, y, z) {
+    return [x * c.cs - y * c.sn, (x * c.sn + y * c.cs) * c.se - z * c.ce];
+  }
+  function riseAt(day) {
+    var d = (weeks > 1 ? day.week / (weeks - 1) : 0) * 0.36 + (day.wd / 6) * 0.06;
+    var t = clamp((rise - d) / 0.58, 0, 1);
+    return 1 - Math.pow(1 - t, 3);
+  }
+  function barHeight(day) {
+    if (!day.count) return 0.12;
+    return 0.12 + (0.28 + Math.pow(day.count / maxCount, 0.85) * 7.2) * riseAt(day);
   }
 
   function drawCity() {
     if (!layout) return;
     var ctx = canvas.getContext('2d');
-    var L = layout, s = 0.82;
+    var L = layout, c = camera(), s = 0.41;
     ctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var order = days.slice().sort(function (a, b) {
-      return (a.week + a.wd) - (b.week + b.wd) || (a.week - b.week);
+    ctx.clearRect(0, 0, L.w, L.h);
+
+    // fit the whole city (at full height) into the canvas for this camera
+    var xs = [], ys = [];
+    [[0, 0], [weeks, 0], [0, 7], [weeks, 7]].forEach(function (g) {
+      [0, TOP].forEach(function (z) { var p = proj(c, g[0], g[1], z); xs.push(p[0]); ys.push(p[1]); });
     });
-    order.forEach(function (day) {
-      var p = project(day);
-      var h = barHeight(day);
-      var w = L.cw * s, hh = L.ch * s;
-      var col = levelColors[day.level];
-      var isHover = days[hover] === day;
-      // left face
-      ctx.fillStyle = shade(col, 0.55);
-      ctx.beginPath();
-      ctx.moveTo(p.x - w, p.y - h); ctx.lineTo(p.x, p.y + hh - h);
-      ctx.lineTo(p.x, p.y + hh); ctx.lineTo(p.x - w, p.y);
-      ctx.closePath(); ctx.fill();
-      // right face
-      ctx.fillStyle = shade(col, 0.78);
-      ctx.beginPath();
-      ctx.moveTo(p.x + w, p.y - h); ctx.lineTo(p.x, p.y + hh - h);
-      ctx.lineTo(p.x, p.y + hh); ctx.lineTo(p.x + w, p.y);
-      ctx.closePath(); ctx.fill();
-      // top face
-      ctx.fillStyle = isHover ? '#e9edf2' : shade(col, day.level >= 3 ? 1.15 : 1.0);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y - hh - h); ctx.lineTo(p.x + w, p.y - h);
-      ctx.lineTo(p.x, p.y + hh - h); ctx.lineTo(p.x - w, p.y - h);
-      ctx.closePath(); ctx.fill();
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    var k = Math.min((L.w - 24) / (maxX - minX), (L.h - 24) / (maxY - minY));
+    var ox = (L.w - (maxX - minX) * k) / 2 - minX * k;
+    var oy = (L.h - (maxY - minY) * k) / 2 - minY * k;
+    function P(x, y, z) { var p = proj(c, x, y, z); return [ox + p[0] * k, oy + p[1] * k]; }
+
+    var order = days.map(function (d, i) { return i; }).sort(function (a, b) {
+      var A = days[a], B = days[b];
+      return ((A.week + 0.5) * c.sn + (A.wd + 0.5) * c.cs) - ((B.week + 0.5) * c.sn + (B.wd + 0.5) * c.cs);
+    });
+    drawn = [];
+    order.forEach(function (i) {
+      var day = days[i], h = barHeight(day), col = levelColors[day.level];
+      var x0 = day.week + 0.5 - s, x1 = day.week + 0.5 + s, y0 = day.wd + 0.5 - s, y1 = day.wd + 0.5 + s;
+      var faces = [
+        [P(x1, y0, 0), P(x1, y1, 0), P(x1, y1, h), P(x1, y0, h), shade(col, 0.55)],
+        [P(x0, y1, 0), P(x1, y1, 0), P(x1, y1, h), P(x0, y1, h), shade(col, 0.78)],
+        [P(x0, y0, h), P(x1, y0, h), P(x1, y1, h), P(x0, y1, h),
+          i === hover ? '#e9edf2' : shade(col, day.level >= 3 ? 1.15 : 1.0)]
+      ];
+      faces.forEach(function (f) {
+        ctx.fillStyle = f[4];
+        ctx.beginPath();
+        ctx.moveTo(f[0][0], f[0][1]);
+        for (var j = 1; j < 4; j++) ctx.lineTo(f[j][0], f[j][1]);
+        ctx.closePath();
+        ctx.fill();
+      });
       if (day.level === 4) {
+        var t = P(day.week + 0.5, day.wd + 0.5, h);
         ctx.save();
         ctx.globalCompositeOperation = 'lighter';
-        ctx.fillStyle = 'rgba(255,179,92,0.10)';
+        ctx.fillStyle = 'rgba(255,179,92,0.12)';
         ctx.beginPath();
-        ctx.arc(p.x, p.y - h, w * 1.15, 0, Math.PI * 2);
+        ctx.arc(t[0], t[1], s * k * 1.6, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
+      drawn.push({ i: i, faces: faces });
     });
   }
 
-  function hitTest(mx, my) {
-    // Front-most first: larger week+wd is drawn later, so test it first.
-    var L = layout, s = 0.82, best = -1, bestKey = -1;
-    for (var i = 0; i < days.length; i++) {
-      var day = days[i], p = project(day), h = barHeight(day);
-      var w = L.cw * s, hh = L.ch * s;
-      var dx = Math.abs(mx - p.x);
-      if (dx > w) continue;
-      var top = p.y - h - hh * (1 - dx / w);
-      var bottom = p.y + hh * (1 - dx / w);
-      if (my >= top && my <= bottom) {
-        var key = day.week + day.wd;
-        if (key > bestKey) { bestKey = key; best = i; }
-      }
+  function inQuad(q, x, y) {
+    var inside = false;
+    for (var a = 0, b = 3; a < 4; b = a++) {
+      if ((q[a][1] > y) !== (q[b][1] > y) &&
+          x < (q[b][0] - q[a][0]) * (y - q[a][1]) / (q[b][1] - q[a][1]) + q[a][0]) inside = !inside;
     }
-    return best;
+    return inside;
+  }
+  function hitTest(mx, my) {
+    for (var n = drawn.length - 1; n >= 0; n--) { // front-most first
+      var f = drawn[n].faces;
+      if (inQuad(f[2], mx, my) || inQuad(f[1], mx, my) || inQuad(f[0], mx, my)) return drawn[n].i;
+    }
+    return -1;
   }
 
+  // drag to orbit, hover to read a day
+  var drag = null;
+  canvas.addEventListener('pointerdown', function (e) {
+    drag = { x: e.clientX, y: e.clientY, yaw: cam.yaw, elev: cam.elev };
+    canvas.setPointerCapture(e.pointerId);
+    canvas.classList.add('dragging');
+  });
+  function endDrag() { drag = null; canvas.classList.remove('dragging'); }
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('dblclick', function () { cam.yaw = 45 * RAD; cam.elev = 34 * RAD; drawCity(); });
   canvas.addEventListener('pointermove', function (e) {
     if (!layout) return;
+    if (drag) {
+      cam.yaw = clamp(drag.yaw - (e.clientX - drag.x) * 0.006, YAW[0], YAW[1]);
+      cam.elev = clamp(drag.elev + (e.clientY - drag.y) * 0.004, ELEV[0], ELEV[1]);
+      drawCity();
+      return;
+    }
     var r = canvas.getBoundingClientRect();
     var i = hitTest(e.clientX - r.left, e.clientY - r.top);
     if (i !== hover) {
@@ -216,19 +253,18 @@
       drawCity();
     }
   });
-  canvas.addEventListener('pointerleave', function () { hover = -1; drawCity(); });
+  canvas.addEventListener('pointerleave', function () { if (!drag) { hover = -1; drawCity(); } });
 
   function showCity() {
     readColors();
     computeLayout();
-    if (reduce) { grow = 1; drawCity(); return; }
-    grow = 0;
-    var start = performance.now(), dur = 1200;
+    if (reduce) { rise = 1; drawCity(); return; }
+    rise = 0;
+    var start = performance.now(), dur = 1800;
     (function step(now) {
-      var t = Math.min(1, (now - start) / dur);
-      grow = 1 - Math.pow(1 - t, 3);
+      rise = Math.min(1, (now - start) / dur);
       drawCity();
-      if (t < 1) requestAnimationFrame(step);
+      if (rise < 1) requestAnimationFrame(step);
     })(start);
   }
 

@@ -1,30 +1,51 @@
 {% extends 'portfolio_website/base.html' %}
-{% load static %}
-{% block title %}Projects | Doan Idriz{% endblock %}
+{% load static i18n %}
+{% block title %}{% translate "Projects" %} | Doan Idriz{% endblock %}
 
 {% block content %}
 <div class="wrap">
     <header class="page-head">
-        <span class="label">Projects</span>
-        <h1>Things I've built</h1>
-        <p>From a live e-commerce platform to small AI tools and the projects I learned on.</p>
+        <span class="label">{% translate "Projects" %}</span>
+        <h1>{% translate "Things I've built" %}</h1>
+        <p>{% translate "From a live e-commerce platform to small AI tools and the projects I learned on." %}</p>
     </header>
 </div>
 
+<section class="museum" aria-label="{% translate '3D gallery of the projects listed below' %}" data-contact="{% url 'contact' %}"
+    data-room-label="{% translate 'Room' %}" data-entrance="{% translate 'Entrance' %}" data-exit="{% translate 'Exit' %}" data-sign="{% translate 'exhibition' %}"
+    data-end1="{% translate 'YOUR PROJECT' %}" data-end2="{% translate 'HERE' %}" data-end3="{% translate 'click to start the conversation' %}" hidden>
+    <div class="museum-stick">
+        <canvas id="museum"></canvas>
+        <div class="museum-loader" aria-hidden="true">
+            <b>{% translate "Hanging the paintings" %}</b>
+            <span class="museum-pct">0%</span>
+            <i><s></s></i>
+        </div>
+        <div class="museum-hud"><span data-room>{% blocktranslate %}Room 1{% endblocktranslate %}</span><span>{% blocktranslate %}scroll to walk &middot; click a painting{% endblocktranslate %}</span></div>
+        <div class="museum-plaque"></div>
+    </div>
+</section>
+
 <section class="section">
     <div class="wrap">
+        <div class="section-head">
+            <div>
+                <span class="label">{% translate "Catalogue" %}</span>
+                <h2>{% translate "Every exhibit, up close" %}</h2>
+            </div>
+        </div>
         <div class="projects-grid">
 
             <article class="project-card flagship">
                 <div class="project-art">
-                    <img src="{% static 'media/broffice-logo.png' %}" alt="Broffice logo">
+                    <img src="{% static 'media/broffice-logo.png' %}" alt="{% translate 'Broffice logo' %}">
                 </div>
                 <div class="project-body">
                     <div class="project-title-row">
                         <h3>Broffice</h3>
-                        <span class="badge-live">Live</span>
+                        <span class="badge-live">{% translate "Live" %}</span>
                     </div>
-                    <p>A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront with dual-currency pricing and promotions, plus an admin back office with a dual pricing/profit-margin engine, B2B orders, automated backups, and a conversational help assistant. In production, serving real customers.</p>
+                    <p>{% translate "A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian office-supplies retailer: full storefront with dual-currency pricing and promotions, plus an admin back office with a dual pricing/profit-margin engine, B2B orders, automated backups, and a conversational help assistant. In production, serving real customers." %}</p>
                     <div class="tag-row">
                         <span class="tag">Django</span>
                         <span class="tag">React</span>
@@ -35,8 +56,8 @@
                         <span class="tag">CI/CD</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">Visit site</a>
-                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">View code</a>
+                        <a href="https://www.broffice.bg" target="_blank" rel="noopener">{% translate "Visit site" %}</a>
+                        <a href="https://github.com/Aransok/broffice-app" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -45,14 +66,14 @@
                 <div class="project-art"><span class="mono">PL</span></div>
                 <div class="project-body">
                     <h3>Property Listings Generator</h3>
-                    <p>Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface.</p>
+                    <p>{% translate "Python/Flask tool that extracts property data from SQLite, PostgreSQL, MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and generates PDF reports via a CLI or web interface." %}</p>
                     <div class="tag-row">
                         <span class="tag">Python</span>
                         <span class="tag">Flask</span>
-                        <span class="tag">Translation</span>
+                        <span class="tag">{% translate "Translation" %}</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/JsonBulgarianDataToAINumericData" target="_blank" rel="noopener">View code</a>
+                        <a href="https://github.com/Aransok/JsonBulgarianDataToAINumericData" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -61,10 +82,10 @@
                 <div class="project-art"><span class="mono">PDF</span></div>
                 <div class="project-body">
                     <h3>Simple PDF Chat</h3>
-                    <p>A Flask app that lets you upload PDFs and chat with them using AI, with Bulgarian OCR support (Tesseract) for scanned documents.</p>
+                    <p>{% translate "A Flask app that lets you upload PDFs and chat with them using AI, with Bulgarian OCR support (Tesseract) for scanned documents." %}</p>
                     <div class="tag-row">
                         <span class="tag">Flask</span>
-                        <span class="tag">AI Chat</span>
+                        <span class="tag">{% translate "AI Chat" %}</span>
                         <span class="tag">OCR</span>
                     </div>
                 </div>
@@ -74,13 +95,13 @@
                 <div class="project-art"><span class="mono">LLM</span></div>
                 <div class="project-body">
                     <h3>LLM Article Summarizer</h3>
-                    <p>Python project for article summarization using an LLM.</p>
+                    <p>{% translate "Python project for article summarization using an LLM." %}</p>
                     <div class="tag-row">
                         <span class="tag">Python</span>
                         <span class="tag">LLM</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" rel="noopener">View code</a>
+                        <a href="https://github.com/Aransok/LLM-Article-Summarizer" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -89,13 +110,13 @@
                 <div class="project-art"><span class="mono">NG</span></div>
                 <div class="project-body">
                     <h3>Angular Movies Web Site</h3>
-                    <p>A movie site built with Angular and Node.js.</p>
+                    <p>{% translate "A movie site built with Angular and Node.js." %}</p>
                     <div class="tag-row">
                         <span class="tag">Angular</span>
                         <span class="tag">Node.js</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" rel="noopener">View code</a>
+                        <a href="https://github.com/Aransok/Angular-Project-Moviesite" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -104,12 +125,12 @@
                 <div class="project-art"><span class="mono">DJ</span></div>
                 <div class="project-body">
                     <h3>Python Movie Website</h3>
-                    <p>An earlier Django movie website project.</p>
+                    <p>{% translate "An earlier Django movie website project." %}</p>
                     <div class="tag-row">
                         <span class="tag">Django</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/ProjectProtect" target="_blank" rel="noopener">View code</a>
+                        <a href="https://github.com/Aransok/ProjectProtect" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -118,13 +139,13 @@
                 <div class="project-art"><span class="mono">d.</span></div>
                 <div class="project-body">
                     <h3>This Portfolio</h3>
-                    <p>This site itself: a Django portfolio with an admin-managed certificates gallery and a live GitHub activity graph.</p>
+                    <p>{% translate "This site itself: a Django portfolio with an admin-managed certificates gallery and a live GitHub activity graph." %}</p>
                     <div class="tag-row">
                         <span class="tag">Django</span>
                         <span class="tag">Three.js</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Aransok/Portfolio-website" target="_blank" rel="noopener">View code</a>
+                        <a href="https://github.com/Aransok/Portfolio-website" target="_blank" rel="noopener">{% translate "View code" %}</a>
                     </div>
                 </div>
             </article>
@@ -132,4 +153,9 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="{% static 'js/gallery.js' %}" defer></script>
 {% endblock %}

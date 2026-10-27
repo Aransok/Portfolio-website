@@ -1,0 +1,582 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Bad request"
+msgstr "Грешна заявка"
+
+msgid "Something about that request didn't add up. Taking you back home."
+msgstr "Нещо в тази заявка не е наред. Връщам те на началната страница."
+
+msgid ""
+"Redirecting in <span id=\"countdown\">5</span> seconds, or <a href=\"/\">go "
+"home now</a>."
+msgstr ""
+"Пренасочване след <span id=\"countdown\">5</span> секунди или <a "
+"href=\"/\">върни се сега</a>."
+
+msgid "Page not found"
+msgstr "Страницата не е намерена"
+
+msgid "This page doesn't exist, or it moved. Taking you back home."
+msgstr ""
+"Тази страница не съществува или е преместена. Връщам те на началната "
+"страница."
+
+msgid "Server error"
+msgstr "Грешка в сървъра"
+
+msgid "Something broke on my side. It's logged; taking you back home."
+msgstr ""
+"Нещо се счупи от моя страна. Записано е в дневника; връщам те на началната "
+"страница."
+
+msgid "About"
+msgstr "За мен"
+
+msgid "Still the kid asking how to make it do stuff."
+msgstr "Все още хлапето, което пита как да накара нещата да работят."
+
+msgid ""
+"Most recently I worked as an AI Researcher, building AI agents from scratch "
+"in pure Python, RAG pipelines, and workflow automations, because code that "
+"learns still feels a little like magic. Always exploring the next tech "
+"rabbit hole."
+msgstr ""
+"Последно работех като AI изследовател: създавах AI агенти от нулата на чист "
+"Python, RAG конвейери и автоматизации на работни процеси, защото код, който "
+"се учи, още ми прилича на малко магия. Винаги разучавам поредната "
+"технологична заешка дупка."
+
+msgid "Let's connect"
+msgstr "Да се свържем"
+
+msgid "Download CV"
+msgstr "Изтегли CV"
+
+msgid "Doan Idriz"
+msgstr "Doan Idriz"
+
+msgid "Path"
+msgstr "Път"
+
+msgid "Experience &amp; education"
+msgstr "Опит и образование"
+
+msgid "AI Researcher &middot; Programming &amp; Automation"
+msgstr "AI изследовател &middot; Програмиране и автоматизация"
+
+msgid ""
+"Designed and built AI agents from scratch in pure Python, with no external "
+"orchestration framework, integrated through OAuth 2.0-secured REST APIs. "
+"Implemented semantic search and RAG pipelines using the Pinecone vector "
+"database and text embeddings. Built internal websites and workflow "
+"automations using N8N."
+msgstr ""
+"Проектирах и изградих AI агенти от нулата на чист Python, без външна рамка "
+"за оркестрация, свързани чрез REST API, защитени с OAuth 2.0. Реализирах "
+"семантично търсене и RAG конвейери с векторната база Pinecone и текстови "
+"вектори (embeddings). Изградих вътрешни уебсайтове и автоматизации на "
+"работни процеси с N8N."
+
+msgid "Pure Python"
+msgstr "Чист Python"
+
+msgid "Python Full-Stack Developer &middot; Professional Diploma"
+msgstr "Python Full-Stack разработчик &middot; Професионален диплом"
+
+msgid "Mar 2024"
+msgstr "март 2024"
+
+msgid "Software Engineer with Python &middot; Diploma"
+msgstr "Софтуерен инженер с Python &middot; Диплом"
+
+msgid "AI &amp; automation"
+msgstr "AI и автоматизация"
+
+msgid "AI Agent Orchestration"
+msgstr "Оркестрация на AI агенти"
+
+msgid "N8N Automation"
+msgstr "N8N автоматизация"
+
+msgid "Prompt Engineering"
+msgstr "Prompt инженерство"
+
+msgid "Backend &amp; data"
+msgstr "Бекенд и данни"
+
+msgid "Frontend"
+msgstr "Фронтенд"
+
+msgid "Infrastructure"
+msgstr "Инфраструктура"
+
+msgid "Languages"
+msgstr "Езици"
+
+msgid "Bulgarian &middot; Native"
+msgstr "Български &middot; Роден"
+
+msgid "English &middot; Fluent"
+msgstr "Английски &middot; Свободно"
+
+msgid ""
+"I'm <strong>Doan Idriz</strong>, a full-stack developer and AI automation "
+"engineer based in Plovdiv, Bulgaria. Still that kid staring at a screen, "
+"wondering \"How do I make this thing do stuff?\""
+msgstr ""
+"Аз съм <strong>Doan Idriz</strong>, full-stack разработчик и инженер по AI "
+"автоматизация от Пловдив, България. Все още съм онова хлапе, което се взира "
+"в екрана и се чуди: &bdquo;Как да накарам това нещо да прави разни "
+"неща?&ldquo;"
+
+msgid ""
+"I earned diplomas in Full-Stack Python and Python Web Development after "
+"completing <a href=\"https://softuni.bg/\" target=\"_blank\" "
+"rel=\"noopener\">SoftUni's</a> challenging and fun courses."
+msgstr ""
+"Придобих дипломи по Full-Stack Python и Python Web Development след "
+"предизвикателните и забавни курсове на <a href=\"https://softuni.bg/\" "
+"target=\"_blank\" rel=\"noopener\">СофтУни</a>."
+
+msgid "Mar 2025 &ndash; Jan 2026"
+msgstr "март 2025 &ndash; яну 2026"
+
+msgid "Edamame Digital &middot; Sofia, Bulgaria"
+msgstr "Edamame Digital &middot; София, България"
+
+msgid "Jan 2021 &ndash; May 2024"
+msgstr "яну 2021 &ndash; май 2024"
+
+msgid ""
+"Software University (SoftUni), Sofia &middot; <a "
+"href=\"https://softuni.bg/Certificates/Details/215978/eb3cab1b\" "
+"target=\"_blank\" rel=\"noopener\">Verify</a>"
+msgstr ""
+"Софтуерен университет (СофтУни), София &middot; <a "
+"href=\"https://softuni.bg/Certificates/Details/215978/eb3cab1b\" "
+"target=\"_blank\" rel=\"noopener\">Провери</a>"
+
+msgid ""
+"Software University (SoftUni), Sofia &middot; <a "
+"href=\"https://softuni.bg/Certificates/Details/208770/e20ed08e\" "
+"target=\"_blank\" rel=\"noopener\">Verify</a>"
+msgstr ""
+"Софтуерен университет (СофтУни), София &middot; <a "
+"href=\"https://softuni.bg/Certificates/Details/208770/e20ed08e\" "
+"target=\"_blank\" rel=\"noopener\">Провери</a>"
+
+msgid ""
+"Doan Idriz, full-stack developer and AI automation engineer in Plovdiv. AI "
+"agents and RAG pipelines in plain Python, Django and React platforms in "
+"production."
+msgstr ""
+"Doan Idriz, full-stack разработчик и инженер по AI автоматизация в Пловдив. "
+"AI агенти и RAG конвейери на чист Python, платформи с Django и React в "
+"продукция."
+
+msgid "Close"
+msgstr "Затвори"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Home"
+msgstr "Начало"
+
+msgid "Projects"
+msgstr "Проекти"
+
+msgid "Certificates"
+msgstr "Сертификати"
+
+msgid "Contact"
+msgstr "Контакти"
+
+msgid "Doan Idriz &middot; Plovdiv, Bulgaria"
+msgstr "Doan Idriz &middot; Пловдив, България"
+
+msgid "Paper trail"
+msgstr "Документална следа"
+
+msgid ""
+"Diplomas and course certificates from SoftUni, plus AI and ML recognitions."
+msgstr ""
+"Дипломи и сертификати от курсове на СофтУни, плюс признания в областта на AI"
+" и ML."
+
+msgid "Certificate categories"
+msgstr "Категории сертификати"
+
+msgid "AI and ML"
+msgstr "AI и ML"
+
+msgid "Diplomas"
+msgstr "Дипломи"
+
+msgid "Verified"
+msgstr "Потвърдено"
+
+msgid "Scanning"
+msgstr "Сканиране"
+
+msgid "Diploma"
+msgstr "Диплом"
+
+msgid "Certificate"
+msgstr "Сертификат"
+
+msgid "View diploma"
+msgstr "Виж диплома"
+
+msgid "View certificate"
+msgstr "Виж сертификата"
+
+msgid "Previous"
+msgstr "Предишен"
+
+msgid "Next"
+msgstr "Следващ"
+
+msgid "Nothing here yet."
+msgstr "Тук още няма нищо."
+
+msgid "%(count)s in this collection"
+msgstr "%(count)s в тази колекция"
+
+msgid "Let's build something."
+msgstr "Хайде да направим нещо."
+
+msgid ""
+"Have a question, a project, or an automation you want gone? Send me a "
+"message and I'll get back to you."
+msgstr ""
+"Имаш въпрос, проект или автоматизация, от която искаш да се отървеш? Пиши ми"
+" и ще ти отговоря."
+
+msgid "Email"
+msgstr "Имейл"
+
+msgid "Based in"
+msgstr "Базиран в"
+
+msgid "Plovdiv, Bulgaria"
+msgstr "Пловдив, България"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "Message"
+msgstr "Съобщение"
+
+msgid "Send message"
+msgstr "Изпрати съобщението"
+
+msgid "Packing your message"
+msgstr "Опаковам съобщението ти"
+
+msgid "Encrypting over TLS"
+msgstr "Криптирам през TLS"
+
+msgid "Routing to Plovdiv, BG"
+msgstr "Насочвам към Пловдив, BG"
+
+msgid "Delivering"
+msgstr "Доставям"
+
+msgid "Delivered."
+msgstr "Доставено."
+
+msgid "Thanks, I'll get back to you soon."
+msgstr "Благодаря, скоро ще ти отговоря."
+
+msgid "Send another"
+msgstr "Изпрати ново"
+
+msgid "Could not reach the server. Please try again."
+msgstr "Няма връзка със сървъра. Опитай отново."
+
+msgid "Doan Idriz | Full-Stack & AI Automation Engineer"
+msgstr "Doan Idriz | Full-Stack и AI автоматизация инженер"
+
+msgid "Full-stack &amp; AI automation engineer &middot; Plovdiv"
+msgstr "Full-stack и AI автоматизация инженер &middot; Пловдив"
+
+msgid "See the work"
+msgstr "Виж проектите"
+
+msgid "Get in touch"
+msgstr "Свържи се с мен"
+
+msgid "move through the code &middot; click to morph"
+msgstr "движи се през кода &middot; кликни за промяна"
+
+msgid "Tech stack"
+msgstr "Технологии"
+
+msgid "Featured work"
+msgstr "Избрани проекти"
+
+msgid "Live in production"
+msgstr "В продукция"
+
+msgid ""
+"A real retailer, real customers, and the whole stack from database to deploy"
+" pipeline."
+msgstr ""
+"Истински търговец, истински клиенти и целият стек от базата данни до "
+"конвейера за разгръщане."
+
+msgid "Broffice logo"
+msgstr "Лого на Broffice"
+
+msgid "Live"
+msgstr "На живо"
+
+msgid ""
+"A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian"
+" office-supplies retailer: full storefront, dual pricing engine, and an "
+"admin back office with a conversational assistant. In production, serving "
+"real customers."
+msgstr ""
+"Изграждане от нулата с Django + React на платформа за електронна търговия за"
+" български търговец на офис консумативи: пълноценен магазин, двоен ценови "
+"механизъм и административен панел с разговорен асистент. В продукция, "
+"обслужва реални клиенти."
+
+msgid "Visit site"
+msgstr "Към сайта"
+
+msgid "View code"
+msgstr "Виж кода"
+
+msgid "All projects"
+msgstr "Всички проекти"
+
+msgid "How I ship"
+msgstr "Как доставям"
+
+msgid "From blank file to production."
+msgstr "От празен файл до продукция."
+
+msgid ""
+"Scroll to write an agent in plain Python and push it through the pipeline. "
+"No framework, no magic, just code that passes its tests."
+msgstr ""
+"Скролирай, за да напишеш агент на чист Python и да го прекараш през "
+"конвейера. Без рамки, без магии, просто код, който минава тестовете си."
+
+msgid "Shipped. Next ticket?"
+msgstr "Доставено. Следваща задача?"
+
+msgid "On GitHub"
+msgstr "В GitHub"
+
+msgid "A year of commits"
+msgstr "Година от комити"
+
+msgid ""
+"Every square is a day. Teal is a working day, ember marks the busiest ones. "
+"Pulled live from GitHub."
+msgstr ""
+"Всеки квадрат е един ден. Тюркоазеният е работен ден, жарта отбелязва най-"
+"натоварените. Извлича се на живо от GitHub."
+
+msgid "Contributions"
+msgstr "Приноси"
+
+msgid "Current streak"
+msgstr "Текуща серия"
+
+msgid "Longest streak"
+msgstr "Най-дълга серия"
+
+msgid "Active days"
+msgstr "Активни дни"
+
+msgid "Graph view"
+msgstr "Изглед на графиката"
+
+msgid "Grid"
+msgstr "Мрежа"
+
+msgid "3D city"
+msgstr "3D град"
+
+msgid "Less"
+msgstr "По-малко"
+
+msgid "More"
+msgstr "Повече"
+
+msgid "Contribution calendar"
+msgstr "Календар на приносите"
+
+msgid "Contribution calendar as a 3D city"
+msgstr "Календар на приносите като 3D град"
+
+msgid "Drag to orbit, double-click to reset"
+msgstr "Плъзни за въртене, двоен клик за нулиране"
+
+msgid "Loading activity&hellip;"
+msgstr "Зареждане на активността&hellip;"
+
+msgid "Interview me"
+msgstr "Интервю с мен"
+
+msgid "Ask the terminal"
+msgstr "Питай терминала"
+
+msgid "Terminal command"
+msgstr "Команда за терминала"
+
+msgid "Need an agent, an automation, or a whole platform?"
+msgstr "Трябва ти агент, автоматизация или цяла платформа?"
+
+msgid "Start a conversation"
+msgstr "Започни разговор"
+
+msgid "Hi, I'm Doan. I build agents from <em>plain Python</em>."
+msgstr "Здравей, аз съм Доан. Правя агенти на <em>чист Python</em>."
+
+msgid ""
+"Production web apps end to end, from Django and React platforms serving real"
+" customers to AI agents and RAG pipelines written from scratch. <b>No "
+"LangChain, no CrewAI</b>, just code you can read and own."
+msgstr ""
+"Уеб приложения в продукция от край до край: от платформи с Django и React, "
+"обслужващи реални клиенти, до AI агенти и RAG конвейери, писани от нулата. "
+"<b>Без LangChain, без CrewAI</b>, просто код, който можеш да прочетеш и да "
+"притежаваш."
+
+msgid ""
+"A tiny shell about me. Type <code>help</code>, use Tab to complete and the "
+"arrow keys for history."
+msgstr ""
+"Малка обвивка (shell) за мен. Напиши <code>help</code>, ползвай Tab за "
+"довършване и стрелките за история."
+
+msgid "Things I've built"
+msgstr "Какво съм изградил"
+
+msgid ""
+"From a live e-commerce platform to small AI tools and the projects I learned"
+" on."
+msgstr ""
+"От работеща платформа за електронна търговия до малки AI инструменти и "
+"проектите, с които съм се учил."
+
+msgid "3D gallery of the projects listed below"
+msgstr "3D галерия на проектите, изброени по-долу"
+
+msgid "Room"
+msgstr "Зала"
+
+msgid "Entrance"
+msgstr "Вход"
+
+msgid "Exit"
+msgstr "Изход"
+
+msgid "exhibition"
+msgstr "изложба"
+
+msgid "YOUR PROJECT"
+msgstr "ТВОЯТ ПРОЕКТ"
+
+msgid "HERE"
+msgstr "ТУК"
+
+msgid "click to start the conversation"
+msgstr "кликни, за да започнем разговор"
+
+msgid "Hanging the paintings"
+msgstr "Окачвам картините"
+
+msgid "Catalogue"
+msgstr "Каталог"
+
+msgid "Every exhibit, up close"
+msgstr "Всеки експонат отблизо"
+
+msgid ""
+"A ground-up Django + React rebuild of an e-commerce platform for a Bulgarian"
+" office-supplies retailer: full storefront with dual-currency pricing and "
+"promotions, plus an admin back office with a dual pricing/profit-margin "
+"engine, B2B orders, automated backups, and a conversational help assistant. "
+"In production, serving real customers."
+msgstr ""
+"Изграждане от нулата с Django + React на платформа за електронна търговия за"
+" български търговец на офис консумативи: пълноценен магазин с цени в две "
+"валути и промоции, плюс административен панел с двоен механизъм за цени и "
+"марж на печалбата, B2B поръчки, автоматични резервни копия и разговорен "
+"помощник. В продукция, обслужва реални клиенти."
+
+msgid ""
+"Python/Flask tool that extracts property data from SQLite, PostgreSQL, "
+"MySQL, SQL Server, or MongoDB, translates Bulgarian to English, and "
+"generates PDF reports via a CLI or web interface."
+msgstr ""
+"Python/Flask инструмент, който извлича данни за имоти от SQLite, PostgreSQL,"
+" MySQL, SQL Server или MongoDB, превежда от български на английски и "
+"генерира PDF отчети през CLI или уеб интерфейс."
+
+msgid "Translation"
+msgstr "Превод"
+
+msgid ""
+"A Flask app that lets you upload PDFs and chat with them using AI, with "
+"Bulgarian OCR support (Tesseract) for scanned documents."
+msgstr ""
+"Flask приложение, в което качваш PDF файлове и разговаряш с тях чрез AI, с "
+"поддръжка на български OCR (Tesseract) за сканирани документи."
+
+msgid "AI Chat"
+msgstr "AI чат"
+
+msgid "Python project for article summarization using an LLM."
+msgstr "Python проект за обобщаване на статии с помощта на LLM."
+
+msgid "A movie site built with Angular and Node.js."
+msgstr "Сайт за филми, изграден с Angular и Node.js."
+
+msgid "An earlier Django movie website project."
+msgstr "По-ранен проект за филмов сайт с Django."
+
+msgid ""
+"This site itself: a Django portfolio with an admin-managed certificates "
+"gallery and a live GitHub activity graph."
+msgstr ""
+"Самият този сайт: портфолио с Django, галерия със сертификати, управлявана "
+"от администраторския панел, и графика на GitHub активността на живо."
+
+msgid "Room 1"
+msgstr "Зала 1"
+
+msgid "scroll to walk &middot; click a painting"
+msgstr "скролирай, за да вървиш &middot; кликни върху картина"
+
+msgid "Please fill in your name, a valid email and a message."
+msgstr "Моля, попълни името си, валиден имейл и съобщение."
+
+msgid "Your message has been sent successfully!"
+msgstr "Съобщението ти беше изпратено успешно!"
+
+msgid ""
+"Sorry, your message could not be sent right now. Please try again later."
+msgstr ""
+"Съжалявам, съобщението не можа да бъде изпратено в момента. Опитай отново "
+"по-късно."
+
+msgid "English"
+msgstr "Английски"
+
+msgid "Bulgarian"
+msgstr "Български"

@@ -1,10 +1,10 @@
-{% load static %}<!doctype html>
-<html lang="en">
+{% load static i18n %}{% get_current_language as LANGUAGE_CODE %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{% block title %}Doan Idriz{% endblock %}</title>
-    <meta name="description" content="{% block description %}Doan Idriz, full-stack developer and AI automation engineer in Plovdiv. AI agents and RAG pipelines in plain Python, Django and React platforms in production.{% endblock %}">
+    <meta name="description" content="{% block description %}{% translate "Doan Idriz, full-stack developer and AI automation engineer in Plovdiv. AI agents and RAG pipelines in plain Python, Django and React platforms in production." %}{% endblock %}">
     <meta name="theme-color" content="#090b0f">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090b0f'/%3E%3Ctext x='32' y='43' font-family='Arial Black, sans-serif' font-size='28' font-weight='900' text-anchor='middle' fill='%237fe3d4'%3Ed.%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +18,26 @@
     <header class="site-header">
         <div class="wrap">
             <a href="{% url 'home' %}" class="brand">doan<span>.</span>idriz</a>
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-open="{% translate 'Close' %}" data-closed="{% translate 'Menu' %}">{% translate "Menu" %}</button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="{% url 'home' %}" {% if current == 'home' %}aria-current="page"{% endif %}>Home</a></li>
-                <li><a href="{% url 'about' %}" {% if current == 'about' %}aria-current="page"{% endif %}>About</a></li>
-                <li><a href="{% url 'projects' %}" {% if current == 'projects' %}aria-current="page"{% endif %}>Projects</a></li>
-                <li><a href="{% url 'certificates' %}" {% if current == 'certificates' %}aria-current="page"{% endif %}>Certificates</a></li>
-                <li><a href="{% url 'contact' %}" {% if current == 'contact' %}aria-current="page"{% endif %}>Contact</a></li>
+                <li><a href="{% url 'home' %}" {% if current == 'home' %}aria-current="page"{% endif %}>{% translate "Home" %}</a></li>
+                <li><a href="{% url 'about' %}" {% if current == 'about' %}aria-current="page"{% endif %}>{% translate "About" %}</a></li>
+                <li><a href="{% url 'projects' %}" {% if current == 'projects' %}aria-current="page"{% endif %}>{% translate "Projects" %}</a></li>
+                <li><a href="{% url 'certificates' %}" {% if current == 'certificates' %}aria-current="page"{% endif %}>{% translate "Certificates" %}</a></li>
+                <li><a href="{% url 'contact' %}" {% if current == 'contact' %}aria-current="page"{% endif %}>{% translate "Contact" %}</a></li>
+                <li class="lang-switch">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{% if LANGUAGE_CODE == 'bg' %}{{ request.get_full_path|slice:'3:' }}{% else %}{{ request.get_full_path }}{% endif %}">
+                        {% get_available_languages as LANGUAGES %}
+                        {% for code, name in LANGUAGES %}
+                        <button type="submit" name="language" value="{{ code }}" lang="{{ code }}" title="{{ name }}" {% if code == LANGUAGE_CODE %}aria-current="true"{% endif %}>{{ code|upper }}</button>
+                        {% endfor %}
+                    </form>
+                </li>
             </ul>
         </div>
+        <div class="scroll-progress" aria-hidden="true"></div>
     </header>
     {% endwith %}
 
@@ -36,7 +47,7 @@
 
     <footer class="site-footer">
         <div class="wrap">
-            <span>Doan Idriz &middot; Plovdiv, Bulgaria</span>
+            <span>{% blocktranslate %}Doan Idriz &middot; Plovdiv, Bulgaria{% endblocktranslate %}</span>
             <div class="footer-links">
                 <a href="https://github.com/Aransok" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://www.linkedin.com/in/doan-idriz-70b472165/" target="_blank" rel="noopener">LinkedIn</a>
@@ -53,10 +64,12 @@
             btn.addEventListener('click', function () {
                 var open = links.classList.toggle('open');
                 btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                btn.textContent = open ? 'Close' : 'Menu';
+                btn.textContent = open ? btn.dataset.open : btn.dataset.closed;
             });
         })();
     </script>
+    <script src="{% static 'js/motion.js' %}" defer></script>
+    <script src="{% static 'js/wild.js' %}" defer></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
