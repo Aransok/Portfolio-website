@@ -841,3 +841,40 @@ msgstr ""
 "една ръка: отворен свят, босове и плячка, билдове без класове, развивани "
 "чрез умения, таланти и постоянно Ember дърво. Направена с Unity, като Claude"
 " Code управлява редактора през Unity MCP."
+
+msgid "Trailer"
+msgstr "Трейлър"
+
+msgid "Hi Doan, I found crew badge NW-0042 and I would like a Crewbase demo."
+msgstr ""
+"Здравей, Доан, намерих служебна карта NW-0042 и искам демо на Crewbase."
+
+msgid "The Build Shelf"
+msgstr "Рафтът с проекти"
+
+msgid "Found behind the crooked painting"
+msgstr "Намерено зад кривата картина"
+
+msgid ""
+"Everything I build on the side, one experiment at a time: tools for my own "
+"day, weird ideas and things that just had to exist. Take your time, nothing "
+"here is for sale."
+msgstr ""
+"Всичко, което строя отстрани, експеримент по експеримент: инструменти за моя"
+" ден, странни идеи и неща, които просто трябваше да съществуват. Не бързай, "
+"тук нищо не се продава."
+
+msgid "Contents"
+msgstr "Съдържание"
+
+msgid "The shelf is being stocked. Come back soon."
+msgstr "Рафтът се зарежда. Върни се скоро."
+
+msgid "Open it"
+msgstr "Отвори"
+
+msgid "Previous page"
+msgstr "Предишна страница"
+
+msgid "Next page"
+msgstr "Следваща страница"

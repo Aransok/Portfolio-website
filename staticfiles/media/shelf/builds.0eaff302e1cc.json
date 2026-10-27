@@ -1,0 +1,158 @@
+[
+ {
+  "date": "2026-10-28",
+  "title": "Echo Check",
+  "kind": "Web app",
+  "shelf": "For You",
+  "what": "Finds the hooks, lines and sign-offs that keep repeating across a pile of scripts, comments or posts, and draws a thread between every echo.",
+  "bg": "Поставяш пакет от скриптове, коментари или постове и Echo Check оцветява всяка фраза, която се повтаря между тях. Посочиш една и червени нишки я свързват с всички места, където е казана пак.",
+  "image": "/static/media/shelf/echo-check-ec-threads-light.jpg",
+  "tags": [
+   "For You",
+   "Web app"
+  ]
+ },
+ {
+  "date": "2026-10-27",
+  "title": "Humroll",
+  "kind": "Web app",
+  "shelf": "Daily Build",
+  "what": "Hum into the mic and the notes land live on a piano roll. Drag the clip out as a real MIDI file.",
+  "bg": "Превръща мелодия, която тананикаш в микрофона, в ноти на пиано ролка още докато пееш. После хващаш клипа и го пускаш в музикална програма като истински .mid файл.",
+  "image": "/static/media/shelf/humroll-humroll-light.jpg",
+  "tags": [
+   "Daily Build",
+   "Web app"
+  ]
+ },
+ {
+  "date": "2026-10-26",
+  "title": "Mojifix",
+  "kind": "CLI",
+  "shelf": "Daily Build",
+  "what": "Repairs broken Cyrillic in CSV and TXT exports (РЎРѕС„РёСЏ back to София), writes Excel-ready copies and a before/after report.",
+  "bg": "Оправя „маймуняците“ в CSV и TXT файлове и записва копие, което Excel отваря с нормална кирилица. Работи само на твоя компютър.",
+  "image": "/static/media/shelf/mojifix-mojifix-report-light.jpg",
+  "tags": [
+   "Daily Build",
+   "CLI"
+  ]
+ },
+ {
+  "date": "2026-10-26",
+  "title": "bg-locale",
+  "kind": "Claude skill",
+  "shelf": "Claude Lab",
+  "what": "Bulgarian formats right the first time: euro amounts, BG numbers and dates, Windows-1251 vs UTF-8 CSV, transliteration and EIK checks.",
+  "bg": "Умение за Claude: всичко на български излиза правилно от първия път. Цени в евро, дати като 26.10.2026 г., CSV на кирилица без маймуняци.",
+  "image": "/static/media/shelf/bg-locale-bg-locale.jpg",
+  "tags": [
+   "Claude Lab",
+   "Claude skill"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "Ledgerdrop",
+  "kind": "Web app",
+  "shelf": "Daily Build",
+  "what": "Drop a stack of invoice PDFs, get one checked ledger: VAT math, duplicates and missing fields flagged, Bulgarian and English, in euro.",
+  "bg": "Пускаш куп фактури в PDF и получаваш един проверен регистър в евро. Маркира грешни суми и дубликати.",
+  "image": "/static/media/shelf/ledgerdrop-ld-ledger.jpg",
+  "tags": [
+   "Daily Build",
+   "Web app"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "shipcheck",
+  "kind": "CLI + web",
+  "shelf": "Daily Build",
+  "what": "A pre-ship review for git diffs: flags secrets, risky calls, debug leftovers and deleted tests. Runs as a pre-push hook too.",
+  "bg": "Проверка преди merge: посочва пароли, рискови извиквания, забравени console.log и липсващи тестове.",
+  "image": "/static/media/shelf/shipcheck-shipcheck-dark.jpg",
+  "tags": [
+   "Daily Build",
+   "CLI + web"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "Retitle",
+  "kind": "Desktop app",
+  "shelf": "Daily Build",
+  "what": "Batch file renamer with a stack of rules, live preview, conflict checks and one-click undo.",
+  "bg": "Масово преименуване на файлове с правила, преглед преди промяната и връщане назад с един клик.",
+  "image": "/static/media/shelf/retitle-retitle-light.jpg",
+  "tags": [
+   "Daily Build",
+   "Desktop app"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "Hop",
+  "kind": "Chrome extension",
+  "shelf": "Daily Build",
+  "what": "A tab palette: Alt+Q, type a few letters and jump. Closes duplicates and parks a whole window for later.",
+  "bg": "Alt+Q, пишеш няколко букви и скачаш на всеки таб. Затваря дублирани табове и паркира прозорец за по-късно.",
+  "image": "/static/media/shelf/hop-hop-light.jpg",
+  "tags": [
+   "Daily Build",
+   "Chrome extension"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "Feed Mapper",
+  "kind": "Web app",
+  "shelf": "For You",
+  "what": "Maps messy supplier price lists (CSV, XML, Excel) into one clean file, remembers each supplier's columns and shows what changed since last week.",
+  "bg": "Подрежда ценови листи от доставчици в един формат, помни колоните на всеки и показва кои цени са се променили.",
+  "image": "/static/media/shelf/feed-mapper-fm-week2-diff.jpg",
+  "tags": [
+   "For You",
+   "Web app"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "Notes to Actions",
+  "kind": "Web app",
+  "shelf": "For You",
+  "what": "Turns a Bulgarian or English brain dump into dated tasks and calendar events in one paste.",
+  "bg": "Поставяш разхвърляни бележки и получаваш задачи с дати и събития в календара.",
+  "image": "/static/media/shelf/notes-to-actions-nta-google-calendar.jpg",
+  "tags": [
+   "For You",
+   "Web app"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "style-guard",
+  "kind": "Claude hook",
+  "shelf": "Claude Lab",
+  "what": "Catches em dashes, double hyphens and leva in anything Claude writes and sends it back to fix before it ships.",
+  "bg": "Следи текстовете да са без дълги тирета и без левове, само евро. Ако намери нещо, Claude го поправя сам.",
+  "image": "/static/media/shelf/style-guard-style-guard.jpg",
+  "tags": [
+   "Claude Lab",
+   "Claude hook"
+  ]
+ },
+ {
+  "date": "2026-10-25",
+  "title": "secret-gate",
+  "kind": "Claude hook",
+  "shelf": "Claude Lab",
+  "what": "Stops a commit or push when it holds a likely secret or a .env file, shows the value masked and the fix.",
+  "bg": "Спира commit или push, ако в тях има ключ, парола или .env файл, и показва стойността скрита.",
+  "image": "/static/media/shelf/secret-gate-secret-gate.jpg",
+  "tags": [
+   "Claude Lab",
+   "Claude hook"
+  ]
+ }
+]

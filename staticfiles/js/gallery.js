@@ -107,7 +107,7 @@
     if (card.__shot) { paintShot(g, w, h, card, card.__shot); return; }
     var title = card.querySelector('h3').textContent.trim();
     var mark = card.querySelector('.project-art .mono');
-    var img = card.querySelector('.project-art img');
+    var img = card.__logo || card.querySelector('.project-art img:not(.project-shot)');
     var tags = Array.prototype.map.call(card.querySelectorAll('.tag'), function (t) { return t.textContent.trim(); });
     var rnd = seeded(title);
     var bg = g.createLinearGradient(0, 0, w, h);
@@ -158,7 +158,7 @@
       g.drawImage(img, (w - iw) / 2, (h - ih) / 2 - 20, iw, ih);
       g.shadowBlur = 0;
     } else {
-      var text = mark ? mark.textContent.trim() : title.slice(0, 2);
+      var text = card.dataset.mark || (mark ? mark.textContent.trim() : title.slice(0, 2));
       g.font = '800 ' + (text.length > 2 ? 210 : 260) + 'px Syne, "Arial Black", sans-serif';
       g.textAlign = 'center';
       g.textBaseline = 'middle';
@@ -230,6 +230,7 @@
     g.fillStyle = '#0a0d12';
     g.fillRect(0, 0, w, h);
     cover(g, v, v.videoWidth, v.videoHeight, w, h);
+    if (p.card.dataset.kind === 'render') { p.tex.needsUpdate = true; return; }
     var k = v.duration ? v.currentTime / v.duration : 0;
     g.fillStyle = 'rgba(8,11,15,0.72)';
     if (g.roundRect) { g.beginPath(); g.roundRect(24, 22, 196, 40, 20); g.fill(); } else g.fillRect(24, 22, 196, 40);
@@ -534,6 +535,128 @@
     paintings.push({ card: card, side: side, z: z, art: art, tex: tex, scan: scan, beam: bm, pool: pool.material, halo: halo.material, script: trailerScript(card), still: null, start: 0 });
   });
 
+
+  // ---------- the crooked painting (easter egg) ----------
+  // Between rooms three and four hangs a small painting that is not quite
+  // straight and has no plaque. Click it three times and it falls, showing a
+  // shelf in the wall. One book on it opens the Build Shelf.
+  var crookZ = 2 - Math.min(3.5, N - 0.5) * S, CS = -1;
+  var crook = new THREE.Group();
+  var crookArt = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.0), new THREE.MeshBasicMaterial({ map: canvasTex(520, 400, function (g, w, h) {
+    var gr = g.createLinearGradient(0, 0, w, h);
+    gr.addColorStop(0, '#2a2216'); gr.addColorStop(1, '#14100b');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    // an old oil study of a bug, slightly too dark
+    g.translate(w / 2, h / 2 + 6);
+    g.strokeStyle = 'rgba(214,190,140,0.55)'; g.lineWidth = 3; g.lineCap = 'round';
+    for (var l = -1; l <= 1; l++) [-1, 1].forEach(function (sd) {
+      g.beginPath(); g.moveTo(sd * 30, l * 26); g.quadraticCurveTo(sd * 70, l * 30 - 10, sd * 92, l * 44 + 10); g.stroke();
+    });
+    g.fillStyle = '#5b4a2e'; g.beginPath(); g.ellipse(0, 10, 44, 64, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#6f5b38'; g.beginPath(); g.ellipse(0, -66, 26, 22, 0, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = 'rgba(20,16,10,0.8)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, -50); g.lineTo(0, 72); g.stroke();
+    g.strokeStyle = 'rgba(214,190,140,0.5)'; g.beginPath(); g.moveTo(-10, -84); g.quadraticCurveTo(-26, -118, -44, -122); g.moveTo(10, -84); g.quadraticCurveTo(26, -118, 44, -122); g.stroke();
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    var v = g.createRadialGradient(w / 2, h / 2, 40, w / 2, h / 2, w * 0.62);
+    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.75)');
+    g.fillStyle = v; g.fillRect(0, 0, w, h);
+    g.font = 'italic 15px Georgia, serif'; g.fillStyle = 'rgba(214,190,140,0.55)'; g.textAlign = 'right';
+    g.fillText('untitled, 1987', w - 18, h - 14);
+  }) }));
+  crookArt.position.set(0, -0.62, 0.05);
+  var crookFrame = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.2, 0.08), new THREE.MeshBasicMaterial({ color: 0x5a4524 }));
+  crookFrame.position.set(0, -0.62, 0);
+  var crookEdge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(1.5, 1.2)), new THREE.LineBasicMaterial({ color: 0x8a6a3a }));
+  crookEdge.position.set(0, -0.62, 0.045);
+  crook.add(crookFrame, crookArt, crookEdge);
+  crook.position.set(CS * (HALF - 0.08), 2.52, crookZ);
+  crook.rotation.set(0, -CS * Math.PI / 2, 0.11);
+  scene.add(crook);
+  var nail = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 6), new THREE.MeshBasicMaterial({ color: 0x9a9a9a }));
+  nail.position.set(CS * (HALF - 0.04), 2.52, crookZ);
+  scene.add(nail);
+
+  // the shelf it was hiding
+  var shelf = new THREE.Group();
+  var niche = new THREE.Mesh(new THREE.PlaneGeometry(1.36, 1.04), new THREE.MeshBasicMaterial({ color: 0x050608 }));
+  var board = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.04, 0.22), new THREE.MeshBasicMaterial({ color: 0x3a2c18 }));
+  board.position.set(0, -0.38, 0.1);
+  shelf.add(niche, board);
+  var spineCols = ['#2b3a4a', '#4a2b2b', '#2d4a3a', '#3d3550', '#4a442b', '#283240', '#3a2b40'];
+  var bookX = -0.56, theBook = null;
+  for (var bk = 0; bk < 9; bk++) {
+    var bw = 0.08 + ((bk * 37) % 5) * 0.012, bh = 0.46 + ((bk * 53) % 7) * 0.035;
+    var special = bk === 5;
+    var spine = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, 0.18), new THREE.MeshBasicMaterial({ map: canvasTex(64, 256, (function (special, col) {
+      return function (g, w, h) {
+        g.fillStyle = special ? '#1b1308' : col; g.fillRect(0, 0, w, h);
+        g.fillStyle = special ? '#ffb35c' : 'rgba(255,255,255,0.18)';
+        g.fillRect(0, 22, w, 4); g.fillRect(0, h - 26, w, 4);
+        if (special) {
+          g.save(); g.translate(w / 2 + 7, h / 2); g.rotate(-Math.PI / 2);
+          g.font = '800 22px Syne, "Arial Black", sans-serif'; g.textAlign = 'center'; g.fillText('BUILD SHELF', 0, 0); g.restore();
+        }
+      };
+    })(special, spineCols[bk % spineCols.length])) }));
+    spine.position.set(bookX + bw / 2, -0.36 + bh / 2, 0.11);
+    spine.rotation.z = bk === 7 ? -0.18 : 0;
+    bookX += bw + 0.012;
+    shelf.add(spine);
+    if (special) theBook = spine;
+  }
+  var bookGlow = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 0.9), new THREE.MeshBasicMaterial({ map: haloTex, color: new THREE.Color(EMBER), transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
+  bookGlow.position.set(theBook.position.x, 0, 0.2);
+  shelf.add(bookGlow);
+  shelf.position.set(CS * (HALF - 0.012), 1.9, crookZ);
+  shelf.rotation.y = -CS * Math.PI / 2;
+  shelf.visible = false;
+  scene.add(shelf);
+
+  var crookHits = 0, crookFall = 0, crookWob = 0, dustPuff = null;
+  function knock() {
+    crookHits++;
+    crookWob = 1;
+    if (crookHits < 3) return;
+    crookFall = performance.now();
+    shelf.visible = true;
+    // a puff of dust where it lands
+    var n = 80, arr = new Float32Array(n * 3), vel = [];
+    for (var q = 0; q < n; q++) {
+      arr[q * 3] = crook.position.x - CS * 0.5; arr[q * 3 + 1] = 0.05; arr[q * 3 + 2] = crookZ + (Math.random() - 0.5) * 1.2;
+      vel.push([(Math.random() - 0.5) * 0.8, Math.random() * 0.9, (Math.random() - 0.5) * 0.8]);
+    }
+    var geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+    dustPuff = { pts: new THREE.Points(geo, new THREE.PointsMaterial({ size: 0.05, color: 0xbfae8c, transparent: true, opacity: 0, depthWrite: false })), vel: vel, t0: 0 };
+    scene.add(dustPuff.pts);
+  }
+  function crookTick(now) {
+    if (!crookFall) {
+      crookWob *= 0.93;
+      crook.rotation.z = 0.11 + Math.sin(now / 90) * 0.12 * crookWob + crookHits * 0.03;
+      return;
+    }
+    var f = Math.min(1, (now - crookFall) / 900);
+    var drop = f * f;
+    // swings off the nail, tips away from the wall and lands face down
+    crook.rotation.z = 0.2 + f * 0.9;
+    crook.rotation.x = -CS * 0;
+    crook.position.y = 2.52 - drop * 2.4;
+    crook.position.x = CS * (HALF - 0.08 - drop * 0.6);
+    var tip = Math.min(1, Math.max(0, (f - 0.55) / 0.45));
+    crook.rotation.set(0, -CS * Math.PI / 2, 0.2 + f * 0.9);
+    crook.rotateX(-tip * Math.PI / 2 * 0.98);
+    if (f >= 1 && dustPuff && !dustPuff.t0) dustPuff.t0 = now;
+    if (dustPuff && dustPuff.t0) {
+      var k = (now - dustPuff.t0) / 1600, a = dustPuff.pts.geometry.attributes.position.array;
+      dustPuff.pts.material.opacity = k < 1 ? 0.7 * (1 - k) : 0;
+      for (var q = 0; q < dustPuff.vel.length; q++) {
+        a[q * 3] += dustPuff.vel[q][0] * 0.012; a[q * 3 + 1] += dustPuff.vel[q][1] * 0.012 * (1 - k); a[q * 3 + 2] += dustPuff.vel[q][2] * 0.012;
+      }
+      dustPuff.pts.geometry.attributes.position.needsUpdate = true;
+    }
+    bookGlow.material.opacity = Math.min(1, Math.max(0, (now - crookFall - 900) / 800)) * (0.55 + Math.sin(now / 300) * 0.2);
+  }
+
   // ---------- entrance: building front, neon sign, sliding doors ----------
   var outTex = floorTex.clone();
   outTex.needsUpdate = true;
@@ -649,6 +772,14 @@
       im.onload = function () { p.card.__shot = im; hang(k); };
       im.onerror = function () { hang(k); };
       im.src = poster;
+      return;
+    }
+    if (p.card.dataset.logo && !p.card.__logo && !p.card.__logoTried) {
+      p.card.__logoTried = true;
+      var lg = new Image();
+      lg.onload = function () { p.card.__logo = lg; hang(k); };
+      lg.onerror = function () { hang(k); };
+      lg.src = p.card.dataset.logo;
       return;
     }
     if (p.card.dataset.video && !p.video) {
@@ -794,8 +925,10 @@
     var r = canvas.getBoundingClientRect();
     ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
     ray.setFromCamera(ndc, camera);
-    var hit = ray.intersectObjects(paintings.map(function (p) { return p.art; }).concat(endSign))[0];
+    var hit = ray.intersectObjects(paintings.map(function (p) { return p.art; }).concat(endSign, crookArt, crookFrame, shelf.visible ? theBook : []))[0];
     if (!hit) return;
+    if (hit.object === crookArt || hit.object === crookFrame) { if (!crookFall) knock(); return; }
+    if (hit.object === theBook) { if (window.openShelf) window.openShelf(); return; }
     if (hit.object === endSign) { window.location.href = section.dataset.contact; return; }
     var j = paintings.map(function (p) { return p.art; }).indexOf(hit.object);
     var run = section.offsetHeight - window.innerHeight;
@@ -805,7 +938,8 @@
     var r = canvas.getBoundingClientRect();
     ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
     ray.setFromCamera(ndc, camera);
-    canvas.style.cursor = ray.intersectObjects(paintings.map(function (p) { return p.art; }).concat(endSign)).length ? 'pointer' : '';
+    var over = ray.intersectObjects(paintings.map(function (p) { return p.art; }).concat(endSign, crookFall ? [] : [crookArt, crookFrame], shelf.visible ? [theBook] : []))[0];
+    canvas.style.cursor = !over ? '' : (over.object === crookArt || over.object === crookFrame) ? 'grab' : 'pointer';
   });
 
   var visible = false, clock = new THREE.Clock();
@@ -826,6 +960,7 @@
     for (var k = 1; k < a.length; k += 3) { a[k] += dt * 0.05; if (a[k] > H) a[k] = 0; }
     dustGeo.attributes.position.needsUpdate = true;
     lightsUp(performance.now());
+    crookTick(performance.now());
     place();
     if (shown >= 0 && paintings[shown].still) trailer(paintings[shown], (performance.now() - paintings[shown].start) / 1000);
     if (shown >= 0) paintings[shown].scan.position.y = 0.98 - (clock.elapsedTime * 0.45 % 1) * 1.96;
