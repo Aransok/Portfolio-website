@@ -911,3 +911,6 @@ msgstr "Планирай. Карай. Достави."
 
 msgid "Take the car apart"
 msgstr "Разглоби колата"
+
+msgid "click the screen"
+msgstr "натисни екрана"

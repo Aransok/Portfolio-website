@@ -230,7 +230,7 @@
     g.fillStyle = '#0a0d12';
     g.fillRect(0, 0, w, h);
     cover(g, v, v.videoWidth, v.videoHeight, w, h);
-    if (p.card.dataset.kind === 'render') { p.tex.needsUpdate = true; return; }
+    if (p.card.dataset.kind === 'render') { if (p.card.dataset.screenCta) screenCta(p, g, w, h); p.tex.needsUpdate = true; return; }
     var k = v.duration ? v.currentTime / v.duration : 0;
     g.fillStyle = 'rgba(8,11,15,0.72)';
     if (g.roundRect) { g.beginPath(); g.roundRect(24, 22, 196, 40, 20); g.fill(); } else g.fillRect(24, 22, 196, 40);
@@ -249,6 +249,51 @@
     g.fillStyle = THREAD;
     g.fillRect(0, h - 6, w * k, 6);
     p.tex.needsUpdate = true;
+  }
+  // a YouTube-style button drawn on the screen itself; clicking the screen opens the channel pop-up
+  function screenCta(p, g, w, h) {
+    var d = p.card.dataset, now = performance.now();
+    var pulse = 1 + Math.sin(now / 380) * 0.035;
+    // dark fade at the bottom so the button and hint read over any frame
+    var fade = g.createLinearGradient(0, h - 230, 0, h);
+    fade.addColorStop(0, 'rgba(7,9,12,0)');
+    fade.addColorStop(0.45, 'rgba(7,9,12,0.82)');
+    fade.addColorStop(1, 'rgba(7,9,12,0.96)');
+    g.fillStyle = fade;
+    g.fillRect(0, h - 230, w, 230);
+    g.save();
+    g.font = '700 30px Syne, "Arial Black", sans-serif';
+    var label = d.screenCta, tw = g.measureText(label).width;
+    var bw = 96 + tw, bh = 78, cx = w / 2, cy = h - 100;
+    g.translate(cx, cy); g.scale(pulse, pulse);
+    // soft glow ring that breathes out
+    var ring = (now / 1400) % 1;
+    g.strokeStyle = 'rgba(255,0,51,' + (0.55 * (1 - ring)).toFixed(3) + ')';
+    g.lineWidth = 4;
+    g.beginPath();
+    if (g.roundRect) g.roundRect(-bw / 2 - ring * 26, -bh / 2 - ring * 26, bw + ring * 52, bh + ring * 52, 39 + ring * 26); else g.rect(-bw / 2, -bh / 2, bw, bh);
+    g.stroke();
+    g.shadowColor = 'rgba(255,0,51,0.55)'; g.shadowBlur = 28;
+    g.fillStyle = '#ff0033';
+    g.beginPath();
+    if (g.roundRect) g.roundRect(-bw / 2, -bh / 2, bw, bh, 39); else g.rect(-bw / 2, -bh / 2, bw, bh);
+    g.fill();
+    g.shadowBlur = 0;
+    // play triangle
+    var px = -bw / 2 + 34;
+    g.fillStyle = '#fff';
+    g.beginPath(); g.moveTo(px, -15); g.lineTo(px + 26, 0); g.lineTo(px, 15); g.closePath(); g.fill();
+    g.textAlign = 'left'; g.textBaseline = 'middle';
+    g.fillText(label, px + 42, 2);
+    g.restore();
+    if (d.screenHint) {
+      g.save();
+      g.font = '500 20px "IBM Plex Mono", monospace';
+      g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+      g.fillStyle = 'rgba(233,237,242,' + (0.55 + Math.sin(now / 500) * 0.3).toFixed(3) + ')';
+      g.fillText('\u25B8 ' + d.screenHint, cx, h - 26);
+      g.restore();
+    }
   }
   function trailer(p, s) {
     if (p.video) { videoTrailer(p); return; }
@@ -931,6 +976,8 @@
     if (hit.object === theBook) { if (window.openShelf) window.openShelf(); return; }
     if (hit.object === endSign) { window.location.href = section.dataset.contact; return; }
     var j = paintings.map(function (p) { return p.art; }).indexOf(hit.object);
+    // the screen you are already facing: if it has a channel link, open it
+    if (j === shown && paintings[j].card.dataset.screenCta && window.openChannel) { window.openChannel(); return; }
     var run = section.offsetHeight - window.innerHeight;
     window.scrollTo({ top: section.offsetTop + (j + 1.7) / (N + 2) * run, behavior: 'smooth' });
   });
