@@ -207,10 +207,11 @@ msgid "Paper trail"
 msgstr "Документална следа"
 
 msgid ""
-"Diplomas and course certificates from SoftUni, plus AI and ML recognitions."
+"Diplomas and course certificates from SoftUni, plus AI and ML recognitions "
+"and Claude Academy badges."
 msgstr ""
 "Дипломи и сертификати от курсове на СофтУни, плюс признания в областта на AI"
-" и ML."
+" и ML и значки от Claude Academy."
 
 msgid "Certificate categories"
 msgstr "Категории сертификати"
