@@ -4,6 +4,12 @@ from django.db import migrations
 # viewer pages through them in the order they were earned.
 BADGES = [
     (
+        'Claude 101', 'ai_llm/Claude_Academy_-_claude-101.png',
+        'Claude Academy course completion badge (November 16, 2026).',
+        'The basics of working with Claude: prompting, projects, files and getting real work done day to day.',
+        'https://academy.claude.com/verify/877530011ee9f99fc68e6b9f07e84731',
+    ),
+    (
         'Claude Code 101', 'ai_llm/Claude_Academy_-_claude-code-101.png',
         'Claude Academy course completion badge (November 16, 2026).',
         'Getting started with Claude Code: working with an AI coding agent in the terminal on a real codebase.',
